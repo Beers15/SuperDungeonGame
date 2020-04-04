@@ -82,10 +82,13 @@ public class CharacterAnimator : MonoBehaviour
     #region Character Action
     public IEnumerator PlayAttackAnimation()
     {
-        animationNumber = 1;// UnityEngine.Random.Range(1, maxAttackAnimations + 1);
+        animationNumber = UnityEngine.Random.Range(1, maxAttackAnimations + 1);
 
         if (animator.GetInteger("Weapon") == CharacterClassOptions.Staff)
         {
+            foreach(AnimatorControllerParameter p in animator.parameters)
+                if (p.type == AnimatorControllerParameterType.Trigger)
+                    animator.ResetTrigger(p.name);        
             animator.SetTrigger("CastAttack" + (animationNumber).ToString() + "Trigger");
             SpawnParticleSystemAtCharacter(magicAura);
             SpawnParticleSystemAtCharacter(magicSparks);
@@ -104,6 +107,9 @@ public class CharacterAnimator : MonoBehaviour
         }
         else
         {
+            foreach(AnimatorControllerParameter p in animator.parameters)
+                if (p.type == AnimatorControllerParameterType.Trigger)
+                    animator.ResetTrigger(p.name);    
             animator.SetTrigger("Attack" + (animationNumber).ToString() + "Trigger");
             SpawnParticleSystemAtCharacter(slashCharge);
             yield return null;

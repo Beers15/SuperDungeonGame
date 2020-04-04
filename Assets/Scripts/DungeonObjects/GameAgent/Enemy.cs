@@ -188,10 +188,26 @@ public class Enemy : GameAgent
     public override void take_damage(int amount) 
 	{	
         stats.TakeDamage(amount);
+		Debug.Log("This mob's lvl is: " +level.ToString());
 
         if (stats.currentState == GameAgentState.Unconscious) {
             StartCoroutine(animator.PlayKilledAimation());
             stats.currentState = GameAgentState.Dead;
+
+			//death and item drop code logic----------------
+			//team 1 equals enemy mob
+			if(team == 1) {
+				Debug.Log("Team of killed mob is: " + team.ToString());
+				Debug.Log("Level of killed mob is: " + level.ToString());
+				
+				var lootThreshold = 10.0f;
+				var mobDifficultyModifier = 1.0f / (10.0f - Convert.ToSingle(level));
+				var lootRoll = UnityEngine.Random.Range(1.0f, 100.0f * (mobDifficultyModifier));
+				Debug.Log("Loot roll is (>" + lootThreshold + " equals chest drop) " + lootRoll);
+				//if(lootRoll > lootThreshold)
+				//	dropChestUponDeath logic here
+			}
+		    //-----------------------------------------------
 			GameManager.kill(this);
 		}
 		
