@@ -82,7 +82,7 @@ public class CharacterAnimator : MonoBehaviour
     #region Character Action
     public IEnumerator PlayAttackAnimation()
     {
-        animationNumber = UnityEngine.Random.Range(1, maxAttackAnimations + 1);
+        animationNumber = 1;// UnityEngine.Random.Range(1, maxAttackAnimations + 1);
 
         if (animator.GetInteger("Weapon") == CharacterClassOptions.Staff)
         {
@@ -95,6 +95,9 @@ public class CharacterAnimator : MonoBehaviour
         }
         else if (animator.GetInteger("Weapon") == CharacterClassOptions.Bow)
         {
+            foreach(AnimatorControllerParameter p in animator.parameters)
+                if (p.type == AnimatorControllerParameterType.Trigger)
+                    animator.ResetTrigger(p.name);    
             animator.SetTrigger("Attack" + (animationNumber).ToString() + "Trigger");
             SpawnParticleSystemAtCharacter(focusSpark);
             yield return null;

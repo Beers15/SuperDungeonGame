@@ -135,8 +135,11 @@ public class Enemy : GameAgent
 	
 	public override void playAttackAnimation()
 	{
+		Debug.Log("BEFORE play attack animation ");
 		animating = true;
 		StartCoroutine(animator.PlayAttackAnimation());
+		Debug.Log("AFTER play attack animation ");
+		
 	}
 	
 	public override void playHitAnimation()

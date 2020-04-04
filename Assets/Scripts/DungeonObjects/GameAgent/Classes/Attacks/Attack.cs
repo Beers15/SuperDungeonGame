@@ -48,9 +48,10 @@ public class MeleeAttack : Attack
 		attacker.playAttackAnimation();
 		attacker.playAttackNoise("Melee");
 		
-		Debug.Log("Waiting for animation to finish");
+		Debug.Log("Waiting for basic melee attack animation to finish: " + attacker.nickname);
 		while (attacker.animating) yield return null;
-		
+	    Debug.Log( attacker.nickname + ": attack animation finished.");
+
 		try {
 			target.playHitAnimation();
 			target.playHitNoise("Melee");
@@ -77,8 +78,9 @@ public class WeakMeleeAttack : Attack
         attacker.playAttackAnimation();
         attacker.playAttackNoise("Melee");
 
-        Debug.Log("Waiting for animation to finish");
+        Debug.Log("Waiting for weak melee attack animation to finish: " + attacker.nickname);
         while (attacker.animating) yield return null;
+        Debug.Log( attacker.nickname + ": attack animation finished.");
 
         try
         {
@@ -113,8 +115,9 @@ public class StrongMeleeAttack : Attack
         attacker.playAttackAnimation();
         attacker.playAttackNoise("Melee");
 
-        Debug.Log("Waiting for animation to finish");
+        Debug.Log("Waiting for strong melee attack animation to finish: " + attacker.nickname);
         while (attacker.animating) yield return null;
+        Debug.Log( attacker.nickname + " :attack animation finished.");
 
         try
         {
@@ -139,17 +142,17 @@ public class ShortbowAttack : Attack
 	{
 		while (attacking) yield return null;
 		attacking = true;
-		
 		attacker.transform.LookAt((target as DungeonObject).transform);
 		attacker.playAttackAnimation();
 		attacker.playAttackNoise("Bow");
-		
+
 		while (attacker.animating) yield return null;
 		
 		Projectile arrow = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "arrow");
-		
+        Debug.Log("Waiting for shortbow attack animation to finish: " + attacker.nickname);
 		while (!(arrow == null)) yield return null;
-		
+		Debug.Log( attacker.nickname + " :attack animation finished.");
+
 		try {
 		target.playHitAnimation();
 		target.playHitNoise("Bow");
@@ -176,8 +179,10 @@ public class LongbowAttack : Attack
 		attacker.playAttackAnimation();
 		attacker.playAttackNoise("Bow");
 		
+        Debug.Log("Waiting for longbow attack animation to finish: " + attacker.nickname);
 		while (attacker.animating) yield return null;
-		
+		Debug.Log( attacker.nickname + " :attack animation finished.");
+
 		var arrow = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "arrow");
 		
 		while (!(arrow == null)) yield return null;
@@ -213,7 +218,9 @@ public class FireSpell : Attack
 		attacker.playAttackAnimation();
 		attacker.playAttackNoise("Fire");
 		
+        Debug.Log("Waiting for fireball attack animation to finish: " + attacker.nickname);
 		while (attacker.animating) yield return null;
+        Debug.Log( attacker.nickname + ": attack animation finished.");
 		
 		Projectile fire = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "fire");
 		
@@ -253,7 +260,9 @@ public class FireStormSpell : Attack
             attacker.playAttackAnimation();
             attacker.playAttackNoise("Fire");
 
+            Debug.Log("Waiting for firestorm attack animation to finish: " + attacker.nickname);
             while (attacker.animating) yield return null;
+            Debug.Log( attacker.nickname + ": attack animation finished.");
 
             Projectile fire = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "fire");
 
@@ -298,8 +307,9 @@ public class Berserk : Attack {
             attacker.playAttackAnimation();
             attacker.playAttackNoise("Melee");
 
-            Debug.Log("Waiting for animation to finish");
+            Debug.Log("Waiting for berserk animation to finish: " + attacker.nickname);
             while (attacker.animating) yield return null;
+            Debug.Log( attacker.nickname + ": attack animation finished.");
 
             try {
                 target.playHitAnimation();
@@ -339,7 +349,9 @@ public class Multishot : Attack
             attacker.playAttackAnimation();
             attacker.playAttackNoise("Bow");
 
+            Debug.Log("Waiting for multishot animation to finish: " + attacker.nickname);
             while (attacker.animating) yield return null;
+            Debug.Log( attacker.nickname + ": attack animation finished.");
 
             Projectile arrow = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "arrow");
 
@@ -385,7 +397,9 @@ public class LightningSpell : Attack
         attacker.playAttackAnimation();
         attacker.playAttackNoise("Lightning");
 
+        Debug.Log("Waiting for lightning attack animation to finish");
         while (attacker.animating) yield return null;
+        Debug.Log( attacker.nickname + ": attack animation finished.");
 
         Projectile lightning = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "lightning");
 
