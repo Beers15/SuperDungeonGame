@@ -45,9 +45,8 @@ public class MapManager : MonoBehaviour
 	// map data
 	private int[,] map_raw;
 	private Region region_tree_root; // the root node of the region tree for the map
-    private MapCell[,] map;
 	private NavigationHandler nav_map;
-
+	private MapCell[,] map;
 	private GameManager parentManager = null;
 	private TileSelector tileSelector = null;
 	private System.Random rng;
@@ -159,7 +158,7 @@ public class MapManager : MonoBehaviour
 		return instantiate_environment(environmentObject, random_traversable_pos(), traversable);
 	}
 	
-	public GameObject instantiate_environment(GameObject environmentObject, Pos pos, bool traversable = true)
+	public GameObject instantiate_environment(GameObject environmentObject, Pos pos, bool traversable = true, bool chest = false)
 	{
         int randomY = rng.Next(1, 4) * 90;
 		
@@ -186,6 +185,8 @@ public class MapManager : MonoBehaviour
 			map[pos.x, pos.y].traversable = true;
 			map[pos.x, pos.y].occupied = false;
 			map[pos.x, pos.y].environment = env;
+			if(chest)
+				map[pos.x, pos.y].resident = env;
 		}
 		
 		return environmentObject;

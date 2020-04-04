@@ -11,7 +11,6 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 	public void init_environment(Pos grid_pos, int health=1)
 	{
 		this.grid_pos = grid_pos;
-		this.
 		chestObject = transform.Find("SM_Prop_Chest_01").gameObject;
         source = GetComponent<AudioSource>();
 	}

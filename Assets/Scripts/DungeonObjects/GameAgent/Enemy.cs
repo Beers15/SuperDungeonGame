@@ -12,6 +12,8 @@ public class Enemy : GameAgent
 	private bool enemy_turn = false;
 	
     //private CharacterClassDefiner classDefiner; // moved to GameAgent
+	//temp attribute to make item drops from enemies appear interactible
+	public Material interactTilesMaterial;
 
     [Header("Enemy Stats")]
     public float _attack;
@@ -20,7 +22,7 @@ public class Enemy : GameAgent
     public float range;
     public float _speed;
     public float moveTime = 0.1f;
-
+	public GameObject lootDrop;
 	public int moveBudget;
     public int level;
     public GameAgentState viewableState;
@@ -50,7 +52,6 @@ public class Enemy : GameAgent
 	{
         map_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapManager>();
         grid_pos = position;
-
         animator = GetComponent<CharacterAnimator>();
 
         this.stats = stats;
@@ -135,11 +136,8 @@ public class Enemy : GameAgent
 	
 	public override void playAttackAnimation()
 	{
-		Debug.Log("BEFORE play attack animation ");
 		animating = true;
-		StartCoroutine(animator.PlayAttackAnimation());
-		Debug.Log("AFTER play attack animation ");
-		
+		StartCoroutine(animator.PlayAttackAnimation());		
 	}
 	
 	public override void playHitAnimation()
@@ -194,21 +192,30 @@ public class Enemy : GameAgent
             StartCoroutine(animator.PlayKilledAimation());
             stats.currentState = GameAgentState.Dead;
 
+			GameManager.kill(this);
+
 			//death and item drop code logic----------------
 			//team 1 equals enemy mob
 			if(team == 1) {
 				Debug.Log("Team of killed mob is: " + team.ToString());
 				Debug.Log("Level of killed mob is: " + level.ToString());
-				
-				var lootThreshold = 10.0f;
+				Debug.Log("Death location (" + this.grid_pos.x + ", " + this.grid_pos.y + ")");
+
+				var lootRoll = 0.0f;
+				var lootThreshold = 11.0f;
 				var mobDifficultyModifier = 1.0f / (10.0f - Convert.ToSingle(level));
-				var lootRoll = UnityEngine.Random.Range(1.0f, 100.0f * (mobDifficultyModifier));
-				Debug.Log("Loot roll is (>" + lootThreshold + " equals chest drop) " + lootRoll);
-				//if(lootRoll > lootThreshold)
-				//	dropChestUponDeath logic here
+
+				if(mobDifficultyModifier <= 0.1f)
+					lootRoll = lootThreshold + 1.0f;
+				else
+					lootRoll = UnityEngine.Random.Range(1.0f, 100.0f * (mobDifficultyModifier));
+				Debug.Log("Loot roll is " + lootRoll + " (>" + lootThreshold + " equals chest drop) ");
+
+				//TODO add rare loot threshold and different chest prefab
+				if(lootRoll > lootThreshold) {
+					map_manager.instantiate_environment(lootDrop, new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
+				}
 			}
-		    //-----------------------------------------------
-			GameManager.kill(this);
 		}
 		
         currentHealth = stats.currentHealth;
