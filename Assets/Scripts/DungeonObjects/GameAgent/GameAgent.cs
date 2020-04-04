@@ -55,6 +55,8 @@ public abstract class GameAgent : DungeonObject, Damageable, Renderable
 		Attack[] attacks = stats.playerCharacterClass.GetAvailableActs();
 		if (action >= attacks.Length) return false;
 		else currentAttack = attacks[action];
+		Debug.Log("action number: " + action);
+		Debug.Log("action taken: " + attacks[action].toString());
 		actionNo = action;
 		return true;
 	}

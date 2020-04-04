@@ -85,23 +85,51 @@ public class CharacterAnimator : MonoBehaviour
         animationNumber = UnityEngine.Random.Range(1, maxAttackAnimations + 1);
 
         if (animator.GetInteger("Weapon") == CharacterClassOptions.Staff)
-        {
-            animator.SetTrigger("CastAttack" + (animationNumber).ToString() + "Trigger");
+		{
+			foreach (AnimatorControllerParameter p in animator.parameters)
+			{
+				if (p.type == AnimatorControllerParameterType.Trigger)
+				{
+					animator.ResetTrigger(p.name);
+				}
+			}
+			animator.SetTrigger("CastAttack" + (animationNumber).ToString() + "Trigger");
             SpawnParticleSystemAtCharacter(magicAura);
             SpawnParticleSystemAtCharacter(magicSparks);
             yield return new WaitForSeconds(actionDuration);
-            animator.SetTrigger("CastEndTrigger");
+			foreach (AnimatorControllerParameter p in animator.parameters)
+			{
+				if (p.type == AnimatorControllerParameterType.Trigger)
+				{
+					animator.ResetTrigger(p.name);
+				}
+			}
+			animator.SetTrigger("CastEndTrigger");
    
         }
         else if (animator.GetInteger("Weapon") == CharacterClassOptions.Bow)
         {
+			foreach (AnimatorControllerParameter p in animator.parameters)
+			{
+				if (p.type == AnimatorControllerParameterType.Trigger)
+				{
+					animator.ResetTrigger(p.name);
+				}
+			}
             animator.SetTrigger("Attack" + (animationNumber).ToString() + "Trigger");
             SpawnParticleSystemAtCharacter(focusSpark);
             yield return null;
         }
         else
-        {
-            animator.SetTrigger("Attack" + (animationNumber).ToString() + "Trigger");
+		{
+			foreach (AnimatorControllerParameter p in animator.parameters)
+			{
+				if (p.type == AnimatorControllerParameterType.Trigger)
+				{
+					animator.ResetTrigger(p.name);
+				}
+			}
+			animator.SetTrigger("Attack" + (animationNumber).ToString() + "Trigger");
             SpawnParticleSystemAtCharacter(slashCharge);
             yield return null;
         }
