@@ -20,6 +20,7 @@ public abstract class GameAgent : DungeonObject, Damageable, Renderable
 
 	public CharacterAnimator animator;
     public Inventory inventory = new Inventory();
+	public PotionsStore potions = new PotionsStore();
 	public bool animating = false;
 	protected CharacterClassDefiner classDefiner;
 	public Attack currentAttack;

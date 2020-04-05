@@ -8,7 +8,10 @@ public class Inventory
 
     public Item[] items = new Item[numItemSlots];
     public const int numItemSlots = 18;
-	public Inventory() {}
+	public Inventory() {
+        for(int i = 0; i < numItemSlots; i++) 
+            items[i] = new Item(20, "", -1, 0);
+    }
 
     public EquipItem helmet;
     public EquipItem armor;
@@ -17,39 +20,63 @@ public class Inventory
     public EquipItem weapon;
 
     public int AddItem(Item item)
-    {
-        if (item == null)
-        {
+    {   //0 = not found
+        int slotNum = 0;
+
+        if(item == null) {
             return 0;
         }
-        int count = 0;
-        for (int i = 0; i < numItemSlots; i++)
-        {
-			if (items[i] == null)
-            {
-                count += item.Amount;
-                items[i] = item;
-                return count;
-            }
-            else if (items[i].ID == item.ID)
-            {
+
+        bool itemFound = false;
+        //check if item already exists in inventory
+        for(int i = 0; i < numItemSlots; i++) {
+            if(string.Equals(item.Name, items[i].Name)) {
+                if(items[i].ID == -1)
+                    items[i].ID = item.ID;
+
                 int maxInsert = items[i].maxAmount - items[i].Amount;
-                if (item.Amount - maxInsert > 0)
-                {
+
+                if (item.Amount - maxInsert > 0) {
                     items[i].Amount = items[i].maxAmount;
                     item.Amount -= maxInsert;
-                    count += maxInsert;
-                }
-                else
-                {
+                } else {
                     items[i].Amount += item.Amount;
-                    count += item.Amount;
-                    return count;
                 }
+                itemFound = true;
+                slotNum = i;
+                break;
             }
         }
 
-        return count;
+        if(!itemFound) {
+        bool emptySlotExists = false;
+        //insert into inventory at an empty slot if not found
+            for(int i = 0; i < numItemSlots; i++) {
+                if(items[i].ID == -1) {
+                    items[i].Name = item.Name;
+                    items[i].ID = item.ID;
+
+                    int maxInsert = items[i].maxAmount - items[i].Amount;
+
+                    if (item.Amount - maxInsert > 0) {
+                        items[i].Amount = items[i].maxAmount;
+                        item.Amount -= maxInsert;
+                    } else {
+                        items[i].Amount += item.Amount;
+                    }
+                    emptySlotExists = true;
+                    slotNum = i;
+                    break;
+                }
+            }
+
+            if(!emptySlotExists) {
+                //TODO: handle how to deal with item when this occurs
+        	    UI_TextAlert.DisplayText("Inventory full.");
+            }
+        }
+
+        return slotNum;
     }
 
     //used to remove item completely from inventory
@@ -60,7 +87,7 @@ public class Inventory
         {
             return; //out of bounds
         }
-        items[slot] = null;
+        items[slot].ID = -1;
         RearrangeSlots();
     }
 
@@ -102,13 +129,21 @@ public class Inventory
     {
         for (int i = 0; i < numItemSlots; i++)
         {
-            if (items[i] == null)
+            if (items[i].ID == null)
             {
                 for (int j = i + 1; j < numItemSlots; j++)
                 {
                     items[j - 1] = items[j];
                 }
             }
+        }
+    }
+
+        //testing
+    public void display() {
+        for(int i = 0; i < numItemSlots; i++) {
+            if(items[i].ID != -1)
+                Debug.Log("item slot #" + i + " Item: " + items[i].Name + " Amount: " + items[i].Amount + " ID: " + items[i].ID);
         }
     }
 }

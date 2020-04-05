@@ -347,7 +347,6 @@ public class Player : GameAgent
 		return library[nextSFX++%library.Length];
 	}
 	
-	
 	// VVVVVVVVVVVVVVVVV CODE JAIL VVVVVVVVVVVVVVVVVV //
 	// 			INTRUDERS WILL BE EXECUTED			  //
 	

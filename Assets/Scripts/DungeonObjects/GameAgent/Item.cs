@@ -24,6 +24,14 @@ public class ConsumableItem : Item
 	public ConsumableItem(int effectiveness, int maxAmount, string Name, int ID, int Amount) : base(maxAmount, Name, ID, Amount) {
 		this.effectiveness = effectiveness;
 	}
+
+	// public int getEffectiveness() {
+	// 	return this.effectiveness;
+	// }
+
+	// public int getID() {
+	// 	return this.ID;
+	// }
 }
 
 public class HealthPot : ConsumableItem
