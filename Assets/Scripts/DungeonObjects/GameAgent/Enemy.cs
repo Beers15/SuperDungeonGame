@@ -202,7 +202,7 @@ public class Enemy : GameAgent
 				Debug.Log("Death location (" + this.grid_pos.x + ", " + this.grid_pos.y + ")");
 
 				var lootRoll = 0.0f;
-				var lootThreshold = 11.0f;
+				var lootThreshold = 1.0f;
 				var mobDifficultyModifier = 1.0f / (10.0f - Convert.ToSingle(level));
 
 				if(mobDifficultyModifier <= 0.1f)
