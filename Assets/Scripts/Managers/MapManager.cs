@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -158,7 +159,7 @@ public class MapManager : MonoBehaviour
 		return instantiate_environment(environmentObject, random_traversable_pos(), traversable);
 	}
 	
-	public GameObject instantiate_environment(GameObject environmentObject, Pos pos, bool traversable = true, bool chest = false)
+	public GameObject instantiate_environment(GameObject environmentObject, Pos pos, bool traversable = true, bool item = false)
 	{
         int randomY = rng.Next(1, 4) * 90;
 		
@@ -185,7 +186,7 @@ public class MapManager : MonoBehaviour
 			map[pos.x, pos.y].traversable = true;
 			map[pos.x, pos.y].occupied = false;
 			map[pos.x, pos.y].environment = env;
-			if(chest)
+			if(item)
 				map[pos.x, pos.y].resident = env;
 		}
 		

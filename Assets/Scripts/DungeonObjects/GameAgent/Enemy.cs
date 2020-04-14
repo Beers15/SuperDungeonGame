@@ -14,6 +14,8 @@ public class Enemy : GameAgent
     //private CharacterClassDefiner classDefiner; // moved to GameAgent
 	//temp attribute to make item drops from enemies appear interactible
 	public Material interactTilesMaterial;
+	public GameObject[] lootDrops;
+	private int randomItem;
 
     [Header("Enemy Stats")]
     public float _attack;
@@ -197,10 +199,6 @@ public class Enemy : GameAgent
 			//death and item drop code logic----------------
 			//team 1 equals enemy mob
 			if(team == 1) {
-				Debug.Log("Team of killed mob is: " + team.ToString());
-				Debug.Log("Level of killed mob is: " + level.ToString());
-				Debug.Log("Death location (" + this.grid_pos.x + ", " + this.grid_pos.y + ")");
-
 				var lootRoll = 0.0f;
 				var lootThreshold = 1.0f;
 				var mobDifficultyModifier = 1.0f / (10.0f - Convert.ToSingle(level));
@@ -209,11 +207,12 @@ public class Enemy : GameAgent
 					lootRoll = lootThreshold + 1.0f;
 				else
 					lootRoll = UnityEngine.Random.Range(1.0f, 100.0f * (mobDifficultyModifier));
-				Debug.Log("Loot roll is " + lootRoll + " (>" + lootThreshold + " equals chest drop) ");
+				Debug.Log("Loot roll is " + lootRoll + " (>" + lootThreshold + " equals item drop) ");
 
 				//TODO add rare loot threshold and different chest prefab
 				if(lootRoll > lootThreshold) {
-					map_manager.instantiate_environment(lootDrop, new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
+					randomItem = UnityEngine.Random.Range(0, lootDrops.Length - 1);
+					map_manager.instantiate_environment(lootDrops[randomItem], new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
 				}
 			}
 		}

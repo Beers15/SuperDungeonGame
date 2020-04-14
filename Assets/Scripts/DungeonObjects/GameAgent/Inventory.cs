@@ -56,6 +56,10 @@ public class Inventory
                     items[i].Name = item.Name;
                     items[i].ID = item.ID;
 
+                    //gold has a higher max than other items
+                    if(items[i].ID == 99)
+                        items[i].maxAmount = 999999;
+
                     int maxInsert = items[i].maxAmount - items[i].Amount;
 
                     if (item.Amount - maxInsert > 0) {
@@ -139,7 +143,7 @@ public class Inventory
         }
     }
 
-        //testing
+    //testing
     public void display() {
         for(int i = 0; i < numItemSlots; i++) {
             if(items[i].ID != -1)

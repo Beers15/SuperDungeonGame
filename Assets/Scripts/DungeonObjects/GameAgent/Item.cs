@@ -24,14 +24,6 @@ public class ConsumableItem : Item
 	public ConsumableItem(int effectiveness, int maxAmount, string Name, int ID, int Amount) : base(maxAmount, Name, ID, Amount) {
 		this.effectiveness = effectiveness;
 	}
-
-	// public int getEffectiveness() {
-	// 	return this.effectiveness;
-	// }
-
-	// public int getID() {
-	// 	return this.ID;
-	// }
 }
 
 public class HealthPot : ConsumableItem
@@ -40,14 +32,6 @@ public class HealthPot : ConsumableItem
 	//public HealthPot(int effectiveness, int maxAmount, string Name, int ID, int Amount) : base(effectiveness, maxAmount, Name, ID, Amount) {}
 	public HealthPot(int amount) : base(1, 64, "Health Potion", _ID, amount) {}
 }
-/*public class HealthPotSmall : HealthPot
-{
-	public HealthPotSmall() : base(1, 64, "Small Health Potion", _ID, 1) {}
-}
-public class HealthPotMedium : HealthPot
-{
-	public HealthPotMedium() : base(2, 64, "Medium Health Potion", _ID, 1) {}
-}*/
 
 public class ManaPot : ConsumableItem
 {
@@ -55,14 +39,11 @@ public class ManaPot : ConsumableItem
 	//public ManaPot(int effectiveness, int maxAmount, string Name, int ID, int Amount) : base(effectiveness, maxAmount, Name, ID, Amount) {}
 	public ManaPot(int amount) : base(1, 64, "Mana Potion", _ID, amount) {}
 }
-/*public class ManaPotSmall : ManaPot
-{
-	public ManaPotSmall() : base(1, 64, "Small Mana Potion", _ID, 1) {}
+
+public class Gold : ConsumableItem {
+    public static int _ID = 99;
+	public Gold(int amount) : base(1, 64, "Gold Coin", _ID, amount) {}
 }
-public class ManaPotMedium : ManaPot
-{
-	public ManaPotMedium() : base(2, 64, "Medium Mana Potion", _ID, 1) {}
-}*/
 
 
 
