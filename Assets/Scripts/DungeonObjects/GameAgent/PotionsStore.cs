@@ -13,7 +13,7 @@ public class PotionsStore
 
     string[] potionOptions = {"Health Potion", "Mana Potion"};
 
-    public void AddPotion(ConsumableItem potion)
+    public void AddConsumable(ConsumableItem potion)
     {
         if (potion == null) {
             return;

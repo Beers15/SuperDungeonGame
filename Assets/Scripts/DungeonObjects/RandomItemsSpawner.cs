@@ -3,16 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using MapUtils;
 
-public class RandomItemsChest : DungeonObject, Interactable, Environment, Renderable, Damageable
+public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Renderable, Damageable
 {
-    public AudioClip chestOpeningSFX;
+    public AudioClip itemSFX;
+    public string modelName;
+    public int itemIndex;
     private AudioSource source;
-	private GameObject chestObject;
-	private int slainEnemyLvl = 5; //default value for level spawned not from a monster drop
+	private GameObject itemObject;
+    private int slainEnemyLvl;
 
 	public void init_environment(Pos grid_pos, int health=1) {
 		this.grid_pos = grid_pos;
-		chestObject = transform.Find("SM_Prop_Chest_01").gameObject;
+
+        switch(itemIndex) {
+            case 0:
+                itemObject = GameObject.Find("SM_Prop_Chest_01"); break;
+            case 1:
+                itemObject = GameObject.Find("SM_Item_Potion_01"); break;
+            case 2:
+                itemObject = GameObject.Find("SM_Item_Potion_06"); break;
+            case 3:
+                itemObject = GameObject.Find("SM_Item_Coins_01"); break;
+            default:
+                itemObject = GameObject.Find("SM_Prop_Chest_01"); break;
+        }
         source = GetComponent<AudioSource>();
 	}
 
@@ -24,40 +38,43 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 	}
 	
     public void EnableRendering() {
-		chestObject.SetActive(true);
+		itemObject.SetActive(true);
 	}
 
 	public void DisableRendering() {
-		chestObject.SetActive(false);
+        if(itemObject)
+		    itemObject.SetActive(false);
 	}
-	//string[] itemOptions = { "health", "mana", "gold", "helmet", "armor", "gloves", "boot" };
-	string[] itemOptions = { "health", "mana", "gold", "helmet", "armor", "gloves", "boot" };
+
 	public void interact(GameAgent interactor)
 	{
-        source.PlayOneShot(chestOpeningSFX);
+        source.PlayOneShot(itemSFX);
 
-		int randomItemIndex = UnityEngine.Random.Range(0, itemOptions.Length);
-		int randomItemAmount = UnityEngine.Random.Range(1, 7);
-		string itemChoice = itemOptions[randomItemIndex];
+        int randomItemAmount;
+
+		//set # of items recived, or set amount of gold based on slain enemy's lvl
+        if(itemIndex != 3)
+		    randomItemAmount = UnityEngine.Random.Range(1, 3);
+        else {
+            int goldRoll = UnityEngine.Random.Range(1, 10);
+            if(goldRoll > 9) 
+                randomItemAmount =  UnityEngine.Random.Range(1, 100 * slainEnemyLvl);
+            else
+                randomItemAmount =  UnityEngine.Random.Range(250, 500 * slainEnemyLvl);
+        }
+
 
 		Item toAdd;
 		bool isConsumable = false;
 		
-		switch (itemChoice) {
-			case "health":
+        //itemIndex set in inspector should match number for that item here
+		switch (itemIndex) {
+			case 1:
 				toAdd = new HealthPot(randomItemAmount); isConsumable = true; break;
-			case "mana":
+			case 2:
 				toAdd = new ManaPot(randomItemAmount); isConsumable = true; break;
-			case "gold":
+			case 3:
 				toAdd = new Gold(randomItemAmount); break;
-			case "helmet":
-				toAdd = new Helmet(); break;
-			case "armor":
-				toAdd = new Armor(); break;
-			case "gloves":
-				toAdd = new Glove(); break;
-			case "boots":
-				toAdd = new Boot(); break;
 			default:
 				toAdd = null; break;
 		}
@@ -80,7 +97,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 
 		GameManager.kill(this, 0.5f);
 	}
-	
+
     public int getLevel() {
         return slainEnemyLvl;
     }
@@ -95,4 +112,3 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 	public void playHitAnimation() {}
 	public void playHitNoise(string noise) {}
 }
-
