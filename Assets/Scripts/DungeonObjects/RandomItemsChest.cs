@@ -30,7 +30,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 	public void DisableRendering() {
 		chestObject.SetActive(false);
 	}
-	//string[] itemOptions = { "health", "mana", "gold", "helmet", "armor", "gloves", "boot" };
+
 	string[] itemOptions = { "health", "mana", "gold", "helmet", "armor", "gloves", "boot" };
 	public void interact(GameAgent interactor)
 	{
@@ -63,8 +63,11 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		}
 		if (toAdd == null) return;
 		
+
+Debug.Log("GENERATED ID before inventory placement = " + toAdd.ID);
+
 		//pluarlize text alert
-		if(randomItemAmount > 1)
+		if(randomItemAmount >= 2)
 			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.Name + "s");
 		else
 			UI_TextAlert.DisplayText("Received " + toAdd.Name);

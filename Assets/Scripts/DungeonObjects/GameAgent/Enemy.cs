@@ -24,7 +24,6 @@ public class Enemy : GameAgent
     public float range;
     public float _speed;
     public float moveTime = 0.1f;
-	public GameObject lootDrop;
 	public int moveBudget;
     public int level;
     public GameAgentState viewableState;
@@ -40,8 +39,7 @@ public class Enemy : GameAgent
 	public AudioClip[] deathRattle;
 	public AudioClip[] hitNoise;
 	
-	void Update()
-	{
+	void Update() {
 		if (FogOfWar.IsVisible(map_manager.world_to_grid(transform.position))) {
 			EnableRendering();
 		}
@@ -50,8 +48,7 @@ public class Enemy : GameAgent
 		}
 	}
 
-    public override void init_agent(Pos position, GameAgentStats stats, string name = null) 
-	{
+    public override void init_agent(Pos position, GameAgentStats stats, string name = null) {
         map_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapManager>();
         grid_pos = position;
         animator = GetComponent<CharacterAnimator>();
@@ -89,8 +86,7 @@ public class Enemy : GameAgent
     }
 
 	private bool moving = false;
-    public override IEnumerator smooth_movement(Path path) 
-	{
+    public override IEnumerator smooth_movement(Path path) {
 		//Debug.Log("started...");
 		grid_pos = path.endPos();
 		if (!FogOfWar.IsVisible(grid_pos)) {
@@ -126,9 +122,7 @@ public class Enemy : GameAgent
 		//Debug.Log("ended...");
     }
 	
-	
-	public override void attack(Damageable target)
-	{
+	public override void attack(Damageable target) {
 		Debug.Log(currentAttack);
 		StartCoroutine(currentAttack.Execute(this, target));
 	}
@@ -136,19 +130,16 @@ public class Enemy : GameAgent
     public void Hit() { animating = false; Debug.Log("Just set animating to false"); }
     public void Shoot() { animating = false; Debug.Log("Just set animating to false"); }
 	
-	public override void playAttackAnimation()
-	{
+	public override void playAttackAnimation() {
 		animating = true;
 		StartCoroutine(animator.PlayAttackAnimation());		
 	}
 	
-	public override void playHitAnimation()
-	{
+	public override void playHitAnimation() {
 		StartCoroutine(animator.PlayHitAnimation());
 	}
 	
-	public override void playAttackNoise(string type)
-	{
+	public override void playAttackNoise(string type) {
 		switch (type) {
 			case "Melee":
 			switch (weapon) {
@@ -170,8 +161,7 @@ public class Enemy : GameAgent
 	}
 	
 	// TODO: once we have more hit noises, switch based on type of projectile/weapon we are hit by
-	public override void playHitNoise(string type)
-	{
+	public override void playHitNoise(string type) {
 		switch (type) {
 			default:
 			source.PlayOneShot(randomSFX(hitNoise));
@@ -179,14 +169,12 @@ public class Enemy : GameAgent
 		}
 	}
 	
-	public override bool animationFinished()
-	{
+	public override bool animationFinished() {
 		Debug.Log(!currentAttack.attacking + ", " + !moving);
 		return (!currentAttack.attacking) && !moving;
 	}
 	
-    public override void take_damage(int amount) 
-	{	
+    public override void take_damage(int amount)  {	
         stats.TakeDamage(amount);
 		Debug.Log("This mob's lvl is: " +level.ToString());
 

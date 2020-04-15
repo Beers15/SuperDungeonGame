@@ -16,8 +16,11 @@ public class EquipItem : Item
     public int atkbonus;
     public int defbonus;
 
+    private static int IDUpperBound = 7;
+    private static int IDLowerBound = 3;
+
 	public EquipItem() {}
-    public EquipItem(string name, int id, EquipType etype, int atk, int def)
+    public EquipItem(string name, string id, EquipType etype, int atk, int def)
     {
         maxAmount = 1;
         Amount = 1;
@@ -27,34 +30,43 @@ public class EquipItem : Item
         atkbonus = atk;
         defbonus = def;
     }
+
+    public static int getIDUpperBound() {
+        return IDUpperBound;
+    }
+
+    public static int getIDLowerBound() {
+       return  IDLowerBound;
+    }
+
 }
 
 public class Helmet : EquipItem
 {
-	public static int _ID = 3;
+	public static string _ID = "3";
 	public Helmet() : base("Helmet", _ID, EquipType.HELMET, 0, 10) {}
 }
 
 public class Armor : EquipItem
 {
-	public static int _ID = 4;
+	public static string _ID = "4";
 	public Armor() : base("Armor", _ID, EquipType.ARMOR, 0, 10) {}
 }
 
 public class Glove : EquipItem
 {
-	public static int _ID = 5;
+	public static string _ID = "5";
 	public Glove() : base("Glove", _ID, EquipType.GLOVE, 0, 10) {}
 }
 
 public class Boot : EquipItem
 {
-	public static int _ID = 6;
+	public static string _ID = "6";
 	public Boot() : base("Boot", _ID, EquipType.BOOT, 0, 10) {}
 }
 
 public class EquipWeapon : EquipItem
 {
-	public static int _ID = 7;
+	public static string _ID = "7";
 	public EquipWeapon() : base("Weapon", _ID, EquipType.WEAPON, 10, 0) {}
 }
