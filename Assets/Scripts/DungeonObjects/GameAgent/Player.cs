@@ -79,8 +79,10 @@ public class Player : GameAgent
 		animating = false;
 
         source = GetComponent<AudioSource>();
-		inventory.AddItem(new HealthPot(5));
-		inventory.AddItem(new ManaPot(5));
+        
+        //-----
+        //add starting items and consumables here with inventory/potionStore.addItem if desired
+        //-----
 
         // AI init
         team = 0;

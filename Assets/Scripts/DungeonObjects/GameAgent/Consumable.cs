@@ -13,7 +13,7 @@ public class Consumable : Item
     private int restoreAmount;
     private ConsumableType ctype;
 
-    public Consumable(string name, int id, int max, int amt, int res, ConsumableType type)
+    public Consumable(string name, string id, int max, int amt, int res, ConsumableType type)
     {
         Name = name;
         ID = id;

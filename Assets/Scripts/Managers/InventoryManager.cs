@@ -15,7 +15,7 @@ public class InventoryManager : MonoBehaviour
     //define delegate to encapsulate item functions to store in dictionary
     //item functions will take in game agent to apply item effects to that agent
     delegate void ItemFunc(Item item, GameAgent agent);
-    IDictionary<int, ItemFunc> itemFuncs = new Dictionary<int, ItemFunc>() {
+    IDictionary<string, ItemFunc> itemFuncs = new Dictionary<string, ItemFunc>() {
 		[HealthPot._ID] = ApplyHealthPotion,
 		[ManaPot._ID] = ApplyManaPotion,
         [Helmet._ID] = EquipEquipment,
