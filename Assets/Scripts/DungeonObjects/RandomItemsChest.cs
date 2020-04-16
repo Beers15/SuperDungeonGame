@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using MapUtils;
 
-public class RandomItemsChest : DungeonObject, Interactable, Environment, Renderable, Damageable
-{
+public class RandomItemsChest : DungeonObject, Interactable, Environment, Renderable, Damageable {
     public AudioClip chestOpeningSFX;
     private AudioSource source;
 	private GameObject chestObject;
-	private int slainEnemyLvl = 5; //default value for level spawned not from a monster drop
+	private int slainEnemyLvl = 2; //default to 2 for spawned chest not dropped from slain enemies
 
 	public void init_environment(Pos grid_pos, int health=1) {
 		this.grid_pos = grid_pos;
@@ -42,6 +41,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 
 		Item toAdd;
 		bool isConsumable = false;
+		bool notEquipItem = true;
 		
 		switch (itemChoice) {
 			case "health":
@@ -49,25 +49,34 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 			case "mana":
 				toAdd = new ManaPot(randomItemAmount); isConsumable = true; break;
 			case "gold":
-				toAdd = new Gold(randomItemAmount); break;
+				toAdd = new Gold(randomItemAmount);	break;
 			case "helmet":
-				toAdd = new Helmet(); break;
+				toAdd = new Helmet(); 
+				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				notEquipItem = false;
+				break;
 			case "armor":
-				toAdd = new Armor(); break;
+				toAdd = new Armor(); 
+				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				notEquipItem = false;
+				break;
 			case "gloves":
-				toAdd = new Glove(); break;
+				toAdd = new Glove(); 
+				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				notEquipItem = false;
+				break;
 			case "boots":
-				toAdd = new Boot(); break;
+				toAdd = new Boot(); 
+				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				notEquipItem = false;
+				break;
 			default:
 				toAdd = null; break;
 		}
 		if (toAdd == null) return;
 		
-
-Debug.Log("GENERATED ID before inventory placement = " + toAdd.ID);
-
 		//pluarlize text alert
-		if(randomItemAmount >= 2)
+		if(randomItemAmount >= 2 && notEquipItem)
 			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.Name + "s");
 		else
 			UI_TextAlert.DisplayText("Received " + toAdd.Name);
@@ -84,18 +93,14 @@ Debug.Log("GENERATED ID before inventory placement = " + toAdd.ID);
 		GameManager.kill(this, 0.5f);
 	}
 	
-    public int getLevel() {
-        return slainEnemyLvl;
-    }
-
-    public void setLevel(int level) {
-        slainEnemyLvl = level;
-    }
-
 	public void take_damage(int amount) {
 		GameManager.kill(this, 1.0f);
 	}
 	public void playHitAnimation() {}
 	public void playHitNoise(string noise) {}
+
+	public void setLvlOfSlainMob(int level) {
+		slainEnemyLvl = level;
+	}
 }
 

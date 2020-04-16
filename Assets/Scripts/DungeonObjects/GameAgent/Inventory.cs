@@ -96,7 +96,6 @@ public class Inventory
         	    UI_TextAlert.DisplayText("Inventory full.");
             }
         }
-Debug.Log("GENERATED ID after inventory placement = " + items[slotNum].ID);
         return slotNum;
     }
 

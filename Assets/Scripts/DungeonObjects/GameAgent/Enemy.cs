@@ -197,9 +197,16 @@ public class Enemy : GameAgent
 					lootRoll = UnityEngine.Random.Range(1.0f, 100.0f * (mobDifficultyModifier));
 				Debug.Log("Loot roll is " + lootRoll + " (>" + lootThreshold + " equals item drop) ");
 
-				//TODO add rare loot threshold and different chest prefab
 				if(lootRoll > lootThreshold) {
 					randomItem = UnityEngine.Random.Range(0, lootDrops.Length - 1);
+
+					//check enemy prefab if changes are made to ensure lootDrops[0] is set to the itemChest prefab
+					//pass on to the item object's item script the lvl of the mob that was slain
+					if(randomItem == 0)
+						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setLvlOfSlainMob(level);
+					else
+						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsSpawner).setLvlOfSlainMob(level);
+
 					map_manager.instantiate_environment(lootDrops[randomItem], new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
 				}
 			}
