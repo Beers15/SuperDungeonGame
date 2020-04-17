@@ -1,9 +1,8 @@
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.URISyntaxException;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.net.ServerSocket;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
@@ -75,7 +74,8 @@ public class DungeonServerNoSQL {
                 echoToAll(("-2$" + Integer.toString(ID)).getBytes());
 
                 InputStream in = socket.getInputStream();
-                while (!socket.isClosed()) {
+                while (!socket.isClosed()) 
+                {
 
                     if (in.available() > 0) {
                         Directive d = Directive.fromByte((byte)in.read());
@@ -90,9 +90,6 @@ public class DungeonServerNoSQL {
                             // don't accept any more clients for this server
                             acceptClients = false;
                             echoToAll(buffer);
-                            //Remove from server list after game is unavailable to join
-                            //String response = sentMessageOnServerList("remove:" + socket.getInetAddress().getHostAddress());
-                            //System.out.println(response);
                             break;
                         case END:
                             // accept more clients to this server
@@ -103,70 +100,50 @@ public class DungeonServerNoSQL {
                             socket.close(); break;
                         case ECHO:
                             // writes packet to buffer
+                        	acceptClients = true;
                             echoToAll(buffer); break;
                         }
-
+                    } else
+                    {
+                    	
                     }
-                    
                     
                     Thread.sleep(1); // prevents excessive thread cpu usage
                 }
+                Thread.sleep(1); // prevents excessive thread cpu usage
             }
-            catch (Throwable e) {
-                System.out.println(this + " experienced an error:");
+            catch (IOException | InterruptedException e) {
+                System.out.println(e + " experienced an error");
                 e.printStackTrace(System.out);
             }
-            finally {
+            finally 
+            {
                 // waits for other threads to finish using activeClients
                 synchronized(activeClients) { activeClients.remove(this); }
                 System.out.println(this + " thread terminated!");
                 echoToAll(("-1$" + Integer.toString(ID)).getBytes()); // sends disconnect signal to all other clients
+                
+                if(activeClients.size() == 0) //Restart whole jar file on last client quit to avoid some errors.
+                {
+					return;
+                }
             }
         }
 
         @Override
         public String toString() { return "Client #" + Integer.toString(ID); }
-    }
+        
+    	}
 
     public static void main(String[] args) throws IOException
     {
         try {
-        	//Class.forName("com.mysql.cj.jdbc.Driver");
             server = new ServerSocket(PORT);
             server.setReuseAddress(true);
             System.out.println("Server starting on port " + PORT + "...");
 
-        	//String url = "jdbc:mysql://localhost:3306/javabase";
-        	//String username = "root";
-        	//String password = "moifantom";
-
         	System.out.println("Not connecting to database.");
-
-        	//try (Connection connection = DriverManager.getConnection(url, username, password)) {
-        	   // System.out.println("Database connected!");
-        	    //connectedtoSQL = true;
-        	    
-            	//currentClients = activeClients.size();
-            	
-            	//Statement Stmt = connection.createStatement();
-            	
-            	//try {
-            		
-            	//	int val = (acceptClients) ? 1 : 0;
-            	//	Stmt.execute("UPDATE servers\r\n" + 
-            	//			"currentClients=" + currentClients + ", isLive= " + val + "\r\n" + 
-            	//			"WHERE identifier=" + serverIdentifier + ";");
-            	//	//Debug print it to see it.
-            	//	System.out.println("UPDATE servers\r\n" + 
-            	//			"currentClients=" + currentClients + ", isLive= " + val + "\r\n" + 
-            	//			"WHERE identifier=" + serverIdentifier + ";");
-            	//	connection.commit(); // now the database physically exists
-            	//	} catch (SQLException exception) {
-            	///	System.out.println(exception);
-            	//	}
-
-        
-            while (true) {
+            while (activeClients.size() <= maxClients) {
 				if (acceptClients && activeClients.size() <= maxClients) {
 					DungeonClient newClient = new DungeonClient(server.accept(), activeClients.size() + 1);
 
@@ -174,30 +151,13 @@ public class DungeonServerNoSQL {
 					activeClients.add(newClient);
 					clientThreads.submit(newClient);
 					System.out.println("Number of active threads: " + activeClients.size());
+				} else {
+					System.out.println("Max clients reached(?): " + acceptClients);
 				}
             }
-        } finally
+        } catch (IOException e)
         {
-        	
-        	
+        	e.printStackTrace();
         }
     }
-        	
-			
-      
-    
-    public static void WriteData()
-    {
-    	
-    }
-
-    //Function for sending message to master server / server list
-    //private static String sentMessageOnServerList(String message) throws IOException {
-        //GreetClient gclient = new GreetClient();
-       // gclient.startConnection(masterIP, 1338);
-        //System.out.println("Send on Server list -> " + message);
-        //String got = gclient.sendMessage(message);
-        //System.out.println("Send on Server list <- " + got);
-        //return got;
-    //}
 }

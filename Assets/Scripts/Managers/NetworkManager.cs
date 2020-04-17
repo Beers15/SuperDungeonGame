@@ -171,5 +171,6 @@ public class NetworkManager : MonoBehaviour
 	void OnApplicationQuit()
 	{
 		Network.disconnectFromServer();
+		NetworkBase.disconnect();
 	}
 }
