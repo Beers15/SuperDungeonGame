@@ -52,22 +52,22 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 				toAdd = new Gold(randomItemAmount);	break;
 			case "helmet":
 				toAdd = new Helmet(); 
-				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
 				notEquipItem = false;
 				break;
 			case "armor":
 				toAdd = new Armor(); 
-				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
 				notEquipItem = false;
 				break;
 			case "gloves":
 				toAdd = new Glove(); 
-				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
 				notEquipItem = false;
 				break;
 			case "boots":
 				toAdd = new Boot(); 
-				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
 				notEquipItem = false;
 				break;
 			default:
@@ -78,8 +78,6 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		//pluarlize text alert
 		if(randomItemAmount >= 2 && notEquipItem)
 			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.Name + "s");
-		else
-			UI_TextAlert.DisplayText("Received " + toAdd.Name);
 
 		//add to consumable/potions storage if consumable, otherwise add to normal inventory
 		if(isConsumable) {

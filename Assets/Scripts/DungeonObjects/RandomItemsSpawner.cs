@@ -110,6 +110,5 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 
 	public void setLvlOfSlainMob(int level) {
 		slainEnemyLvl = level;
-		Debug.Log("LVL OF SLAIN MOB DROPPING ITEM IS : " + slainEnemyLvl);
 	}
 }
