@@ -7,10 +7,10 @@ public class Inventory
 {
 
     public Item[] items = new Item[numItemSlots];
-    public const int numItemSlots = 18;
+    public const int numItemSlots = 10;
 	public Inventory() {
         for(int i = 0; i < numItemSlots; i++) 
-            items[i] = new Item(20, "", -1, 0);
+            items[i] = new Item(20, "", "-1", 0);
     }
 
     public EquipItem helmet;
@@ -18,6 +18,9 @@ public class Inventory
     public EquipItem gloves;
     public EquipItem boots;
     public EquipItem weapon;
+
+    private int gearIdLowerBound = EquipItem.getIDLowerBound();
+    private int gearIdUpperBound = EquipItem.getIDUpperBound();
 
     public int AddItem(Item item)
     {   //0 = not found
@@ -31,7 +34,7 @@ public class Inventory
         //check if item already exists in inventory
         for(int i = 0; i < numItemSlots; i++) {
             if(string.Equals(item.Name, items[i].Name)) {
-                if(items[i].ID == -1)
+                if(string.Compare(items[i].ID, "-1") == 0) 
                     items[i].ID = item.ID;
 
                 int maxInsert = items[i].maxAmount - items[i].Amount;
@@ -49,12 +52,30 @@ public class Inventory
         }
 
         if(!itemFound) {
-        bool emptySlotExists = false;
-        //insert into inventory at an empty slot if not found
+            bool emptySlotExists = false;
+            //insert into inventory at an empty slot if not found
             for(int i = 0; i < numItemSlots; i++) {
-                if(items[i].ID == -1) {
+                if(string.Compare(items[i].ID, "-1") == 0) {
                     items[i].Name = item.Name;
-                    items[i].ID = item.ID;
+
+                    //check to see if item that is being added is equipment
+                    int id = int.Parse(item.ID);
+                    Debug.Log("ID: " +id);
+                    if(id >= gearIdLowerBound && id <= gearIdUpperBound) {
+                        item.ID = getUniqueID();
+                        
+                        //todo: static function call from EquipItem that produces random stats for gear
+                        //based on rarity variable (add rarity variable)
+
+                        Debug.Log("Equipment ID generated: " + item.ID);
+                        items[i].ID = item.ID;
+                    }
+                    else 
+                        items[i].ID = item.ID;
+
+                    //gold has a higher max than other items
+                    if(string.Compare(items[i].ID, "99") == 0)
+                        items[i].maxAmount = 999999;
 
                     int maxInsert = items[i].maxAmount - items[i].Amount;
 
@@ -75,7 +96,6 @@ public class Inventory
         	    UI_TextAlert.DisplayText("Inventory full.");
             }
         }
-
         return slotNum;
     }
 
@@ -87,7 +107,7 @@ public class Inventory
         {
             return; //out of bounds
         }
-        items[slot].ID = -1;
+        items[slot].ID = "-1";
         RearrangeSlots();
     }
 
@@ -139,11 +159,22 @@ public class Inventory
         }
     }
 
-        //testing
+    //testing
     public void display() {
         for(int i = 0; i < numItemSlots; i++) {
-            if(items[i].ID != -1)
+            if(string.Compare(items[i].ID, "-1") != 0)
                 Debug.Log("item slot #" + i + " Item: " + items[i].Name + " Amount: " + items[i].Amount + " ID: " + items[i].ID);
         }
+    }
+
+    //referenced https://sushanta1991.blogspot.com/2016/02/how-to-create-unique-id-in-unity.html
+    private string getUniqueID()
+    {
+        string [] split = System.DateTime.Now.TimeOfDay.ToString().Split(new char [] {':','.'});
+        string id = "";
+        for(int i = 0; i < split.Length; i++) {
+            id+=split[i];
+        }
+        return id;
     }
 }

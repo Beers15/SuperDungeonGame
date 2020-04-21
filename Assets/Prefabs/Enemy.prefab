@@ -19,6 +19,13 @@ MonoBehaviour:
   move_budget: 0
   animator: {fileID: 0}
   animating: 1
+  interactTilesMaterial: {fileID: 0}
+  lootDrops:
+  - {fileID: 5539044942602581205, guid: 23aeddc0f049ccd4ab4d593683d33a8e, type: 3}
+  - {fileID: 128318, guid: c341d70d4dd30454881fcc7fa6d0baa4, type: 3}
+  - {fileID: 186258, guid: c0391bc2170c2054ebb26f1f425004b4, type: 3}
+  - {fileID: 138872, guid: 2c70562ca10765c42a41667567224154, type: 3}
+  - {fileID: 149244, guid: 2835e173a7421ca499f76d4b7867306f, type: 3}
   _attack: 0
   maxHealth: 0
   currentHealth: 0

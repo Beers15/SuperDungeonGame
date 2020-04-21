@@ -8,12 +8,12 @@ public class PotionsStore
     public ConsumableItem[] potions = new ConsumableItem[numPotionSlots];
 	public PotionsStore() {
         for(int i = 0; i < potionOptions.Length; i++) 
-            potions[i] = new ConsumableItem(0, 20, potionOptions[i], -1, 0);
+            potions[i] = new ConsumableItem(0, 20, potionOptions[i], "-1", 0);
     }
 
     string[] potionOptions = {"Health Potion", "Mana Potion"};
 
-    public void AddPotion(ConsumableItem potion)
+    public void AddConsumable(ConsumableItem potion)
     {
         if (potion == null) {
             return;
@@ -25,7 +25,7 @@ public class PotionsStore
                 //if(potions[i].effectivness == 0)
                     //potions[i].effectivness = potion.effectivness;
 
-                if(potions[i].ID == -1)
+                if(string.Compare(potions[i].ID, "-1") == 0)
                     potions[i].ID = potion.ID;
 
 
@@ -77,7 +77,7 @@ public class PotionsStore
     //testing
     public void display() {
         for(int i = 0; i < potionOptions.Length; i++) {
-            if(potions[i].ID != -1)
+            if(string.Compare(potions[i].ID, "-1") != 0)
                 Debug.Log("potions slot #" + i + " Potion: " + potions[i].Name + " Amount: " + potions[i].Amount + " ID: " + potions[i].ID);
         }
     }
