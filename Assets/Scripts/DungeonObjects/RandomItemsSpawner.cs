@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MapUtils;
 
-public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Renderable, Damageable
-{
+public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Renderable, Damageable {
     public AudioClip itemSFX;
     public string modelName;
     public int itemIndex;
@@ -42,12 +41,10 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 	}
 
 	public void DisableRendering() {
-        if(itemObject)
-		    itemObject.SetActive(false);
+		itemObject.SetActive(false);
 	}
 
-	public void interact(GameAgent interactor)
-	{
+	public void interact(GameAgent interactor) {
         source.PlayOneShot(itemSFX);
 
         int randomItemAmount;
@@ -63,7 +60,6 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
                 randomItemAmount =  UnityEngine.Random.Range(250, 500 * slainEnemyLvl);
         }
 
-
 		Item toAdd;
 		bool isConsumable = false;
 		
@@ -76,7 +72,7 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 			case 3:
 				toAdd = new Gold(randomItemAmount); break;
 			default:
-				toAdd = null; break;
+				Debug.Log("NULL IN SPAWNER"); toAdd = null; break;
 		}
 		if (toAdd == null) return;
 		
@@ -111,4 +107,9 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 	}
 	public void playHitAnimation() {}
 	public void playHitNoise(string noise) {}
+
+	public void setLvlOfSlainMob(int level) {
+		slainEnemyLvl = level;
+		Debug.Log("LVL OF SLAIN MOB DROPPING ITEM IS : " + slainEnemyLvl);
+	}
 }

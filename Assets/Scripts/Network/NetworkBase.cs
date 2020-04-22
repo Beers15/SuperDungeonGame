@@ -39,7 +39,7 @@ public class NetworkBase
 		sendThread.Start();
 	}
 	
-	protected static void disconnect()
+	public static void disconnect()
 	{
 		if (client != null && client.Connected) {
 			Debug.Log("Terminating listen/send threads and disconnecting from server...");

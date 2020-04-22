@@ -8,7 +8,7 @@ using MapUtils;
 public class UI_MultiplayerJoin : MonoBehaviour
 {
     private GameObject Panel_Main, Panel_Lobby;
-	private Text entry;
+	public Text entry;
 	
 	public void Awake()
 	{
