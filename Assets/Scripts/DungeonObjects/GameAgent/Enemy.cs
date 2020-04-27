@@ -123,12 +123,12 @@ public class Enemy : GameAgent
     }
 	
 	public override void attack(Damageable target) {
-		Debug.Log(currentAttack);
+		//Debug.Log(currentAttack);
 		StartCoroutine(currentAttack.Execute(this, target));
 	}
 	
-    public void Hit() { animating = false; Debug.Log("Just set animating to false"); }
-    public void Shoot() { animating = false; Debug.Log("Just set animating to false"); }
+    public void Hit() { animating = false;}
+    public void Shoot() { animating = false;}
 	
 	public override void playAttackAnimation() {
 		animating = true;
@@ -170,13 +170,13 @@ public class Enemy : GameAgent
 	}
 	
 	public override bool animationFinished() {
-		Debug.Log(!currentAttack.attacking + ", " + !moving);
+		//Debug.Log(!currentAttack.attacking + ", " + !moving);
 		return (!currentAttack.attacking) && !moving;
 	}
 	
     public override void take_damage(int amount)  {	
         stats.TakeDamage(amount);
-		Debug.Log("This mob's lvl is: " +level.ToString());
+		//Debug.Log("This mob's lvl is: " +level.ToString());
 
         if (stats.currentState == GameAgentState.Unconscious) {
             StartCoroutine(animator.PlayKilledAimation());
@@ -184,8 +184,6 @@ public class Enemy : GameAgent
 
 			GameManager.kill(this);
 
-			//death and item drop code logic----------------
-			//team 1 equals enemy mob
 			if(team == 1) {
 				var lootRoll = 0.0f;
 				var lootThreshold = 1.0f;
@@ -195,12 +193,11 @@ public class Enemy : GameAgent
 					lootRoll = lootThreshold + 1.0f;
 				else
 					lootRoll = UnityEngine.Random.Range(1.0f, 100.0f * (mobDifficultyModifier));
-				Debug.Log("Loot roll is " + lootRoll + " (>" + lootThreshold + " equals item drop) ");
+					Debug.Log("Loot roll is " + lootRoll + " (>" + lootThreshold + " equals item drop) ");
 
 				if(lootRoll > lootThreshold) {
 					randomItem = UnityEngine.Random.Range(0, lootDrops.Length - 1);
 
-					//check enemy prefab if changes are made to ensure lootDrops[0] is set to the itemChest prefab
 					//pass on to the item object's item script the lvl of the mob that was slain
 					if(randomItem == 0)
 						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setLvlOfSlainMob(level);

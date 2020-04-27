@@ -57,16 +57,16 @@ public class EquipItem : Item {
         
         int tierRoll = UnityEngine.Random.Range(1, 100);
 
-        if(tierRoll > 98) {
+        if(tierRoll > 93) {
             tierValue = 5; //legendary
         }
-        else if(tierRoll > 91) {
+        else if(tierRoll > 85) {
             tierValue = 4; //epic
         }	
-        else if(tierRoll > 80) {
+        else if(tierRoll > 72) {
             tierValue = 3; //rare
         }
-        else if(tierRoll > 55) {
+        else if(tierRoll > 60) {
             tierValue = 2; //magic
         }
         else
@@ -74,16 +74,47 @@ public class EquipItem : Item {
 
         tier = tierValue;
         //TODO
-        //generateStats();
+        generateStats(tierValue);
         generateName();
         displayMessage();
 
         Debug.Log("This gear's tier is " + tier);
     }
 
-    // private void generateStats() {
+    private void generateStats(int tierValue) {
+        int atkValue = tierValue * UnityEngine.Random.Range(tierValue, 10);
+        int defValue = tierValue * UnityEngine.Random.Range(tierValue, 10);
 
-    // }
+        switch(type) {
+            case EquipType.HELMET:
+                atkbonus += (int)atkValue / 4;
+                defbonus += (int)defValue;
+                break;
+            case EquipType.ARMOR:
+                atkbonus += (int)atkValue / 2;
+                defbonus += (int)defValue;
+                break;
+            case EquipType.GLOVE:
+                atkbonus += (int)atkValue / 2;
+                defbonus += (int)defValue / 3;
+                break;
+            case EquipType.BOOT:
+                atkbonus += (int)atkValue / 3;
+                defbonus += (int)defValue / 2;
+                break;
+            case EquipType.WEAPON:
+                atkbonus += (int)atkValue;
+                defbonus += (int)defValue / 5;
+                break;
+
+            default:
+                break;
+        }
+
+        Debug.Log("ITEM ATTACK: " +  atkbonus);
+        Debug.Log("ITEM DEFENCE: " + defbonus);
+    }
+
     private void generateName() {
     
         string adj = equipmentAdjectives.ToArray()[UnityEngine.Random.Range(0, equipmentAdjectives.Count - 1)];
@@ -94,7 +125,7 @@ public class EquipItem : Item {
     }
 
     public void displayMessage() {
-        UI_TextAlert.DisplayText("Received " + completeName);
+        UI_TextAlert.DisplayColorText("Recieved " + completeName, tier);
     }
 
     public void initWords() {
@@ -126,20 +157,20 @@ public class Helmet : EquipItem {
 
 public class Armor : EquipItem {
 	public static string _ID = "4";
-	public Armor() : base("armor", _ID, EquipType.ARMOR, 0, 10) {}
+	public Armor() : base("armor", _ID, EquipType.ARMOR, 0, 20) {}
 }
 
 public class Glove : EquipItem {
 	public static string _ID = "5";
-	public Glove() : base("gloves", _ID, EquipType.GLOVE, 0, 10) {}
+	public Glove() : base("gloves", _ID, EquipType.GLOVE, 0, 8) {}
 }
 
 public class Boot : EquipItem {
 	public static string _ID = "6";
-	public Boot() : base("boot", _ID, EquipType.BOOT, 0, 10) {}
+	public Boot() : base("boot", _ID, EquipType.BOOT, 0, 8) {}
 }
 
 public class EquipWeapon : EquipItem {
 	public static string _ID = "7";
-	public EquipWeapon() : base("weapon", _ID, EquipType.WEAPON, 10, 0) {}
+	public EquipWeapon() : base("weapon", _ID, EquipType.WEAPON, 20, 0) {}
 }

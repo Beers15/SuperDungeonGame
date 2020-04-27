@@ -43,7 +43,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		bool isConsumable = false;
 		bool notEquipItem = true;
 		
-		switch (itemChoice) {
+		switch ("helmet"){//(itemChoice) {
 			case "health":
 				toAdd = new HealthPot(randomItemAmount); isConsumable = true; break;
 			case "mana":

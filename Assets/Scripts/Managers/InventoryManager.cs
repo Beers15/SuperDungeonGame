@@ -59,9 +59,6 @@ public class InventoryManager : MonoBehaviour
 		if (agent.stats.currentMagicPoints > agent.stats.maxMagicPoints)
 			agent.stats.currentMagicPoints = agent.stats.maxMagicPoints;
     }
-
-
-    //FOLLOWING METHODS FOR EQUIPMENT SYSTEM
 	
 	private static void EquipEquipment(Item item, GameAgent agent)
 	{
@@ -109,33 +106,4 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    /*private void EquipHelmet(Item item, GameAgent agent)
-    {
-        Debug.Log("Equipping helmet!");
-    }
-
-    private void EquipArmor(Item item, GameAgent agent)
-    {
-        Debug.Log("Equipping armor!");
-    }
-
-    private void EquipWeapon(Item item, GameAgent agent)
-    {
-        Debug.Log("Equipping weapon!");
-    }
-
-    private void EquipGloves(Item item, GameAgent agent)
-    {
-        Debug.Log("Equipping gloves!");
-    }
-
-    private void EquipShoes(Item item, GameAgent agent)
-    {
-        Debug.Log("Equipping shoes!");
-    }
-
-    private void EquipOffhand(Item item, GameAgent agent)
-    {
-        Debug.Log("Equipping offhand item!");
-    }*/
 }
