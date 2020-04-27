@@ -33,8 +33,6 @@ public class Player : GameAgent
     public int level;
     public string viewableState;
 
-    // 0 - unarmed, 1 - sword, 2 - bow, 3 - staff
-    public int weapon = 1;
 
     //CharacterClassDefiner classDefiner; // moved to GameAgent
 
@@ -208,7 +206,7 @@ public class Player : GameAgent
 		return (currentAttack == null || !currentAttack.attacking) && !moving;
 	}
 	
-	public override void take_damage(int amount)
+	public override void take_damage(int amount, int classOfAttacker)
 	{
         if (stats.currentState == GameAgentState.Alive) {
             if (!godMode) stats.TakeDamage((int)(amount * 0.05));

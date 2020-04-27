@@ -21,7 +21,7 @@ public class PotionsStore
 
         //using name instead of ID for now
         for(int i = 0; i < potionOptions.Length; i++) {
-            if(string.Equals(potion.Name, potions[i].Name)) {
+            if(string.Equals(potion.name, potions[i].name)) {
                 //if(potions[i].effectivness == 0)
                     //potions[i].effectivness = potion.effectivness;
 
@@ -78,7 +78,7 @@ public class PotionsStore
     public void display() {
         for(int i = 0; i < potionOptions.Length; i++) {
             if(string.Compare(potions[i].ID, "-1") != 0)
-                Debug.Log("potions slot #" + i + " Potion: " + potions[i].Name + " Amount: " + potions[i].Amount + " ID: " + potions[i].ID);
+                Debug.Log("potions slot #" + i + " Potion: " + potions[i].name + " Amount: " + potions[i].Amount + " ID: " + potions[i].ID);
         }
     }
 }

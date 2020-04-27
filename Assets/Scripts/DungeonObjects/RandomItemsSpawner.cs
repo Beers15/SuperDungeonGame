@@ -14,7 +14,7 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 	public void init_environment(Pos grid_pos, int health=1) {
 		this.grid_pos = grid_pos;
 
-        switch(itemIndex) {
+        switch(0){//(itemIndex) {
             case 0:
                 itemObject = GameObject.Find("SM_Prop_Chest_01"); break;
             case 1:
@@ -78,9 +78,9 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 		
 		//pluarlize text alert
 		if(randomItemAmount > 1)
-			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.Name + "s");
+			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.name + "s");
 		else
-			UI_TextAlert.DisplayText("Received " + toAdd.Name);
+			UI_TextAlert.DisplayText("Received " + toAdd.name);
 
 		//add to consumable/potions storage if consumable, otherwise add to normal inventory
 		if(isConsumable) {
@@ -102,7 +102,7 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
         slainEnemyLvl = level;
     }
 
-	public void take_damage(int amount) {
+	public void take_damage(int amount, int classOfAttacker) {
 		GameManager.kill(this, 1.0f);
 	}
 	public void playHitAnimation() {}
@@ -110,6 +110,5 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 
 	public void setLvlOfSlainMob(int level) {
 		slainEnemyLvl = level;
-		Debug.Log("LVL OF SLAIN MOB DROPPING ITEM IS : " + slainEnemyLvl);
 	}
 }

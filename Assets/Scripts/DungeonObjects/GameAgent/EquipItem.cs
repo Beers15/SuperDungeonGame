@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public enum EquipType {
     HELMET,
@@ -14,24 +15,33 @@ public class EquipItem : Item {
     public EquipType type;
     public int atkbonus;
     public int defbonus;
+    //public CharacterClassOptions weaponType;
+
+    public string completeName;
+    public List<string> equipmentAdjectives; 
+    public List<string> equipmentNouns;
+    public string[] adjectives;
+    public string[] nouns;
 
     //All gear IDs are within this range by default until they are assigned stats and given unique IDs (Change as needed)
     private static int IDUpperBound = 7;
     private static int IDLowerBound = 3;
     private int lvlOfSlainMob = 1;  //used to calculate EquipItem's tier 
     private int tier;
+    public int weaponClass;
 
 	public EquipItem() {}
     public EquipItem(string name, string id, EquipType etype, int atk, int def) {
+        initWords();
         maxAmount = 1;
         Amount = 1;
-        Name = name;
+        this.name = name;
         ID = id;
         type = etype;
         atkbonus = atk;
         defbonus = def;
     }
-
+    
     public static int getIDUpperBound() {
         return IDUpperBound;
     }
@@ -40,75 +50,136 @@ public class EquipItem : Item {
        return  IDLowerBound;
     }
         
-    public void setLvl(int level) {
+    public void generateEquipmentValues(int level) {
         lvlOfSlainMob = level;
-        getTier();
-    }
-
-    public void getTier() {
         Debug.Log("This gear's slain mob was lvl " + lvlOfSlainMob);
 
-        //TODO add logic to have enemies lvl/boss status affect this value
         int tierValue;
         
         int tierRoll = UnityEngine.Random.Range(1, 100);
 
-        if(tierRoll > 98) {
+        if(tierRoll > 93) {
             tierValue = 5; //legendary
         }
-        else if(tierRoll > 91) {
+        else if(tierRoll > 85) {
             tierValue = 4; //epic
         }	
-        else if(tierRoll > 80) {
+        else if(tierRoll > 72) {
             tierValue = 3; //rare
         }
-        else if(tierRoll > 55) {
-            tierValue = 2; //magic;
+        else if(tierRoll > 60) {
+            tierValue = 2; //magic
         }
         else
             tierValue = 1; //common
 
         tier = tierValue;
-        
-        //TODO
-        //generateStats();
-        //generateName();
-        //displayMessage();
+  
+        generateStats(tierValue);
+        generateName();
+        displayMessage();
+
         Debug.Log("This gear's tier is " + tier);
     }
 
-    // private void generateStats() {
+    private void generateStats(int tierValue) {
+        int atkValue = tierValue * UnityEngine.Random.Range(tierValue, 10);
+        int defValue = tierValue * UnityEngine.Random.Range(tierValue, 10);
 
-    // }
-    // private void generateName() {
+        switch(type) {
+            case EquipType.HELMET:
+                atkbonus += (int)atkValue / 4;
+                defbonus += (int)defValue;
+                break;
+            case EquipType.ARMOR:
+                atkbonus += (int)atkValue / 2;
+                defbonus += (int)defValue;
+                break;
+            case EquipType.GLOVE:
+                atkbonus += (int)atkValue / 2;
+                defbonus += (int)defValue / 3;
+                break;
+            case EquipType.BOOT:
+                atkbonus += (int)atkValue / 3;
+                defbonus += (int)defValue / 2;
+                break;
+            case EquipType.WEAPON:
+                atkbonus += (int)atkValue;
+                defbonus += (int)defValue / 5;
+                break;
+
+            default:
+                break;
+        }
+
+        Debug.Log("ITEM ATTACK: " +  atkbonus);
+        Debug.Log("ITEM DEFENCE: " + defbonus);
+    }
+
+    private void generateName() {
+    
+        string adj = equipmentAdjectives.ToArray()[UnityEngine.Random.Range(0, equipmentAdjectives.Count - 1)];
+        string noun = equipmentNouns.ToArray()[UnityEngine.Random.Range(0, equipmentNouns.Count - 1)];
+        if(type == EquipType.WEAPON)
+            completeName = adj + " " + CharacterClassOptions.getWeaponType((this as EquipWeapon).weaponClass) + " of " + noun;
+        else {
+           completeName = adj + " " + name + " of " + noun; 
+        }
+        Debug.Log("Name of equipment is : " + completeName);
+    }
+
+    public void displayMessage() {
+        UI_TextAlert.DisplayColorText("Recieved " + completeName, tier);
+    }
+
+    public void initWords() {
+       equipmentAdjectives = new List<string>();
+       equipmentNouns = new List<string>();
+
+        TextAsset EquipmentAdjectives = Resources.Load<TextAsset>("EquipmentAdjectives");
+        TextAsset EquipmentNouns = Resources.Load<TextAsset>("EquipmentNouns");
+
+        adjectives = EquipmentAdjectives.text.Split("\n"[0]);
+        nouns = EquipmentNouns.text.Split("\n"[0]);
+
+        for(int i = 0; i < adjectives.Length; i++) {  
+            equipmentAdjectives.Add(adjectives[i]);
+        }
         
-    // }
-    // public void displayMessage() {
-        
-    // }
+        for(int i = 0; i < nouns.Length; i++) {  
+            equipmentNouns.Add(nouns[i]);
+        }
+
+    }
+
 }
 
 public class Helmet : EquipItem {
 	public static string _ID = "3";
-	public Helmet() : base("Helmet", _ID, EquipType.HELMET, 0, 10) {}
+	public Helmet() : base("helmet", _ID, EquipType.HELMET, 0, 10) {}
 }
 
 public class Armor : EquipItem {
 	public static string _ID = "4";
-	public Armor() : base("Armor", _ID, EquipType.ARMOR, 0, 10) {}
+	public Armor() : base("armor", _ID, EquipType.ARMOR, 0, 20) {}
 }
 
 public class Glove : EquipItem {
 	public static string _ID = "5";
-	public Glove() : base("Glove", _ID, EquipType.GLOVE, 0, 10) {}
+	public Glove() : base("gloves", _ID, EquipType.GLOVE, 0, 8) {}
 }
 
 public class Boot : EquipItem {
 	public static string _ID = "6";
-	public Boot() : base("Boot", _ID, EquipType.BOOT, 0, 10) {}
+	public Boot() : base("boots", _ID, EquipType.BOOT, 0, 8) {}
 }
 
 public class EquipWeapon : EquipItem {
 	public static string _ID = "7";
-	public EquipWeapon() : base("Weapon", _ID, EquipType.WEAPON, 10, 1) {}
+   
+	public EquipWeapon(int weaponClass) : base("weapon", _ID, EquipType.WEAPON, 20, 0) {
+        this.weaponClass = weaponClass;
+        Debug.Log("Weapon class is : " + weaponClass);
+    }
+
 }

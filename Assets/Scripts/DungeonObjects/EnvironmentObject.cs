@@ -35,7 +35,7 @@ public class EnvironmentObject : DungeonObject, Damageable, Environment, Rendera
 		else
 			DisableRendering();
 	}
-    public void take_damage(int amount)
+    public void take_damage(int amount, int classOfAttacker)
 	{
 		health -= amount;
 		Debug.Log(gameObject.name);

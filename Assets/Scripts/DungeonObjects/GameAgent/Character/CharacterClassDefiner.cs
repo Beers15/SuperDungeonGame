@@ -175,7 +175,7 @@ public class CharacterClassDefiner : MonoBehaviour
             club.SetActive(true);
 			activeWeapon = club;
         } 
-        else if (weaponID == CharacterClassOptions.Unarmed) // Staff
+        else if (weaponID == CharacterClassOptions.Unarmed) 
         {
             animator.SetInteger("Weapon", CharacterClassOptions.Unarmed);
 			activeWeapon = null;

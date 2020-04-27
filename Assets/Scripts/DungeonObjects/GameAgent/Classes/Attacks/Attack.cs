@@ -47,15 +47,13 @@ public class MeleeAttack : Attack
 		attacker.transform.LookAt((target as DungeonObject).transform);
 		attacker.playAttackAnimation();
 		attacker.playAttackNoise("Melee");
-		
-		Debug.Log("Waiting for basic melee attack animation to finish: " + attacker.nickname);
+	
 		while (attacker.animating) yield return null;
-	    Debug.Log( attacker.nickname + ": attack animation finished.");
 
 		try {
 			target.playHitAnimation();
 			target.playHitNoise("Melee");
-			target.take_damage((int) (attacker.stats.DealDamage() * damageModifier));
+			target.take_damage((int) (attacker.stats.DealDamage() * damageModifier), attacker.weapon);
 		}
 		catch (Exception e) {
 			// swallow the error
@@ -78,15 +76,13 @@ public class WeakMeleeAttack : Attack
         attacker.playAttackAnimation();
         attacker.playAttackNoise("Melee");
 
-        Debug.Log("Waiting for weak melee attack animation to finish: " + attacker.nickname);
         while (attacker.animating) yield return null;
-        Debug.Log( attacker.nickname + ": attack animation finished.");
 
         try
         {
             target.playHitAnimation();
             target.playHitNoise("Melee");
-            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier));
+            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier), attacker.weapon);
         }
         catch (Exception e)
         {
@@ -115,15 +111,13 @@ public class StrongMeleeAttack : Attack
         attacker.playAttackAnimation();
         attacker.playAttackNoise("Melee");
 
-        Debug.Log("Waiting for strong melee attack animation to finish: " + attacker.nickname);
         while (attacker.animating) yield return null;
-        Debug.Log( attacker.nickname + " :attack animation finished.");
 
         try
         {
             target.playHitAnimation();
             target.playHitNoise("Melee");
-            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier));
+            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier), attacker.weapon);
         }
         catch (Exception e)
         {
@@ -149,14 +143,13 @@ public class ShortbowAttack : Attack
 		while (attacker.animating) yield return null;
 		
 		Projectile arrow = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "arrow");
-        Debug.Log("Waiting for shortbow attack animation to finish: " + attacker.nickname);
+
 		while (!(arrow == null)) yield return null;
-		Debug.Log( attacker.nickname + " :attack animation finished.");
 
 		try {
 		target.playHitAnimation();
 		target.playHitNoise("Bow");
-		target.take_damage((int) (attacker.stats.DealDamage() * damageModifier));
+		target.take_damage((int) (attacker.stats.DealDamage() * damageModifier), attacker.weapon);
 		}
 		catch (Exception e) {
 			// swallow the error
@@ -179,9 +172,7 @@ public class LongbowAttack : Attack
 		attacker.playAttackAnimation();
 		attacker.playAttackNoise("Bow");
 		
-        Debug.Log("Waiting for longbow attack animation to finish: " + attacker.nickname);
 		while (attacker.animating) yield return null;
-		Debug.Log( attacker.nickname + " :attack animation finished.");
 
 		var arrow = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "arrow");
 		
@@ -190,7 +181,7 @@ public class LongbowAttack : Attack
 		try {
 		target.playHitAnimation();
 		target.playHitNoise("Bow");
-		target.take_damage((int) (attacker.stats.DealDamage() * damageModifier));
+		target.take_damage((int) (attacker.stats.DealDamage() * damageModifier), attacker.weapon);
 		}
 		catch (Exception e) {
 			// swallow the error
@@ -218,9 +209,7 @@ public class FireSpell : Attack
 		attacker.playAttackAnimation();
 		attacker.playAttackNoise("Fire");
 		
-        Debug.Log("Waiting for fireball attack animation to finish: " + attacker.nickname);
 		while (attacker.animating) yield return null;
-        Debug.Log( attacker.nickname + ": attack animation finished.");
 		
 		Projectile fire = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "fire");
 		
@@ -229,7 +218,7 @@ public class FireSpell : Attack
 		try {
 		target.playHitAnimation();
 		target.playHitNoise("Fire");
-        target.take_damage((int)(attacker.stats.DealDamage() * damageModifier));
+        target.take_damage((int)(attacker.stats.DealDamage() * damageModifier), attacker.weapon);
         }
 		catch (Exception e) {
 			// swallow the error
@@ -259,10 +248,8 @@ public class FireStormSpell : Attack
             attacker.transform.LookAt((target as DungeonObject).transform);
             attacker.playAttackAnimation();
             attacker.playAttackNoise("Fire");
-
-            Debug.Log("Waiting for firestorm attack animation to finish: " + attacker.nickname);
+    
             while (attacker.animating) yield return null;
-            Debug.Log( attacker.nickname + ": attack animation finished.");
 
             Projectile fire = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "fire");
 
@@ -271,7 +258,7 @@ public class FireStormSpell : Attack
             try {
                 target.playHitAnimation();
                 target.playHitNoise("Fire");
-                target.take_damage((int)(attacker.stats.GetFireStormDamage() * damageModifier));
+                target.take_damage((int)(attacker.stats.GetFireStormDamage() * damageModifier), attacker.weapon);
             } catch (Exception e) {
                 // swallow the error
             }
@@ -282,7 +269,6 @@ public class FireStormSpell : Attack
 
             count--;
         }
-        Debug.Log("After while loop");
 		attacking = false;
     }
     public override string toString() { return "Fire Storm"; }
@@ -307,14 +293,12 @@ public class Berserk : Attack {
             attacker.playAttackAnimation();
             attacker.playAttackNoise("Melee");
 
-            Debug.Log("Waiting for berserk animation to finish: " + attacker.nickname);
             while (attacker.animating) yield return null;
-            Debug.Log( attacker.nickname + ": attack animation finished.");
-
+        
             try {
                 target.playHitAnimation();
                 target.playHitNoise("Melee");
-                target.take_damage((int)(attacker.stats.GetBerserkDamage() * damageModifier));
+                target.take_damage((int)(attacker.stats.GetBerserkDamage() * damageModifier), attacker.weapon);
             } catch (Exception e) {
                 // swallow the error
             }
@@ -349,9 +333,7 @@ public class Multishot : Attack
             attacker.playAttackAnimation();
             attacker.playAttackNoise("Bow");
 
-            Debug.Log("Waiting for multishot animation to finish: " + attacker.nickname);
             while (attacker.animating) yield return null;
-            Debug.Log( attacker.nickname + ": attack animation finished.");
 
             Projectile arrow = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "arrow");
 
@@ -361,7 +343,7 @@ public class Multishot : Attack
             {
                 target.playHitAnimation();
                 target.playHitNoise("Bow");
-                target.take_damage((int)(attacker.stats.DealDamage() * damageModifier));
+                target.take_damage((int)(attacker.stats.DealDamage() * damageModifier), attacker.weapon);
             }
             catch (Exception e)
             {
@@ -375,7 +357,6 @@ public class Multishot : Attack
             count--;
         }
 		attacking = false;
-        Debug.Log("After while loop");
     }
     public override string toString() { return "Multishot"; }
 }
@@ -397,9 +378,7 @@ public class LightningSpell : Attack
         attacker.playAttackAnimation();
         attacker.playAttackNoise("Lightning");
 
-        Debug.Log("Waiting for lightning attack animation to finish");
         while (attacker.animating) yield return null;
-        Debug.Log( attacker.nickname + ": attack animation finished.");
 
         Projectile lightning = MapManager.AnimateProjectile(attacker.grid_pos, (target as DungeonObject).grid_pos, "lightning");
 
@@ -409,7 +388,7 @@ public class LightningSpell : Attack
         {
             target.playHitAnimation();
             target.playHitNoise("Fire");
-            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier));
+            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier), attacker.weapon);
         }
         catch (Exception e)
         {

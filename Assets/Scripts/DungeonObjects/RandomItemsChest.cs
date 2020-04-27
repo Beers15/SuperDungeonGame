@@ -8,6 +8,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
     private AudioSource source;
 	private GameObject chestObject;
 	private int slainEnemyLvl = 2; //default to 2 for spawned chest not dropped from slain enemies
+	private int classOfAttacker; //used to determine what kind of weapon to drop
 
 	public void init_environment(Pos grid_pos, int health=1) {
 		this.grid_pos = grid_pos;
@@ -30,7 +31,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		chestObject.SetActive(false);
 	}
 
-	string[] itemOptions = { "health", "mana", "gold", "helmet", "armor", "gloves", "boot" };
+	string[] itemOptions = { "health", "mana", "gold", "helmet", "armor", "gloves", "boot", "weapon" };
 	public void interact(GameAgent interactor)
 	{
         source.PlayOneShot(chestOpeningSFX);
@@ -42,7 +43,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		Item toAdd;
 		bool isConsumable = false;
 		bool notEquipItem = true;
-		
+		//Debug.Log("CLASS OF ATTACKER IN CHEST SCRIPT: " + classOfAttacker);
 		switch (itemChoice) {
 			case "health":
 				toAdd = new HealthPot(randomItemAmount); isConsumable = true; break;
@@ -52,22 +53,27 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 				toAdd = new Gold(randomItemAmount);	break;
 			case "helmet":
 				toAdd = new Helmet(); 
-				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
 				notEquipItem = false;
 				break;
 			case "armor":
 				toAdd = new Armor(); 
-				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
 				notEquipItem = false;
 				break;
 			case "gloves":
 				toAdd = new Glove(); 
-				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
 				notEquipItem = false;
 				break;
-			case "boots":
+			case "boot":
 				toAdd = new Boot(); 
-				(toAdd as EquipItem).setLvl(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
+				notEquipItem = false;
+				break;
+			case "weapon":
+				toAdd = new EquipWeapon(classOfAttacker); 
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
 				notEquipItem = false;
 				break;
 			default:
@@ -77,9 +83,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		
 		//pluarlize text alert
 		if(randomItemAmount >= 2 && notEquipItem)
-			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.Name + "s");
-		else
-			UI_TextAlert.DisplayText("Received " + toAdd.Name);
+			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.name + "s");
 
 		//add to consumable/potions storage if consumable, otherwise add to normal inventory
 		if(isConsumable) {
@@ -93,7 +97,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		GameManager.kill(this, 0.5f);
 	}
 	
-	public void take_damage(int amount) {
+	public void take_damage(int amount, int classOfAttacker) {
 		GameManager.kill(this, 1.0f);
 	}
 	public void playHitAnimation() {}
@@ -101,6 +105,12 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 
 	public void setLvlOfSlainMob(int level) {
 		slainEnemyLvl = level;
+	}
+	public void setClassOfAttacker(int playerClass) {
+		classOfAttacker = playerClass;
+	}
+	public int getClassOfAttacker() {
+		return classOfAttacker;
 	}
 }
 

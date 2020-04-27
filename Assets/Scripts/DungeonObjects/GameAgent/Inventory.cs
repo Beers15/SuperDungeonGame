@@ -33,7 +33,7 @@ public class Inventory
         bool itemFound = false;
         //check if item already exists in inventory
         for(int i = 0; i < numItemSlots; i++) {
-            if(string.Equals(item.Name, items[i].Name)) {
+            if(string.Equals(item.name, items[i].name)) {
                 if(string.Compare(items[i].ID, "-1") == 0) 
                     items[i].ID = item.ID;
 
@@ -56,7 +56,7 @@ public class Inventory
             //insert into inventory at an empty slot if not found
             for(int i = 0; i < numItemSlots; i++) {
                 if(string.Compare(items[i].ID, "-1") == 0) {
-                    items[i].Name = item.Name;
+                    items[i].name = item.name;
 
                     //check to see if item that is being added is equipment
                     int id = int.Parse(item.ID);
@@ -163,7 +163,7 @@ public class Inventory
     public void display() {
         for(int i = 0; i < numItemSlots; i++) {
             if(string.Compare(items[i].ID, "-1") != 0)
-                Debug.Log("item slot #" + i + " Item: " + items[i].Name + " Amount: " + items[i].Amount + " ID: " + items[i].ID);
+                Debug.Log("item slot #" + i + " Item: " + items[i].name + " Amount: " + items[i].Amount + " ID: " + items[i].ID);
         }
     }
 

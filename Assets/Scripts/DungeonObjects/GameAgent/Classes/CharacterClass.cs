@@ -24,6 +24,18 @@
 			default: return "";
 		}
 	}
+    public static string getWeaponType(int weapon)
+	{
+		switch (weapon) {
+			case 1: return "Sword";
+			case 2: return "Bow";
+			case 3: return "Staff";
+			case 4: return "Axe";
+			case 5: return "Maul";
+			case 6: return "Spiked Gauntlets"; 
+			default: return "weapon";
+		}
+	}
 };
 
 public static class CharacterRaceOptions {

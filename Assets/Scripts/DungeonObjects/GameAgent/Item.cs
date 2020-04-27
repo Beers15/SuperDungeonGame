@@ -6,13 +6,13 @@ public class Item
 {
     //derive item types from this class
     public int maxAmount; //max amount of item that can be held
-    public string Name; //name of the item
+    public string name; //name of the item
     public string ID; //unique ID used to identity item in code (if necessary)
     public int Amount; //current amount of item held
 	public Item() {}
-	public Item(int maxAmount, string Name, string ID, int Amount) {
+	public Item(int maxAmount, string name, string ID, int Amount) {
 		this.maxAmount = maxAmount;
-		this.Name = Name;
+		this.name = name;
 		this.ID = ID;
 		this.Amount = Amount;
 	}
