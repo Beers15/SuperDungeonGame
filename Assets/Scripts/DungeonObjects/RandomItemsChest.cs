@@ -43,8 +43,8 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		Item toAdd;
 		bool isConsumable = false;
 		bool notEquipItem = true;
-		Debug.Log("CLASS OF ATTACKER IN CHEST SCRIPT: " + classOfAttacker);
-		switch ("weapon") {
+		//Debug.Log("CLASS OF ATTACKER IN CHEST SCRIPT: " + classOfAttacker);
+		switch (itemChoice) {
 			case "health":
 				toAdd = new HealthPot(randomItemAmount); isConsumable = true; break;
 			case "mana":

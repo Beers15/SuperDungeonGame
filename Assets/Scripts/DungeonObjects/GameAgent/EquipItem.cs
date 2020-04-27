@@ -171,7 +171,7 @@ public class Glove : EquipItem {
 
 public class Boot : EquipItem {
 	public static string _ID = "6";
-	public Boot() : base("boot", _ID, EquipType.BOOT, 0, 8) {}
+	public Boot() : base("boots", _ID, EquipType.BOOT, 0, 8) {}
 }
 
 public class EquipWeapon : EquipItem {
@@ -179,7 +179,7 @@ public class EquipWeapon : EquipItem {
    
 	public EquipWeapon(int weaponClass) : base("weapon", _ID, EquipType.WEAPON, 20, 0) {
         this.weaponClass = weaponClass;
-        Debug.Log("Weapon class is : "+weaponClass);
+        Debug.Log("Weapon class is : " + weaponClass);
     }
 
 }

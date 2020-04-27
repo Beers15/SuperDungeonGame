@@ -174,7 +174,6 @@ public class Enemy : GameAgent
 	}
 	
     public override void take_damage(int amount, int classOfAttacker)  {	
-		Debug.Log("IN ENEMY CLASS OF ATTACKER IS " + classOfAttacker);
         stats.TakeDamage(amount);
 		//Debug.Log("This mob's lvl is: " +level.ToString());
 
@@ -186,7 +185,7 @@ public class Enemy : GameAgent
 
 			if(team == 1) {
 				var lootRoll = 0.0f;
-				var lootThreshold = 1.0f;
+				var lootThreshold = 5.0f;
 				var mobDifficultyModifier = 1.0f / (10.0f - Convert.ToSingle(level));
 
 				if(mobDifficultyModifier <= 0.1f)
@@ -198,11 +197,11 @@ public class Enemy : GameAgent
 				if(lootRoll > lootThreshold) {
 					randomItem = UnityEngine.Random.Range(0, lootDrops.Length - 1);
 
-					//pass on to the item object's item script the lvl of the mob that was slain
+					//LVL/CLASS PASSING CURRENTLY NOT WORKING: pass on to the item object's item script the lvl of the mob that was slain
 					if(randomItem == 0) {
 						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setLvlOfSlainMob(level);
 						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setClassOfAttacker(classOfAttacker);
-						//test
+						
 						Debug.Log("CHEST ATTACKER VALUE: " + (lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).getClassOfAttacker());
 					}
 					else
@@ -210,6 +209,7 @@ public class Enemy : GameAgent
 				
 
 					map_manager.instantiate_environment(lootDrops[randomItem], new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
+					//----------------------------------
 				}
 			}
 		}
