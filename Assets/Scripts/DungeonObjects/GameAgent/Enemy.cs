@@ -27,7 +27,6 @@ public class Enemy : GameAgent
 	public int moveBudget;
     public int level;
     public GameAgentState viewableState;
-	private int weapon;
 
     //sound effects
     private AudioSource source;
@@ -174,7 +173,8 @@ public class Enemy : GameAgent
 		return (!currentAttack.attacking) && !moving;
 	}
 	
-    public override void take_damage(int amount)  {	
+    public override void take_damage(int amount, int classOfAttacker)  {	
+		Debug.Log("IN ENEMY CLASS OF ATTACKER IS " + classOfAttacker);
         stats.TakeDamage(amount);
 		//Debug.Log("This mob's lvl is: " +level.ToString());
 
@@ -199,11 +199,16 @@ public class Enemy : GameAgent
 					randomItem = UnityEngine.Random.Range(0, lootDrops.Length - 1);
 
 					//pass on to the item object's item script the lvl of the mob that was slain
-					if(randomItem == 0)
+					if(randomItem == 0) {
 						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setLvlOfSlainMob(level);
+						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setClassOfAttacker(classOfAttacker);
+						//test
+						Debug.Log("CHEST ATTACKER VALUE: " + (lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).getClassOfAttacker());
+					}
 					else
 						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsSpawner).setLvlOfSlainMob(level);
-						
+				
+
 					map_manager.instantiate_environment(lootDrops[randomItem], new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
 				}
 			}

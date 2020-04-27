@@ -55,7 +55,8 @@ public class MeleeAttack : Attack
 		try {
 			target.playHitAnimation();
 			target.playHitNoise("Melee");
-			target.take_damage((int) (attacker.stats.DealDamage() * damageModifier));
+			target.take_damage((int) (attacker.stats.DealDamage() * damageModifier), attacker.weapon);
+              Debug.Log("WEAPON TYPE: "+attacker.weapon);
 		}
 		catch (Exception e) {
 			// swallow the error
@@ -86,7 +87,8 @@ public class WeakMeleeAttack : Attack
         {
             target.playHitAnimation();
             target.playHitNoise("Melee");
-            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier));
+            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier), attacker.weapon);
+            Debug.Log("WEAPON TYPE: "+attacker.weapon);
         }
         catch (Exception e)
         {
@@ -123,7 +125,8 @@ public class StrongMeleeAttack : Attack
         {
             target.playHitAnimation();
             target.playHitNoise("Melee");
-            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier));
+            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier), attacker.weapon);
+              Debug.Log("WEAPON TYPE: " + attacker.weapon);
         }
         catch (Exception e)
         {
@@ -156,7 +159,7 @@ public class ShortbowAttack : Attack
 		try {
 		target.playHitAnimation();
 		target.playHitNoise("Bow");
-		target.take_damage((int) (attacker.stats.DealDamage() * damageModifier));
+		target.take_damage((int) (attacker.stats.DealDamage() * damageModifier), attacker.weapon);
 		}
 		catch (Exception e) {
 			// swallow the error
@@ -190,7 +193,7 @@ public class LongbowAttack : Attack
 		try {
 		target.playHitAnimation();
 		target.playHitNoise("Bow");
-		target.take_damage((int) (attacker.stats.DealDamage() * damageModifier));
+		target.take_damage((int) (attacker.stats.DealDamage() * damageModifier), attacker.weapon);
 		}
 		catch (Exception e) {
 			// swallow the error
@@ -229,7 +232,7 @@ public class FireSpell : Attack
 		try {
 		target.playHitAnimation();
 		target.playHitNoise("Fire");
-        target.take_damage((int)(attacker.stats.DealDamage() * damageModifier));
+        target.take_damage((int)(attacker.stats.DealDamage() * damageModifier), attacker.weapon);
         }
 		catch (Exception e) {
 			// swallow the error
@@ -271,7 +274,7 @@ public class FireStormSpell : Attack
             try {
                 target.playHitAnimation();
                 target.playHitNoise("Fire");
-                target.take_damage((int)(attacker.stats.GetFireStormDamage() * damageModifier));
+                target.take_damage((int)(attacker.stats.GetFireStormDamage() * damageModifier), attacker.weapon);
             } catch (Exception e) {
                 // swallow the error
             }
@@ -314,7 +317,7 @@ public class Berserk : Attack {
             try {
                 target.playHitAnimation();
                 target.playHitNoise("Melee");
-                target.take_damage((int)(attacker.stats.GetBerserkDamage() * damageModifier));
+                target.take_damage((int)(attacker.stats.GetBerserkDamage() * damageModifier), attacker.weapon);
             } catch (Exception e) {
                 // swallow the error
             }
@@ -361,7 +364,7 @@ public class Multishot : Attack
             {
                 target.playHitAnimation();
                 target.playHitNoise("Bow");
-                target.take_damage((int)(attacker.stats.DealDamage() * damageModifier));
+                target.take_damage((int)(attacker.stats.DealDamage() * damageModifier), attacker.weapon);
             }
             catch (Exception e)
             {
@@ -409,7 +412,7 @@ public class LightningSpell : Attack
         {
             target.playHitAnimation();
             target.playHitNoise("Fire");
-            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier));
+            target.take_damage((int)(attacker.stats.DealDamage() * damageModifier), attacker.weapon);
         }
         catch (Exception e)
         {

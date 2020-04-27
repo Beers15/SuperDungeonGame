@@ -17,6 +17,7 @@ public abstract class GameAgent : DungeonObject, Damageable, Renderable
 	public AIComponent AI;
 	public int team;
 	public int move_budget;
+	public int weapon = 0;
 
 	public CharacterAnimator animator;
     public Inventory inventory = new Inventory();
@@ -49,7 +50,7 @@ public abstract class GameAgent : DungeonObject, Damageable, Renderable
     public abstract void act();
     public abstract void wait();
     public abstract void potion();
-	public abstract void take_damage(int amount);
+	public abstract void take_damage(int amount, int classOfAttacker);
 	private int actionNo;
 	public bool SetCurrentAction(int action)
 	{

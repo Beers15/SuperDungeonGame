@@ -21,7 +21,8 @@ public class UI_TextAlert : MonoBehaviour
 	}
 	
 	public static void DisplayText(string message, float waitTime = 3.0f )
-	{
+	{   
+		instance.alert.GetComponent<Text>().color = Color.white; 
 		instance.alert.text = message;
 		instance.display = true;
 		instance.StartCoroutine(instance.waitForDisplayEnd(waitTime));

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface Damageable
 {
-    void take_damage(int amount);
+    void take_damage(int amount, int classOfAttacker);
 	void playHitAnimation();
 	void playHitNoise(string type);
 }

@@ -34,7 +34,7 @@ public class UI_InventorySlot : MonoBehaviour
 		equippedItem = item;
 		itemCount.text = item.Amount.ToString();
 		itemImage.color = new Color(1, 1, 1, 1);
-		switch (item.Name) {
+		switch (item.name) {
 			case "Health Potion":
 				itemImage.sprite = healthPot; break;
 			case "Mana Potion":

@@ -78,9 +78,9 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 		
 		//pluarlize text alert
 		if(randomItemAmount > 1)
-			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.Name + "s");
+			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.name + "s");
 		else
-			UI_TextAlert.DisplayText("Received " + toAdd.Name);
+			UI_TextAlert.DisplayText("Received " + toAdd.name);
 
 		//add to consumable/potions storage if consumable, otherwise add to normal inventory
 		if(isConsumable) {
@@ -102,7 +102,7 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
         slainEnemyLvl = level;
     }
 
-	public void take_damage(int amount) {
+	public void take_damage(int amount, int classOfAttacker) {
 		GameManager.kill(this, 1.0f);
 	}
 	public void playHitAnimation() {}

@@ -15,6 +15,7 @@ public class EquipItem : Item {
     public EquipType type;
     public int atkbonus;
     public int defbonus;
+    //public CharacterClassOptions weaponType;
 
     public string completeName;
     public List<string> equipmentAdjectives; 
@@ -27,13 +28,14 @@ public class EquipItem : Item {
     private static int IDLowerBound = 3;
     private int lvlOfSlainMob = 1;  //used to calculate EquipItem's tier 
     private int tier;
+    public int weaponClass;
 
 	public EquipItem() {}
     public EquipItem(string name, string id, EquipType etype, int atk, int def) {
         initWords();
         maxAmount = 1;
         Amount = 1;
-        Name = name;
+        this.name = name;
         ID = id;
         type = etype;
         atkbonus = atk;
@@ -52,7 +54,6 @@ public class EquipItem : Item {
         lvlOfSlainMob = level;
         Debug.Log("This gear's slain mob was lvl " + lvlOfSlainMob);
 
-        //TODO add logic to have enemies lvl/boss status affect this value
         int tierValue;
         
         int tierRoll = UnityEngine.Random.Range(1, 100);
@@ -73,7 +74,7 @@ public class EquipItem : Item {
             tierValue = 1; //common
 
         tier = tierValue;
-        //TODO
+  
         generateStats(tierValue);
         generateName();
         displayMessage();
@@ -119,8 +120,11 @@ public class EquipItem : Item {
     
         string adj = equipmentAdjectives.ToArray()[UnityEngine.Random.Range(0, equipmentAdjectives.Count - 1)];
         string noun = equipmentNouns.ToArray()[UnityEngine.Random.Range(0, equipmentNouns.Count - 1)];
-
-        completeName = adj + " " + Name + " of " + noun;
+        if(type == EquipType.WEAPON)
+            completeName = adj + " " + CharacterClassOptions.getWeaponType((this as EquipWeapon).weaponClass) + " of " + noun;
+        else {
+           completeName = adj + " " + name + " of " + noun; 
+        }
         Debug.Log("Name of equipment is : " + completeName);
     }
 
@@ -147,7 +151,7 @@ public class EquipItem : Item {
         }
 
     }
-  
+
 }
 
 public class Helmet : EquipItem {
@@ -172,5 +176,10 @@ public class Boot : EquipItem {
 
 public class EquipWeapon : EquipItem {
 	public static string _ID = "7";
-	public EquipWeapon() : base("weapon", _ID, EquipType.WEAPON, 20, 0) {}
+   
+	public EquipWeapon(int weaponClass) : base("weapon", _ID, EquipType.WEAPON, 20, 0) {
+        this.weaponClass = weaponClass;
+        Debug.Log("Weapon class is : "+weaponClass);
+    }
+
 }
