@@ -37,11 +37,11 @@ public class MapGenerator : MonoBehaviour
 	//static int MasterSeed = 1111111;
 	//private static System.Random seedRNG = new System.Random(MasterSeed);
 
-	private int generateRandomSeed()
-	{
-		var random = new System.Random();
-		return random.Next();
-	}
+	// private int generateRandomSeed()
+	// {
+	// 	var random = new System.Random();
+	// 	return random.Next();
+	// }
 	
 	void set_variables()
 	{
@@ -58,8 +58,8 @@ public class MapGenerator : MonoBehaviour
 		this.region_cull_threshold = config.region_cull_threshold;
 		this.cell_size = config.cell_size;
         this.object_size_scale = config.object_size_scale;
-		//this.seed = config.seed; // this is the origin seed gerneation that takes place in Settings.CS
-		this.seed = generateRandomSeed();
+		this.seed = config.seed; // this is the origin seed gerneation that takes place in Settings.CS
+		//this.seed = generateRandomSeed();
 		
 		map_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapManager>();
 	}

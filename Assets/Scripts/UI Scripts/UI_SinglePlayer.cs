@@ -21,6 +21,9 @@ public class UI_SinglePlayer : MonoBehaviour
 	
     public void StartGame()
 	{
+
+		SeedConfig.setSeed();
+
 		Network.setPeer(0);
 		Network.getPeer(0).classname = characterClass;
 		switch (characterClass) {
