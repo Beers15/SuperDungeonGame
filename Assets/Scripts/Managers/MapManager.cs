@@ -28,6 +28,7 @@ public class MapManager : MonoBehaviour
 	public GameObject mapPrefab, fireProjectile, arrowProjectile, lightningProjectile;
 	//public MapManager instance;
 
+	public bool debug; // set debug to true to remove the fog of war on the map
 	// config variables
 	private int width;
 	private int height;
@@ -54,6 +55,7 @@ public class MapManager : MonoBehaviour
 	private System.Random rng;
 	private List<GameObject> environmentObjects;
 	private static MapManager instance;
+	public MapConfiguration config;
 
     // called by gamemanager, initializes map components
     public void Init(GameManager parent)
@@ -62,11 +64,18 @@ public class MapManager : MonoBehaviour
 		instance = this;
 		NetworkManager.mapManager = instance;
 
+		// debug fog of war
+		if(debug) {
+			config.fogViewRange = 100;
+		}
+			
+
 		// begin component init
 		GameObject mapObject = GameObject.FindGameObjectWithTag("Map");
-		if (mapObject == null)
+		if (mapObject == null) {
 			mapObject = Instantiate(mapPrefab, Vector3.zero, Quaternion.identity);
-
+		}
+			
 		map_raw = mapObject.GetComponent<MapGenerator>().generate_map();
 		region_tree_root = mapObject.GetComponent<MapGenerator>().getMainRegion();
 

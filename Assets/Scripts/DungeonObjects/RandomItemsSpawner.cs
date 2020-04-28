@@ -41,7 +41,8 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 	}
 
 	public void DisableRendering() {
-		itemObject.SetActive(false);
+		if(itemObject != null)
+			itemObject.SetActive(false);
 	}
 
 	public void interact(GameAgent interactor) {

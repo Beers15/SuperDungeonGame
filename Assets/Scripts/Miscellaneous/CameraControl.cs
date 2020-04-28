@@ -56,7 +56,7 @@ public class CameraControl : MonoBehaviour
         // Basic camera follow; updates the camera transform a certain position
         // away from the player.
 		if (target_transform == null) {
-			Debug.Log("No target!");
+			//Debug.Log("No target!");
 			return;
 		}
 		

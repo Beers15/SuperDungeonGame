@@ -51,7 +51,7 @@ public class TileSelector : MonoBehaviour
     // called by the gameManager script
     public void Init(MapManager map_manager)
 	{
-		MapConfiguration config = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>();
+		MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
 		cell_size = config.cell_size;
 		width = config.width;
 		height = config.height;

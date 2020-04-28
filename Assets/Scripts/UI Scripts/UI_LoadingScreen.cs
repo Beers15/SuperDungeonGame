@@ -18,6 +18,7 @@ public class UI_LoadingScreen : MonoBehaviour
 		}
 		else {
 			waitingForLoad.SetActive(true);
+			Debug.Log("update from UI_loading screen");
 		}
 		if (Network.allPlayersReady()) {
 			waitingForPlayers.SetActive(false);
