@@ -38,7 +38,7 @@ public class BridgeMeshGenerator : MonoBehaviour
 		 * Create the metadata map for use later down the line 
 		 * The metadata map contains information that is relevant for bridge generation, e.g bridges and platforms */
 		
-		MapConfiguration config = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>();
+		MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
 		
 		int width = config.width;
 		int height = config.height;

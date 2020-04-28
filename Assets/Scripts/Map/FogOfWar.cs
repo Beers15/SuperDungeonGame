@@ -14,7 +14,7 @@ public class FogOfWar : MonoBehaviour
 	const byte SEMI = 128;
 	const byte INVISIBLE = 0;
 	
-	const int VIEW_RANGE = 14;
+	private int VIEW_RANGE;
 	
 	public static Texture2D fogTex;
 	private static Texture2D FogClear;
@@ -23,7 +23,9 @@ public class FogOfWar : MonoBehaviour
     public void Init()
 	{
 		instance = this;
-		MapConfiguration config = GetComponent<MapConfiguration>();
+		MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
+		Debug.Log("fog is intialized");
+		VIEW_RANGE = config.fogViewRange;
 		
 		width = config.width;
 		height = config.height; // pads out width/height
@@ -85,8 +87,12 @@ public class FogOfWar : MonoBehaviour
 	
 	void UpdateTexture()
 	{
-		FogActual.LoadRawTextureData(fog);
-		FogActual.Apply();
+		if(FogActual != null)
+		{
+			FogActual.LoadRawTextureData(fog);
+			FogActual.Apply();
+		}
+		
 	}
 	
 	public static bool IsVisible(Pos position)
@@ -96,7 +102,13 @@ public class FogOfWar : MonoBehaviour
 	
 	public static bool IsSemiVisible(Pos position)
 	{
-		return instance.fog[position.y * instance.width + position.x] != INVISIBLE;
+		bool retVal = false;
+		if(position != null)
+		{
+			retVal = instance.fog[position.y * instance.width + position.x] != INVISIBLE;
+		}
+
+		return retVal;
 	}
 	
 	public static bool VisibleInRange(int sx, int sy, int _width, int _height)

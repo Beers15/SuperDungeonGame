@@ -2305,6 +2305,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804828497}
   m_CullTransparentMesh: 0
+--- !u!1 &972810460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 972810462}
+  - component: {fileID: 972810461}
+  m_Layer: 0
+  m_Name: ProceduralDebugger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &972810461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972810460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b70147eb923d2c41aad22704e43d0ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugFog: 1
+  classes:
+  - Warrior
+  - Healer
+  - Hunter
+  - Mage
+  characterClass: 0
+  loadingScreen: {fileID: 1289607737}
+  networkPrefab: {fileID: 6081443213912929002, guid: 3bc2fd1e22f72e34285ef303be890706,
+    type: 3}
+--- !u!4 &972810462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972810460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 405.2196, y: 164.83264, z: -86.28894}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1013031058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3222,6 +3275,7 @@ GameObject:
   - component: {fileID: 1591538339}
   - component: {fileID: 1591538341}
   - component: {fileID: 1591538342}
+  - component: {fileID: 1591538340}
   - component: {fileID: 1591538336}
   - component: {fileID: 1591538343}
   m_Layer: 0
@@ -3358,7 +3412,7 @@ MonoBehaviour:
   upperRadius: 6
   minimumNumberOfTilesInSpawnZone: 4
   maximumNumberOfTilesInSpawnZone: 10
-  maxNumberOfSpawnZones: 5
+  maxNumberOfSpawnZones: 1
 --- !u!114 &1591538339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3371,6 +3425,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e62f91107bc241a7815bea04211dfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1591538340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591538335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e200e9a9eb6534f918eb71dcac6113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogViewRange: 16
+  _width: 50
+  _height: 50
+  _padding: 15
+  fill_percent: 51
+  smoothness: 8
+  region_cull_threshold: 16
+  cell_size: 1
+  wall_height: 4
+  wall_texture_scale: 3
+  surface_texture_scale: 5
+  bridge_texture_scale: 1
+  floor_texture_scale: 1
+  object_size_scale: 0
 --- !u!114 &1591538341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3411,6 +3491,8 @@ MonoBehaviour:
     type: 3}
   lightningProjectile: {fileID: 7123571416476213774, guid: 01fbfc0ee180c4de6ac29c03e9cbac75,
     type: 3}
+  debug: 0
+  config: {fileID: 1591538340}
 --- !u!114 &1591538343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4065,7 +4147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -44.677734, y: -218.42972}
+  m_AnchoredPosition: {x: -44.677734, y: -218.42969}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1867890175
@@ -4337,7 +4419,7 @@ PrefabInstance:
     - target: {fileID: 957583780, guid: bcfeb66b5a365914483f3a675c49a0df, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1867890181}
     - target: {fileID: 957583780, guid: bcfeb66b5a365914483f3a675c49a0df, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: PlayOneShot
@@ -4497,7 +4579,7 @@ PrefabInstance:
     - target: {fileID: 2061386671, guid: bcfeb66b5a365914483f3a675c49a0df, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1867890181}
     - target: {fileID: 2061386671, guid: bcfeb66b5a365914483f3a675c49a0df, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: PlayOneShot
@@ -4532,7 +4614,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1867890181}
     - target: {fileID: 8039206392034979722, guid: bcfeb66b5a365914483f3a675c49a0df,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
