@@ -19,8 +19,8 @@ public class UI_InventorySlot : MonoBehaviour
 		// finds the great great grandparent of this inventory slot!
 		// man is this code getting sloppy
 		manager = transform.parent.parent.parent.GetComponent<UI_InventoryManager>();
-		itemImage = transform.Find("Item").GetComponent<Image>();
-		itemCount = transform.Find("ItemCount").GetComponent<Text>();
+		//itemImage = transform.Find("Item").GetComponent<Image>();
+		//itemCount = transform.Find("ItemCount").GetComponent<Text>();
 	}
 	
 	public void TriggerSlot()

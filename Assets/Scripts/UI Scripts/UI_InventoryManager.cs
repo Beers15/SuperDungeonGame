@@ -25,7 +25,7 @@ public class UI_InventoryManager : MonoBehaviour
 			inventorySlots.Add(slot);
 		}
 		
-		display.SetActive(false);
+		display.SetActive(true);
 		
 		/*equipSlots = new List<UI_InventorySlot>();
 		foreach (Transform child in transform.Find("EquipSlots"))  {

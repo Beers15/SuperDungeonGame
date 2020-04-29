@@ -7,7 +7,7 @@ public class Inventory
 {
 
     public Item[] items = new Item[numItemSlots];
-    public const int numItemSlots = 10;
+    public const int numItemSlots = 18;
 	public Inventory() {
         for(int i = 0; i < numItemSlots; i++) 
             items[i] = new Item(20, "", "-1", 0);
