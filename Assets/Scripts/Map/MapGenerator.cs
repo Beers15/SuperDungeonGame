@@ -20,7 +20,8 @@ public class MapGenerator : MonoBehaviour
 	private int region_cull_threshold;
 	private float cell_size;
     private float object_size_scale;
-	private int seed;
+
+	private int seed; // this seed controls the randomness of the map?
 	
 	[HideInInspector]
 	public int[,] map;
@@ -31,10 +32,24 @@ public class MapGenerator : MonoBehaviour
 	// debug stuff
 	private List<Connection> debug_connections;
 	private MapManager map_manager;
+
+	//seed generation
+	//static int MasterSeed = 1111111;
+	//private static System.Random seedRNG = new System.Random(MasterSeed);
+
+	// private int generateRandomSeed()
+	// {
+	// 	var random = new System.Random();
+	// 	return random.Next();
+	// }
 	
 	void set_variables()
 	{
-		MapConfiguration config = GetComponent<MapConfiguration>();
+		MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
+		Debug.Log("Map generator initialized");
+
+		//Debug.Log(config.fogViewRange);
+		
 		this.width = config._width;
 		this.height = config._height;
 		this.padding = config._padding;
@@ -43,7 +58,8 @@ public class MapGenerator : MonoBehaviour
 		this.region_cull_threshold = config.region_cull_threshold;
 		this.cell_size = config.cell_size;
         this.object_size_scale = config.object_size_scale;
-		this.seed = config.seed;
+		this.seed = config.seed; // this is the origin seed gerneation that takes place in Settings.CS
+		//this.seed = generateRandomSeed();
 		
 		map_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapManager>();
 	}

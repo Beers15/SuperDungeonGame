@@ -6,11 +6,13 @@ using MapUtils;
 
 public class MapConfiguration : MonoBehaviour
 {
+	public int fogViewRange; // how much you can actually see in the map
 	public int _width;
 	public int _height;
 	public int _padding;
     public int width { get { return _width + _padding*2; } }
 	public int height { get { return _height + _padding*2; } }
+	
 	[Range(0, 100)]
 	public int fill_percent;
 	[Range(0, 30)]
@@ -29,6 +31,7 @@ public class MapConfiguration : MonoBehaviour
     public float object_size_scale;
 	
 	public int seed { get { return Settings.MapSeed; } }
+
 
     public Vector3 GetCenter() {
         return new Vector3(width / (2f * cell_size), 0.0f, height / (2f * cell_size));
