@@ -24,7 +24,6 @@ public class UI_InventoryManager : MonoBehaviour
 			slot.index = index++;
 			inventorySlots.Add(slot);
 		}
-		
 		display.SetActive(true);
 		
 		/*equipSlots = new List<UI_InventorySlot>();
@@ -45,12 +44,13 @@ public class UI_InventoryManager : MonoBehaviour
 			return;
 		}
         for (int i = 0; i < inventorySlots.Count; i++) {
-			UI_InventorySlot slot = inventorySlots[i];
+			UI_InventorySlot slot = inventorySlots[i];	
 			slot.SetItem(playerMain.inventory.GetItemFromSlot(i));
+		
 		}
-		if (Input.GetKeyDown("space")) {
-			display.SetActive(!display.activeSelf);
-		}
+		// if (Input.GetKeyDown("space")) {
+		// 	display.SetActive(!display.activeSelf);
+		// }
     }
 	
 	public void TriggerSlot(int index) 

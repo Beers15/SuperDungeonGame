@@ -369,7 +369,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthPot
       value: 
-      objectReference: {fileID: 21300000, guid: 71daf48db5446bb43ad40c0c00bea9eb,
+      objectReference: {fileID: 21300000, guid: e52ea25af699fd445b7046374f81a5b9,
         type: 3}
     - target: {fileID: 1489494806619306703, guid: a49284f0f3f9d964c99aba1ade3dc8ba,
         type: 3}
