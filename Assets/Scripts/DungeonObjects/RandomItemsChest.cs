@@ -97,7 +97,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		GameManager.kill(this, 0.5f);
 	}
 	
-	public void take_damage(int amount, int classOfAttacker) {
+	public void take_damage(int amount, int classOfAttacker, GameAgent attacker) {
 		GameManager.kill(this, 1.0f);
 	}
 	public void playHitAnimation() {}

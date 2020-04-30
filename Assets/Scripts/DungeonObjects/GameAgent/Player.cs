@@ -208,7 +208,7 @@ public class Player : GameAgent
 		return (currentAttack == null || !currentAttack.attacking) && !moving;
 	}
 	
-	public override void take_damage(int amount, int classOfAttacker)
+	public override void take_damage(int amount, int classOfAttacker, GameAgent attacker)
 	{
         if (stats.currentState == GameAgentState.Alive) {
             if (!godMode) stats.TakeDamage((int)(amount * 0.05));

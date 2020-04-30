@@ -50,7 +50,7 @@ public abstract class GameAgent : DungeonObject, Damageable, Renderable
     public abstract void act();
     public abstract void wait();
     public abstract void potion();
-	public abstract void take_damage(int amount, int classOfAttacker);
+	public abstract void take_damage(int amount, int classOfAttacker, GameAgent attacker);
 	private int actionNo;
 	public bool SetCurrentAction(int action)
 	{

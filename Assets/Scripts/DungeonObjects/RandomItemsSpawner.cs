@@ -103,7 +103,7 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
         slainEnemyLvl = level;
     }
 
-	public void take_damage(int amount, int classOfAttacker) {
+	public void take_damage(int amount, int classOfAttacker, GameAgent attacker) {
 		GameManager.kill(this, 1.0f);
 	}
 	public void playHitAnimation() {}

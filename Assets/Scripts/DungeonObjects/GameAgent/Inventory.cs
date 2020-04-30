@@ -3,30 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory
-{
-
+public class Inventory {
     public Item[] items = new Item[numItemSlots];
     public const int numItemSlots = 18;
-	public Inventory() {
-        for(int i = 0; i < numItemSlots; i++) 
-            items[i] = new Item(20, "", "-1", 0);
-    }
+
+    private int gearIdLowerBound = EquipItem.getIDLowerBound();
+    private int gearIdUpperBound = EquipItem.getIDUpperBound();
 
     public EquipItem helmet;
     public EquipItem armor;
     public EquipItem gloves;
     public EquipItem boots;
     public EquipItem weapon;
+    private Item gold;
 
-    private int gearIdLowerBound = EquipItem.getIDLowerBound();
-    private int gearIdUpperBound = EquipItem.getIDUpperBound();
+	public Inventory() {
+        for(int i = 0; i < numItemSlots; i++) 
+            items[i] = new Item(20, "", "-1", 0);
+
+        gold = new Item(9999999, "gold", "99", 0);
+    }
 
     public int AddItem(Item item)
     {   //0 = not found
         int slotNum = 0;
 
         if(item == null) {
+            return 0;
+        }
+
+        else if(string.Compare(item.ID, "99") == 0) {
+            int maxInsert = gold.maxAmount - item.Amount;
+
+                if(item.Amount - maxInsert > 0) {
+                    gold.Amount = gold.maxAmount;
+                    item.Amount -= maxInsert;
+                } else {
+                    gold.Amount += item.Amount;
+                }
+                Debug.Log("TOTAL GOLD: " + gold.Amount);
             return 0;
         }
 
@@ -79,7 +94,7 @@ public class Inventory
 
                     int maxInsert = items[i].maxAmount - items[i].Amount;
 
-                    if (item.Amount - maxInsert > 0) {
+                    if(item.Amount - maxInsert > 0) {
                         items[i].Amount = items[i].maxAmount;
                         item.Amount -= maxInsert;
                     } else {
@@ -119,6 +134,10 @@ public class Inventory
             return null; //out of bounds
         }
         return items[slot];
+    }
+
+    public Item getGold() {
+        return gold;
     }
 
     public void IncrementItemAtSlot(int slot)

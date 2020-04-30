@@ -173,11 +173,14 @@ public class Enemy : GameAgent
 		return (!currentAttack.attacking) && !moving;
 	}
 	
-    public override void take_damage(int amount, int classOfAttacker)  {	
+    public override void take_damage(int amount, int classOfAttacker, GameAgent attacker)  {	
         stats.TakeDamage(amount);
 		//Debug.Log("This mob's lvl is: " +level.ToString());
 
         if (stats.currentState == GameAgentState.Unconscious) {
+			//give attacker gold (points) for the kill based on enemy level
+			attacker.inventory.AddItem(new Item(9999999, "gold", "99", (level * 50)));
+
             StartCoroutine(animator.PlayKilledAimation());
             stats.currentState = GameAgentState.Dead;
 
@@ -201,8 +204,6 @@ public class Enemy : GameAgent
 					if(randomItem == 0) {
 						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setLvlOfSlainMob(level);
 						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setClassOfAttacker(classOfAttacker);
-						
-						Debug.Log("CHEST ATTACKER VALUE: " + (lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).getClassOfAttacker());
 					}
 					else
 						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsSpawner).setLvlOfSlainMob(level);
