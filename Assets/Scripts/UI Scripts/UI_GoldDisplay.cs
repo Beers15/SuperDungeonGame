@@ -15,9 +15,9 @@ public class UI_GoldDisplay : MonoBehaviour {
 		goldCount = transform.Find("GoldText").GetComponent<Text>();  
 	}
 	
-	public void setItem(Item item) 	{
-		if (item == null) return;
+	public void setGold(Item gold) 	{
+		if (gold == null) return;
 	
-		goldCount.text = item.Amount.ToString();
+		goldCount.text = gold.Amount.ToString();
 	}
 }

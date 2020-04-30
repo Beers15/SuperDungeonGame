@@ -54,22 +54,22 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
         if(itemIndex != 3)
 		    randomItemAmount = UnityEngine.Random.Range(1, 3);
         else {
-            int goldRoll = UnityEngine.Random.Range(1, 10);
-            if(goldRoll > 9) 
-                randomItemAmount =  UnityEngine.Random.Range(1, 100 * slainEnemyLvl);
+            int goldRoll = UnityEngine.Random.Range(1, 30);
+            if(goldRoll < 15) 
+                randomItemAmount =  UnityEngine.Random.Range(1, 500 * slainEnemyLvl);
             else
-                randomItemAmount =  UnityEngine.Random.Range(250, 500 * slainEnemyLvl);
+                randomItemAmount =  UnityEngine.Random.Range(500, 1000 * slainEnemyLvl);
         }
 
 		Item toAdd;
-		bool isConsumable = false;
+		//bool isConsumable = false; removing potion store for now
 		
         //itemIndex set in inspector should match number for that item here
 		switch (itemIndex) {
 			case 1:
-				toAdd = new HealthPot(randomItemAmount); isConsumable = true; break;
+				toAdd = new HealthPot(randomItemAmount); break;//isConsumable = true; break;
 			case 2:
-				toAdd = new ManaPot(randomItemAmount); isConsumable = true; break;
+				toAdd = new ManaPot(randomItemAmount); break;//isConsumable = true; break;
 			case 3:
 				toAdd = new Gold(randomItemAmount); break;
 			default:
@@ -84,13 +84,13 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 			UI_TextAlert.DisplayText("Received " + toAdd.name);
 
 		//add to consumable/potions storage if consumable, otherwise add to normal inventory
-		if(isConsumable) {
-			interactor.potions.AddConsumable((ConsumableItem)toAdd);
-			interactor.potions.display();
-		} else {
-			interactor.inventory.AddItem(toAdd);
-			interactor.inventory.display();
-		}
+		// if(isConsumable) {
+		// 	interactor.potions.AddConsumable((ConsumableItem)toAdd);
+		// 	interactor.potions.display();
+		// } else {
+		interactor.inventory.AddItem(toAdd);
+		interactor.inventory.display();
+		//}
 
 		GameManager.kill(this, 0.5f);
 	}

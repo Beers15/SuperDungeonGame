@@ -3,31 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_InventorySlot : MonoBehaviour
-{	
+public class UI_InventorySlot : MonoBehaviour {	
 	Image itemImage;
 	Text itemCount;
     Item slotItem;
 	UI_InventoryManager manager;
 	
-	public Sprite healthPot, manaPot, helmet, armor, glove, boots, nothing;
+	public Sprite healthPot, manaPot, helmet, armor, gloves, boots, nothing;
 	
 	public int index = 0;
 	
-	void Awake()
-	{
+	void Awake() {
 		manager = transform.parent.parent.parent.GetComponent<UI_InventoryManager>();
 		itemImage = transform.Find("Item").GetComponent<Image>();
 		itemCount = transform.Find("ItemCount").GetComponent<Text>();
 	}
 	
-	public void TriggerSlot()
-	{
+	public void TriggerSlot() {
 		manager.TriggerSlot(this.index);
 	}
 	
-	public void SetItem(Item item) 
-	{
+	public void SetItem(Item item) {
 		if (item == null) return;
 	
 		slotItem = item;
@@ -38,11 +34,13 @@ public class UI_InventorySlot : MonoBehaviour
 				itemImage.sprite = healthPot; break;
 			case "Mana Potion":
 				itemImage.sprite = manaPot; break;
-			case "Helmet":
+			case "helmet":
 				itemImage.sprite = helmet; break;
-			case "Armor":
+			case "armor":
 				itemImage.sprite = armor; break;
-			case "Boot":
+			case "boots":
+				itemImage.sprite = boots; break;
+			case "gloves":
 				itemImage.sprite = boots; break;
 			default:
 				itemImage.sprite = nothing; break;

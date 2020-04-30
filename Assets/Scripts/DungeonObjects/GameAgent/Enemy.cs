@@ -188,7 +188,7 @@ public class Enemy : GameAgent
 
 			if(team == 1) {
 				var lootRoll = 0.0f;
-				var lootThreshold = 5.0f;
+				var lootThreshold = 1.0f;
 				var mobDifficultyModifier = 1.0f / (10.0f - Convert.ToSingle(level));
 
 				if(mobDifficultyModifier <= 0.1f)

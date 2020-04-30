@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_InventoryManager : MonoBehaviour
-{
+public class UI_InventoryManager : MonoBehaviour {
 	List<UI_InventorySlot> inventorySlots;
 	List<UI_InventorySlot> equipSlots;
+	UI_GoldDisplay goldDisplay;
 	GameObject display;
 	Player playerMain;
 	int selectedSlotIndex = -1;
 	
     // Start is called before the first frame update
-    void Awake()
-    {
+    void Awake() {
 		int index = 0;
 		
 		inventorySlots = new List<UI_InventorySlot>();
@@ -24,7 +23,9 @@ public class UI_InventoryManager : MonoBehaviour
 			slot.index = index++;
 			inventorySlots.Add(slot);
 		}
-		
+
+		goldDisplay =  transform.Find("GoldDisplay").gameObject.GetComponent<UI_GoldDisplay>();
+
 		display.SetActive(true);
 		
 		/*equipSlots = new List<UI_InventorySlot>();
@@ -38,8 +39,7 @@ public class UI_InventoryManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 		if (playerMain == null) {
 			playerMain = Network.getPlayer(NetworkManager.clientID);
 			return;
@@ -48,30 +48,29 @@ public class UI_InventoryManager : MonoBehaviour
 			UI_InventorySlot slot = inventorySlots[i];
 			slot.SetItem(playerMain.inventory.GetItemFromSlot(i));
 		}
+
+		goldDisplay.setGold(playerMain.inventory.getGold());
+
 		// if (Input.GetKeyDown("space")) {
 		// 	display.SetActive(!display.activeSelf);
 		// }
     }
 	
-	public void TriggerSlot(int index) 
-	{
+	public void TriggerSlot(int index) {
 		selectedSlotIndex = index;
 	}
 	
-	public void DropItem()
-	{
+	public void DropItem() {
 		if (selectedSlotIndex == -1) return;
 		playerMain.inventory.DecrementItemAtSlot(selectedSlotIndex);
 	}
 	
-	public void UseItem()
-	{
+	public void UseItem() {
 		if (selectedSlotIndex == -1) return;
 		Network.submitCommand(new UseItemCommand(NetworkManager.clientID, selectedSlotIndex));
 	}
 	
-	public void Back()
-	{
+	public void Back() {
 		display.SetActive(false);
 	}
 }
