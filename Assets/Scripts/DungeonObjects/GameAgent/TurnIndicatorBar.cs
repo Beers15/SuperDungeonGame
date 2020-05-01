@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurnIndicatorBar : MonoBehaviour
 {
-	public float Spacing = 140.0f;
+	public float Spacing = 64.0f;
 
 	private List<TurnIndicator> turnIndicators;
 

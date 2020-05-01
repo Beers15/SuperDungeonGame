@@ -2122,7 +2122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb599f5ad11c30438ff575dd772582a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spacing: 140
+  Spacing: 80
 --- !u!1 &771130423
 GameObject:
   m_ObjectHideFlags: 0
