@@ -40,7 +40,7 @@ public class InventoryManager : MonoBehaviour
     {
         //decrement item in player inventory, call HP increase func (if applicable)
         //Debug.Log("Applying HP potion!");
-		agent.stats.currentHealth += 20;
+		agent.stats.currentHealth += 15;
 		agent.animator.PlayHealedAnimation();
 		if (agent.stats.currentHealth > agent.stats.maxHealth)
 			agent.stats.currentHealth = agent.stats.maxHealth;
@@ -49,7 +49,7 @@ public class InventoryManager : MonoBehaviour
     private static void ApplyManaPotion(Item item, GameAgent agent)
     {
         //Debug.Log("Applying MP potion!");
-		agent.stats.currentMagicPoints += 20;
+		agent.stats.currentMagicPoints += 15;
 		agent.animator.PlayHealedAnimation();
 		if (agent.stats.currentMagicPoints > agent.stats.maxMagicPoints)
 			agent.stats.currentMagicPoints = agent.stats.maxMagicPoints;

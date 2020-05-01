@@ -28,12 +28,13 @@
 	{
 		switch (weapon) {
 			case 1: return "Sword";
-			case 2: return "Bow";
-			case 3: return "Staff";
-			case 4: return "Axe";
-			case 5: return "Maul";
-			case 6: return "Spiked Gauntlets"; 
-			default: return "weapon";
+			//case 2: return "Bow";
+			case 3: return "Axe";
+			case 4: return "Bow";
+			case 6: return "Staff";
+			case 9: return "Club";
+			case 0: return "Spiked Gauntlets"; 
+			default: return "Weapon";
 		}
 	}
 };

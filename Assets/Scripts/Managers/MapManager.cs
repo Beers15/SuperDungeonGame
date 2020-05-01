@@ -171,7 +171,6 @@ public class MapManager : MonoBehaviour
 	
 
 	public GameObject instantiate_environment(GameObject environmentObject, Pos pos, bool traversable = true, bool item = false)
-
 	{
         int randomY = rng.Next(1, 4) * 90;
 		

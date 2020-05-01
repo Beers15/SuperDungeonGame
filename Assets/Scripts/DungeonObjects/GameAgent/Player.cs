@@ -36,7 +36,6 @@ public class Player : GameAgent
     public int level;
     public string viewableState;
 
-
     //CharacterClassDefiner classDefiner; // moved to GameAgent
 
     // Get rid of this when you get rid of using keys to change player class
@@ -83,6 +82,8 @@ public class Player : GameAgent
         
         //-----
         //add starting items and consumables here with inventory/potionStore.addItem if desired
+        inventory.AddItem(new HealthPot(5));
+        inventory.AddItem(new ManaPot(5));
         //-----
 
         // AI init
@@ -229,7 +230,7 @@ public class Player : GameAgent
 		return (currentAttack == null || !currentAttack.attacking) && !moving;
 	}
 	
-	public override void take_damage(int amount, int classOfAttacker)
+	public override void take_damage(int amount, int classOfAttacker, GameAgent attacker)
 	{
         if (stats.currentState == GameAgentState.Alive) {
             if (!godMode) stats.TakeDamage((int)(amount * 0.05));
@@ -332,23 +333,27 @@ public class Player : GameAgent
 	
 	public void SetCharacterClass(string classname) {
 		
-        int weapon, classID;
+        int classID;
         switch (classname) {
 			case "Warrior":
 				classID = CharacterClassOptions.Knight;
 				weapon = CharacterClassOptions.Sword;
+                Debug.Log("WARRIOR CLASS WEP VALUE IS " + weapon);
 				break;
 			case "Mage":
 				classID = CharacterClassOptions.Mage;
 				weapon = CharacterClassOptions.Staff;
+                Debug.Log("MAGE CLASS WEP VALUE IS " + weapon);
 				break;
 			case "Hunter":
 				classID = CharacterClassOptions.Hunter;
 				weapon = CharacterClassOptions.Bow;
+                Debug.Log("HUNTER CLASS WEP VALUE IS " + weapon);
 				break;
 			case "Healer":
 				classID = CharacterClassOptions.Healer;
 				weapon = CharacterClassOptions.Staff;
+                Debug.Log("HEALER CLASS WEP VALUE IS " + weapon);
 				break;
 			default:
 				classID = CharacterClassOptions.Knight;

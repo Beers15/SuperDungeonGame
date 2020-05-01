@@ -41,14 +41,14 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		string itemChoice = itemOptions[randomItemIndex];
 
 		Item toAdd;
-		bool isConsumable = false;
+		//bool isConsumable = false; removing potion store for now
 		bool notEquipItem = true;
-		//Debug.Log("CLASS OF ATTACKER IN CHEST SCRIPT: " + classOfAttacker);
+
 		switch (itemChoice) {
 			case "health":
-				toAdd = new HealthPot(randomItemAmount); isConsumable = true; break;
+				toAdd = new HealthPot(randomItemAmount); break;//isConsumable = true; break;
 			case "mana":
-				toAdd = new ManaPot(randomItemAmount); isConsumable = true; break;
+				toAdd = new ManaPot(randomItemAmount); break;//isConsumable = true; break;
 			case "gold":
 				toAdd = new Gold(randomItemAmount);	break;
 			case "helmet":
@@ -86,18 +86,18 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.name + "s");
 
 		//add to consumable/potions storage if consumable, otherwise add to normal inventory
-		if(isConsumable) {
-			interactor.potions.AddConsumable((ConsumableItem)toAdd);
-			interactor.potions.display();
-		} else {
-			interactor.inventory.AddItem(toAdd);
-			interactor.inventory.display();
-		}
+		// if(isConsumable) {
+		// 	interactor.potions.AddConsumable((ConsumableItem)toAdd);
+		// 	interactor.potions.display();
+		// } else {
+		interactor.inventory.AddItem(toAdd);
+		interactor.inventory.display();
+		//}
 
 		GameManager.kill(this, 0.5f);
 	}
 	
-	public void take_damage(int amount, int classOfAttacker) {
+	public void take_damage(int amount, int classOfAttacker, GameAgent attacker) {
 		GameManager.kill(this, 1.0f);
 	}
 	public void playHitAnimation() {}
@@ -111,6 +111,9 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 	}
 	public int getClassOfAttacker() {
 		return classOfAttacker;
+	}
+	public int getLvlOfSlainMob() {
+		return slainEnemyLvl;
 	}
 }
 
