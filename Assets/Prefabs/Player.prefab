@@ -3879,8 +3879,11 @@ MonoBehaviour:
   currentState: 0
   team: 0
   move_budget: 6
+  weapon: 1
   animator: {fileID: 0}
   animating: 0
+  TurnIndicatorPrefab: {fileID: 9176033643825015674, guid: c2edad020c898b64d94def85a9d90e55,
+    type: 3}
   godMode: 0
   name: 
   _attack: 0
@@ -3890,7 +3893,6 @@ MonoBehaviour:
   _speed: 0
   level: 0
   viewableState: 
-  weapon: 1
   swordSwing:
   - {fileID: 8300000, guid: 9bebec336d8345d4d99302d483703e6d, type: 3}
   - {fileID: 8300000, guid: 75847b5b43dbd3b4ca412f7624f4ec34, type: 3}

@@ -13,7 +13,10 @@ public class Player : GameAgent
     private MapConfiguration config;
 	private TileSelector tile_selector; // reference to map tile selector
     private List<Pos> selectableTiles;
-	
+	private TurnIndicator turnIndicator;
+
+	public GameObject TurnIndicatorPrefab;
+
 	public bool godMode = false;
 
     // player turn options
@@ -86,7 +89,25 @@ public class Player : GameAgent
         team = 0;
 		AI = null; // players don't have AI
 		TurnManager.instance.addToRoster(this); //add player to player list
+		InitTurnIndicator();
     }
+
+	private void InitTurnIndicator()
+	{
+		GameObject turnIndicatorBarObj = GameObject.Find("TurnIndicatorBar");
+		GameObject turnIndicatorObj = GameObject.Instantiate(TurnIndicatorPrefab, turnIndicatorBarObj.transform);
+		turnIndicator = turnIndicatorObj.GetComponent<TurnIndicator>();
+		turnIndicator.SetClass(stats.characterClassOption);
+		turnIndicator.SetName(nickname);
+		turnIndicatorBarObj.GetComponent<TurnIndicatorBar>().AddTurnIndicator(turnIndicator);
+	}
+
+	private void DestroyTurnIndicator()
+	{
+		TurnIndicatorBar turnIndicatorBar = GameObject.Find("TurnIndicatorBar").GetComponent<TurnIndicatorBar>();
+		turnIndicatorBar.RemoveTurnIndicator(turnIndicator);
+		GameObject.Destroy(turnIndicator.gameObject);
+	}
 	
 	public void re_init(Pos position)
 	{
@@ -97,6 +118,7 @@ public class Player : GameAgent
 		playerUsedPotionThisTurn = false;
 		playerWaitingThisTurn = false;
 		TurnManager.instance.addToRoster(this); //add player to player list
+		InitTurnIndicator();
 		EnableRendering();
 	}
 	
@@ -143,13 +165,14 @@ public class Player : GameAgent
             animating = true;
             StartCoroutine(currentAttack.Execute(this, target));
             StartCoroutine(waitForAttackEnd());
-        }
+		}
 	}
 	
 	private IEnumerator waitForAttackEnd()
 	{
 		while (currentAttack.attacking) yield return null;
 		playerActedThisTurn = true;
+		turnIndicator.SetActiveTurn(false);
 	}
 	
 	public void Hit(){ animating = false; }
@@ -246,6 +269,7 @@ public class Player : GameAgent
             playerUsedPotionThisTurn = false;
             playerWaitingThisTurn = false;
 			move_budget = max_move_budget;
+			turnIndicator.SetActiveTurn(true);
         }
 
         UpdateViewableEditorPlayerStats();
@@ -290,10 +314,10 @@ public class Player : GameAgent
 		return actionNames.ToArray();
 	}
 	
-	public override void wait() { playerWaitingThisTurn = true; }
-	public override void potion() { playerUsedPotionThisTurn = true; }
+	public override void wait() { playerWaitingThisTurn = true; turnIndicator.SetActiveTurn(false); }
+	public override void potion() { playerUsedPotionThisTurn = true; turnIndicator.SetActiveTurn(false); }
 	public override void move() { playerMovedThisTurn = true; }
-	public override void act() { playerActedThisTurn = true; }
+	public override void act() { playerActedThisTurn = true; turnIndicator.SetActiveTurn(false); }
 	public override bool turn_over() {
 		return playerWaitingThisTurn || playerActedThisTurn || playerUsedPotionThisTurn || playerExtracted;
     }
@@ -301,6 +325,7 @@ public class Player : GameAgent
 		playerExtracted = true;
 		DisableRendering();
 		TurnManager.instance.removeFromRoster(this);
+		DestroyTurnIndicator();
 	}
 	
 	public bool can_take_action() { return !playerExtracted && animationFinished() && !turn_over() && Network.allPlayersReady(); }
