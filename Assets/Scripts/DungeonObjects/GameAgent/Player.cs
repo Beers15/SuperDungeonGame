@@ -364,7 +364,8 @@ public class Player : GameAgent
         _speed = stats.speed;
 
         classDefiner.init(stats.characterRace, stats.characterClassOption, stats.playerCharacterClass.weapon);
-    }
+		turnIndicator.SetClass(stats.characterClassOption);
+	}
 	
 	private static int nextSFX = 0;
 	private AudioClip randomSFX(AudioClip[] library)

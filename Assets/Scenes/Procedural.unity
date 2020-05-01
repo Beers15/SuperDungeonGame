@@ -2372,7 +2372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &972810461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4198,7 +4198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -44.677917, y: -218.42969}
+  m_AnchoredPosition: {x: -44.67798, y: -218.42969}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1867890175
@@ -4979,6 +4979,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TurnIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176033643825015674, guid: c2edad020c898b64d94def85a9d90e55,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2edad020c898b64d94def85a9d90e55, type: 3}

@@ -31,9 +31,7 @@ public class TurnIndicatorBar : MonoBehaviour
 		float x = -(turnIndicators.Count - 1) * Spacing / 2.0f;
 		for (int i = 0; i < turnIndicators.Count; ++i)
 		{
-			Debug.Log("Old: " + turnIndicators[i].transform.position);
 			turnIndicators[i].transform.position = transform.position + new Vector3(x, 0, 0);
-			Debug.Log("New: " + turnIndicators[i].transform.position);
 			x += Spacing;
 		}
 	}

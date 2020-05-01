@@ -29,6 +29,7 @@ public class TurnIndicator : MonoBehaviour
 
 	public void SetClass(int charClass)
 	{
+		Debug.Log("SetClass given: " + charClass);
 		characterClass = charClass;
 		if (charClass == CharacterClassOptions.Knight)
 		{
