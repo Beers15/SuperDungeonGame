@@ -24,15 +24,14 @@ public class Inventory {
         gold = new Item(9999999, "gold", "99", 0);
     }
 
-    public int AddItem(Item item)
-    {   //0 = not found
-        int slotNum = 0;
+    public int AddItem(Item item) { 
+        int slotNum = -1;
 
         if(item == null) {
             return 0;
         }
 
-        else if(string.Compare(item.ID, "99") == 0) {
+        else if(string.Equals(item.ID, "99")) {
             int maxInsert = gold.maxAmount - item.Amount;
 
                 if(item.Amount - maxInsert > 0) {
@@ -48,9 +47,9 @@ public class Inventory {
         bool itemFound = false;
         //check if item already exists in inventory
         for(int i = 0; i < numItemSlots; i++) {
-            if(string.Equals(item.name, items[i].name)) {
-                if(string.Compare(items[i].ID, "-1") == 0) 
-                    items[i].ID = item.ID;
+            if(string.Equals(item.ID, items[i].ID)) {
+                // if(string.Compare(items[i].ID, "-1") == 0) 
+                //     items[i].ID = item.ID;
 
                 int maxInsert = items[i].maxAmount - items[i].Amount;
 
@@ -70,7 +69,7 @@ public class Inventory {
             bool emptySlotExists = false;
             //insert into inventory at an empty slot if not found
             for(int i = 0; i < numItemSlots; i++) {
-                if(string.Compare(items[i].ID, "-1") == 0) {
+                if(string.Equals(items[i].ID, "-1")) {
                     items[i].name = item.name;
 
                     //check to see if item that is being added is equipment
@@ -87,10 +86,6 @@ public class Inventory {
                     }
                     else 
                         items[i].ID = item.ID;
-
-                    //gold has a higher max than other items
-                    if(string.Compare(items[i].ID, "99") == 0)
-                        items[i].maxAmount = 999999;
 
                     int maxInsert = items[i].maxAmount - items[i].Amount;
 
@@ -116,8 +111,7 @@ public class Inventory {
 
     //used to remove item completely from inventory
     //used for throwing away items (not using them)
-    public void RemoveItemFromSlot(int slot)
-    {
+    public void RemoveItemFromSlot(int slot) {
         if (slot >= numItemSlots)
         {
             return; //out of bounds
@@ -127,8 +121,7 @@ public class Inventory {
     }
 
     //returns item in slot
-    public Item GetItemFromSlot(int slot)
-    {
+    public Item GetItemFromSlot(int slot) {
         if (slot >= numItemSlots)
         {
             return null; //out of bounds
@@ -140,8 +133,7 @@ public class Inventory {
         return gold;
     }
 
-    public void IncrementItemAtSlot(int slot)
-    {
+    public void IncrementItemAtSlot(int slot) {
         if (slot >= numItemSlots)
         {
             return;
@@ -151,24 +143,22 @@ public class Inventory {
 
     //decreases amount of item by 1
     //used when item is being used, i.e. potion consumed
-    public void DecrementItemAtSlot(int slot)
-    {
+    public void DecrementItemAtSlot(int slot) {
         if (slot >= numItemSlots)
         {
             return; //out of bounds
         }
         if ((--items[slot].Amount) <= 0)
         {
-            items[slot] = null; //remove item if amount is zero
+            items[slot] = new Item(20, "", "-1", 0); //remove item if amount is zero
             RearrangeSlots();
         }
     }
 
-    private void RearrangeSlots()
-    {
+    private void RearrangeSlots() {
         for (int i = 0; i < numItemSlots; i++)
         {
-            if (items[i].ID == null)
+            if (items[i].ID == "-1")
             {
                 for (int j = i + 1; j < numItemSlots; j++)
                 {
@@ -181,7 +171,7 @@ public class Inventory {
     //testing
     public void display() {
         for(int i = 0; i < numItemSlots; i++) {
-            if(string.Compare(items[i].ID, "-1") != 0)
+            if(!string.Equals(items[i].ID, "-1"))
                 Debug.Log("item slot #" + i + " Item: " + items[i].name + " Amount: " + items[i].Amount + " ID: " + items[i].ID);
         }
     }

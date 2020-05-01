@@ -2612,7 +2612,7 @@ MonoBehaviour:
   - Healer
   - Hunter
   - Mage
-  characterClass: 0
+  characterClass: 2
   loadingScreen: {fileID: 1289607737}
   networkPrefab: {fileID: 6081443213912929002, guid: 3bc2fd1e22f72e34285ef303be890706,
     type: 3}

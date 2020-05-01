@@ -9,7 +9,7 @@ public class UI_InventorySlot : MonoBehaviour {
     Item slotItem;
 	UI_InventoryManager manager;
 	
-	public Sprite healthPot, manaPot, helmet, armor, gloves, boots, nothing;
+	public Sprite healthPot, manaPot, helmet, armor, gloves, boots, bow, sword, staff, nothing;
 	
 	public int index = 0;
 	
@@ -29,19 +29,26 @@ public class UI_InventorySlot : MonoBehaviour {
 		slotItem = item;
 		itemCount.text = item.Amount.ToString();
 		itemImage.color = new Color(1, 1, 1, 1);
+		Debug.Log("IN INVENTORY SLOT THE SPRITE NAME IS " +item.name);
 		switch (item.name) {
 			case "Health Potion":
 				itemImage.sprite = healthPot; break;
 			case "Mana Potion":
 				itemImage.sprite = manaPot; break;
-			case "helmet":
+			case "Helmet":
 				itemImage.sprite = helmet; break;
-			case "armor":
+			case "Armor":
 				itemImage.sprite = armor; break;
-			case "boots":
+			case "Gloves":
+				itemImage.sprite = gloves; break;
+			case "Boots":
 				itemImage.sprite = boots; break;
-			case "gloves":
-				itemImage.sprite = boots; break;
+			case "Bow":
+				itemImage.sprite = bow; break;
+			case "Sword":
+				itemImage.sprite = sword; break;
+			case "Staff":
+				itemImage.sprite = staff; break;
 			default:
 				itemImage.sprite = nothing; break;
 		}

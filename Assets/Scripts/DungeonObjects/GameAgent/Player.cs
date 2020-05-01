@@ -33,7 +33,6 @@ public class Player : GameAgent
     public int level;
     public string viewableState;
 
-
     //CharacterClassDefiner classDefiner; // moved to GameAgent
 
     // Get rid of this when you get rid of using keys to change player class
@@ -309,23 +308,27 @@ public class Player : GameAgent
 	
 	public void SetCharacterClass(string classname) {
 		
-        int weapon, classID;
+        int classID;
         switch (classname) {
 			case "Warrior":
 				classID = CharacterClassOptions.Knight;
 				weapon = CharacterClassOptions.Sword;
+                Debug.Log("WARRIOR CLASS WEP VALUE IS " + weapon);
 				break;
 			case "Mage":
 				classID = CharacterClassOptions.Mage;
 				weapon = CharacterClassOptions.Staff;
+                Debug.Log("MAGE CLASS WEP VALUE IS " + weapon);
 				break;
 			case "Hunter":
 				classID = CharacterClassOptions.Hunter;
 				weapon = CharacterClassOptions.Bow;
+                Debug.Log("HUNTER CLASS WEP VALUE IS " + weapon);
 				break;
 			case "Healer":
 				classID = CharacterClassOptions.Healer;
 				weapon = CharacterClassOptions.Staff;
+                Debug.Log("HEALER CLASS WEP VALUE IS " + weapon);
 				break;
 			default:
 				classID = CharacterClassOptions.Knight;

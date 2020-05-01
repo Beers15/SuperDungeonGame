@@ -44,7 +44,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		//bool isConsumable = false; removing potion store for now
 		bool notEquipItem = true;
 
-		switch ("helmet") {
+		switch (itemChoice) {
 			case "health":
 				toAdd = new HealthPot(randomItemAmount); break;//isConsumable = true; break;
 			case "mana":
@@ -111,6 +111,9 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 	}
 	public int getClassOfAttacker() {
 		return classOfAttacker;
+	}
+	public int getLvlOfSlainMob() {
+		return slainEnemyLvl;
 	}
 }
 

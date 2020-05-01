@@ -200,17 +200,14 @@ public class Enemy : GameAgent
 				if(lootRoll > lootThreshold) {
 					randomItem = UnityEngine.Random.Range(0, lootDrops.Length - 1);
 
-					//LVL/CLASS PASSING CURRENTLY NOT WORKING: pass on to the item object's item script the lvl of the mob that was slain
+					var spawnedDrop = map_manager.instantiate_environment(lootDrops[randomItem], new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
 					if(randomItem == 0) {
-						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setLvlOfSlainMob(level);
-						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setClassOfAttacker(classOfAttacker);
-					}
+						(spawnedDrop.GetComponent<DungeonObject>() as RandomItemsChest).setLvlOfSlainMob(level);	
+						(spawnedDrop.GetComponent<DungeonObject>() as RandomItemsChest).setClassOfAttacker(classOfAttacker);
+						Debug.Log("CLASS OF ATTACKER " + (spawnedDrop.GetComponent<DungeonObject>() as RandomItemsChest).getClassOfAttacker());
+					}		
 					else
-						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsSpawner).setLvlOfSlainMob(level);
-				
-
-					map_manager.instantiate_environment(lootDrops[randomItem], new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
-					//----------------------------------
+						(spawnedDrop.GetComponent<DungeonObject>() as RandomItemsSpawner).setLvlOfSlainMob(level);
 				}
 			}
 		}
