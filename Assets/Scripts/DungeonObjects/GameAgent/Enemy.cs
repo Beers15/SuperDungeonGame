@@ -173,11 +173,14 @@ public class Enemy : GameAgent
 		return (!currentAttack.attacking) && !moving;
 	}
 	
-    public override void take_damage(int amount, int classOfAttacker)  {	
+    public override void take_damage(int amount, int classOfAttacker, GameAgent attacker)  {	
         stats.TakeDamage(amount);
 		//Debug.Log("This mob's lvl is: " +level.ToString());
 
         if (stats.currentState == GameAgentState.Unconscious) {
+			//give attacker gold (points) for the kill based on enemy level
+			attacker.inventory.AddItem(new Item(9999999, "gold", "99", (level * 50)));
+
             StartCoroutine(animator.PlayKilledAimation());
             stats.currentState = GameAgentState.Dead;
 
@@ -185,7 +188,7 @@ public class Enemy : GameAgent
 
 			if(team == 1) {
 				var lootRoll = 0.0f;
-				var lootThreshold = 5.0f;
+				var lootThreshold = 1.0f;
 				var mobDifficultyModifier = 1.0f / (10.0f - Convert.ToSingle(level));
 
 				if(mobDifficultyModifier <= 0.1f)
@@ -197,19 +200,14 @@ public class Enemy : GameAgent
 				if(lootRoll > lootThreshold) {
 					randomItem = UnityEngine.Random.Range(0, lootDrops.Length - 1);
 
-					//LVL/CLASS PASSING CURRENTLY NOT WORKING: pass on to the item object's item script the lvl of the mob that was slain
+					var spawnedDrop = map_manager.instantiate_environment(lootDrops[randomItem], new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
 					if(randomItem == 0) {
-						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setLvlOfSlainMob(level);
-						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).setClassOfAttacker(classOfAttacker);
-						
-						Debug.Log("CHEST ATTACKER VALUE: " + (lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsChest).getClassOfAttacker());
-					}
+						(spawnedDrop.GetComponent<DungeonObject>() as RandomItemsChest).setLvlOfSlainMob(level);	
+						(spawnedDrop.GetComponent<DungeonObject>() as RandomItemsChest).setClassOfAttacker(classOfAttacker);
+						Debug.Log("CLASS OF ATTACKER " + (spawnedDrop.GetComponent<DungeonObject>() as RandomItemsChest).getClassOfAttacker());
+					}		
 					else
-						(lootDrops[randomItem].GetComponent<DungeonObject>() as RandomItemsSpawner).setLvlOfSlainMob(level);
-				
-
-					map_manager.instantiate_environment(lootDrops[randomItem], new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
-					//----------------------------------
+						(spawnedDrop.GetComponent<DungeonObject>() as RandomItemsSpawner).setLvlOfSlainMob(level);
 				}
 			}
 		}

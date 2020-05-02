@@ -156,30 +156,29 @@ public class EquipItem : Item {
 
 public class Helmet : EquipItem {
 	public static string _ID = "3";
-	public Helmet() : base("helmet", _ID, EquipType.HELMET, 0, 10) {}
+	public Helmet() : base("Helmet", _ID, EquipType.HELMET, 0, 10) {}
 }
 
 public class Armor : EquipItem {
 	public static string _ID = "4";
-	public Armor() : base("armor", _ID, EquipType.ARMOR, 0, 20) {}
+	public Armor() : base("Armor", _ID, EquipType.ARMOR, 0, 20) {}
 }
 
 public class Glove : EquipItem {
 	public static string _ID = "5";
-	public Glove() : base("gloves", _ID, EquipType.GLOVE, 0, 8) {}
+	public Glove() : base("Gloves", _ID, EquipType.GLOVE, 0, 8) {}
 }
 
 public class Boot : EquipItem {
 	public static string _ID = "6";
-	public Boot() : base("boots", _ID, EquipType.BOOT, 0, 8) {}
+	public Boot() : base("Boots", _ID, EquipType.BOOT, 0, 8) {}
 }
 
 public class EquipWeapon : EquipItem {
 	public static string _ID = "7";
    
-	public EquipWeapon(int weaponClass) : base("weapon", _ID, EquipType.WEAPON, 20, 0) {
+	public EquipWeapon(int weaponClass) : base(CharacterClassOptions.getWeaponType((weaponClass)), _ID, EquipType.WEAPON, 20, 0) {
         this.weaponClass = weaponClass;
-        Debug.Log("Weapon class is : " + weaponClass);
     }
 
 }

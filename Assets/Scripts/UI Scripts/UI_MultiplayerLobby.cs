@@ -79,6 +79,14 @@ public class UI_MultiplayerLobby : MonoBehaviour
 	public void StartGame()
 	{
 		if (NetworkManager.clientID == 1 && Network.allPlayersReady()) {
+
+			// set the settings seed here and save intos settings.cs
+			//call the seedconfig set seed method		
+
+			SeedConfig.setSeed();
+			Debug.Log(Settings.MasterSeed);
+			// modify the startcommand to accept a int value
+
 			Network.submitCommand(new StartCommand());
 		}
 	}
@@ -90,8 +98,8 @@ public class UI_MultiplayerLobby : MonoBehaviour
 		Network.disconnectFromServer();
 	}
 	
-	public void Settings()
-	{
+	//public void OnSettings()
+	//{
 		
-	}
+	//}
 }

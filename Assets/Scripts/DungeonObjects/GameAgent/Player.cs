@@ -13,7 +13,10 @@ public class Player : GameAgent
     private MapConfiguration config;
 	private TileSelector tile_selector; // reference to map tile selector
     private List<Pos> selectableTiles;
-	
+	private TurnIndicator turnIndicator;
+
+	public GameObject TurnIndicatorPrefab;
+
 	public bool godMode = false;
 
     // player turn options
@@ -32,7 +35,6 @@ public class Player : GameAgent
     public float _speed;
     public int level;
     public string viewableState;
-
 
     //CharacterClassDefiner classDefiner; // moved to GameAgent
 
@@ -80,13 +82,33 @@ public class Player : GameAgent
         
         //-----
         //add starting items and consumables here with inventory/potionStore.addItem if desired
+        inventory.AddItem(new HealthPot(5));
+        inventory.AddItem(new ManaPot(5));
         //-----
 
         // AI init
         team = 0;
 		AI = null; // players don't have AI
 		TurnManager.instance.addToRoster(this); //add player to player list
+		InitTurnIndicator();
     }
+
+	private void InitTurnIndicator()
+	{
+		GameObject turnIndicatorBarObj = GameObject.Find("TurnIndicatorBar");
+		GameObject turnIndicatorObj = GameObject.Instantiate(TurnIndicatorPrefab, turnIndicatorBarObj.transform);
+		turnIndicator = turnIndicatorObj.GetComponent<TurnIndicator>();
+		turnIndicator.SetClass(stats.characterClassOption);
+		turnIndicator.SetName(nickname);
+		turnIndicatorBarObj.GetComponent<TurnIndicatorBar>().AddTurnIndicator(turnIndicator);
+	}
+
+	private void DestroyTurnIndicator()
+	{
+		TurnIndicatorBar turnIndicatorBar = GameObject.Find("TurnIndicatorBar").GetComponent<TurnIndicatorBar>();
+		turnIndicatorBar.RemoveTurnIndicator(turnIndicator);
+		GameObject.Destroy(turnIndicator.gameObject);
+	}
 	
 	public void re_init(Pos position)
 	{
@@ -97,6 +119,7 @@ public class Player : GameAgent
 		playerUsedPotionThisTurn = false;
 		playerWaitingThisTurn = false;
 		TurnManager.instance.addToRoster(this); //add player to player list
+		InitTurnIndicator();
 		EnableRendering();
 	}
 	
@@ -143,13 +166,14 @@ public class Player : GameAgent
             animating = true;
             StartCoroutine(currentAttack.Execute(this, target));
             StartCoroutine(waitForAttackEnd());
-        }
+		}
 	}
 	
 	private IEnumerator waitForAttackEnd()
 	{
 		while (currentAttack.attacking) yield return null;
 		playerActedThisTurn = true;
+		turnIndicator.SetActiveTurn(false);
 	}
 	
 	public void Hit(){ animating = false; }
@@ -206,7 +230,7 @@ public class Player : GameAgent
 		return (currentAttack == null || !currentAttack.attacking) && !moving;
 	}
 	
-	public override void take_damage(int amount, int classOfAttacker)
+	public override void take_damage(int amount, int classOfAttacker, GameAgent attacker)
 	{
         if (stats.currentState == GameAgentState.Alive) {
             if (!godMode) stats.TakeDamage((int)(amount * 0.05));
@@ -246,6 +270,7 @@ public class Player : GameAgent
             playerUsedPotionThisTurn = false;
             playerWaitingThisTurn = false;
 			move_budget = max_move_budget;
+			turnIndicator.SetActiveTurn(true);
         }
 
         UpdateViewableEditorPlayerStats();
@@ -290,10 +315,10 @@ public class Player : GameAgent
 		return actionNames.ToArray();
 	}
 	
-	public override void wait() { playerWaitingThisTurn = true; }
-	public override void potion() { playerUsedPotionThisTurn = true; }
+	public override void wait() { playerWaitingThisTurn = true; turnIndicator.SetActiveTurn(false); }
+	public override void potion() { playerUsedPotionThisTurn = true; turnIndicator.SetActiveTurn(false); }
 	public override void move() { playerMovedThisTurn = true; }
-	public override void act() { playerActedThisTurn = true; }
+	public override void act() { playerActedThisTurn = true; turnIndicator.SetActiveTurn(false); }
 	public override bool turn_over() {
 		return playerWaitingThisTurn || playerActedThisTurn || playerUsedPotionThisTurn || playerExtracted;
     }
@@ -301,29 +326,34 @@ public class Player : GameAgent
 		playerExtracted = true;
 		DisableRendering();
 		TurnManager.instance.removeFromRoster(this);
+		DestroyTurnIndicator();
 	}
 	
 	public bool can_take_action() { return !playerExtracted && animationFinished() && !turn_over() && Network.allPlayersReady(); }
 	
 	public void SetCharacterClass(string classname) {
 		
-        int weapon, classID;
+        int classID;
         switch (classname) {
 			case "Warrior":
 				classID = CharacterClassOptions.Knight;
 				weapon = CharacterClassOptions.Sword;
+                Debug.Log("WARRIOR CLASS WEP VALUE IS " + weapon);
 				break;
 			case "Mage":
 				classID = CharacterClassOptions.Mage;
 				weapon = CharacterClassOptions.Staff;
+                Debug.Log("MAGE CLASS WEP VALUE IS " + weapon);
 				break;
 			case "Hunter":
 				classID = CharacterClassOptions.Hunter;
 				weapon = CharacterClassOptions.Bow;
+                Debug.Log("HUNTER CLASS WEP VALUE IS " + weapon);
 				break;
 			case "Healer":
 				classID = CharacterClassOptions.Healer;
 				weapon = CharacterClassOptions.Staff;
+                Debug.Log("HEALER CLASS WEP VALUE IS " + weapon);
 				break;
 			default:
 				classID = CharacterClassOptions.Knight;
@@ -339,7 +369,8 @@ public class Player : GameAgent
         _speed = stats.speed;
 
         classDefiner.init(stats.characterRace, stats.characterClassOption, stats.playerCharacterClass.weapon);
-    }
+		turnIndicator.SetClass(stats.characterClassOption);
+	}
 	
 	private static int nextSFX = 0;
 	private AudioClip randomSFX(AudioClip[] library)
