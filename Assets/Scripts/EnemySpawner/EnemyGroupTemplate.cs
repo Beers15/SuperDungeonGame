@@ -85,7 +85,7 @@ public static class EnemyGroupTemplate {
     }
 
     public static EnemyGroup GetEnemyGroup(int groupType, int difficulty, int enemyGroupSize, int race, int level) {
-        MapConfiguration config = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>();
+        MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
         System.Random rng = config.GetRNG();
         List<EnemyGroupDescription> enemyGroupDescriptions = new List<EnemyGroupDescription>();
         List<int> enemyQuantities = new List<int>();

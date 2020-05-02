@@ -97,7 +97,7 @@ public class MapManager : MonoBehaviour
 	// set all map configuration variables
 	private void set_config_variables()
 	{
-		MapConfiguration config = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>();
+		MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
 		this.width = config.width;
 		this.height = config.height;
 		this.cell_size = config.cell_size;

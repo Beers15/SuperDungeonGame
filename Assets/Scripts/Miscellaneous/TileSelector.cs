@@ -112,10 +112,14 @@ public class TileSelector : MonoBehaviour
 	
 	public void clear_path_line()
 	{
-		path_render.positionCount = 0;
+		if(path_render != null)
+		{
+			path_render.positionCount = 0;
 		
-		Vector3[] blank = new Vector3[0];
-		path_render.SetPositions(blank);
+					Vector3[] blank = new Vector3[0];
+					path_render.SetPositions(blank);
+		}
+		
 	}
 	
     // Creates a list of all selectable tiles within a given radius of a position

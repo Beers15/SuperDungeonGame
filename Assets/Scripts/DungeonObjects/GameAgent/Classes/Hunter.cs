@@ -4,7 +4,7 @@ public class Hunter : CharacterClass
 {
     public Hunter() {
         baseStats = new GameAgentStats(18, 80, 9, 9, true);
-        rng = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>().GetRNG();
+        rng = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>().GetRNG();
     }
 
     public override int GetAttackStatIncreaseFromLevelUp(int level = -1) {
