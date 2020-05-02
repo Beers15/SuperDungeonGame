@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{aed5072d-ec6e-4b97-a131-fc1b4c47073d}">
+		<property name="name">
+			<value>Biome</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b6de307e-db20-4644-84e1-8b1b9b4c1264}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{2b3bd2f1-9ef1-4ba9-82b8-264f8c0313bc}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{2b3bd2f1-9ef1-4ba9-82b8-264f8c0313bc}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Menu</value>
+			<value>Cave</value>
+			<value>Forrest</value>
+			<value>Mountain</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

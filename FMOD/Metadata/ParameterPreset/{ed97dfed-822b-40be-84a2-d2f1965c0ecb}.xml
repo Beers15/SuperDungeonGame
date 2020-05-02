@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{ed97dfed-822b-40be-84a2-d2f1965c0ecb}">
+		<property name="name">
+			<value>Pick-Up &amp; Items</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b6de307e-db20-4644-84e1-8b1b9b4c1264}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{9e669111-a202-4dd4-a289-2e51df42d916}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{9e669111-a202-4dd4-a289-2e51df42d916}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>5</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Loot</value>
+			<value>Coin</value>
+			<value>Potion Consumption</value>
+			<value>Item Equip</value>
+			<value>Open Chest</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

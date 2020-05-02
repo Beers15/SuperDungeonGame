@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{cacd4d59-2e4d-4c03-9302-00d761998880}">
+		<property name="name">
+			<value>Weapon or Attack </value>
+		</property>
+		<relationship name="folder">
+			<destination>{b6de307e-db20-4644-84e1-8b1b9b4c1264}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{861a091b-803c-4abc-b78e-ee480f528459}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{861a091b-803c-4abc-b78e-ee480f528459}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>10</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Sword Swing</value>
+			<value>Sword Swing Power Slash</value>
+			<value>Staff Swing</value>
+			<value>Club Swing</value>
+			<value>BowShot</value>
+			<value>Bow Shot Multi-burst</value>
+			<value>FireBurst</value>
+			<value>FireStorm</value>
+			<value>Dagger Stab</value>
+			<value>Lightning</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

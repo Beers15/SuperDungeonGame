@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{ca0f7602-2e46-4b8d-8a94-74c4c3e801d7}">
+		<property name="name">
+			<value>Attack Hit Type</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b6de307e-db20-4644-84e1-8b1b9b4c1264}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{79e6691f-4542-45ff-95f0-594fe5b77f0a}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{79e6691f-4542-45ff-95f0-594fe5b77f0a}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>6</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Sword</value>
+			<value>Staff</value>
+			<value>Club</value>
+			<value>Dagger</value>
+			<value>Fire</value>
+			<value>Lightning</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

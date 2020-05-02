@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{f31afec0-51b6-4e48-9ad2-9609a4fa038f}">
+		<property name="name">
+			<value>Character-Armor Type</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b6de307e-db20-4644-84e1-8b1b9b4c1264}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{d158ca12-e1dd-4d14-8772-932be11535ac}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{d158ca12-e1dd-4d14-8772-932be11535ac}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Metal Armor</value>
+			<value>Skeleton</value>
+			<value>Flesh</value>
+			<value>Ice</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

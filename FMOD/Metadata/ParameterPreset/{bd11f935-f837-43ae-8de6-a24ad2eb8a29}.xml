@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{bd11f935-f837-43ae-8de6-a24ad2eb8a29}">
+		<property name="name">
+			<value>UI Sound</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b6de307e-db20-4644-84e1-8b1b9b4c1264}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{544ef577-788a-4f7e-a863-6b23782063cd}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{544ef577-788a-4f7e-a863-6b23782063cd}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Rollover</value>
+			<value>Select</value>
+			<value>Pause</value>
+			<value>Cancel</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
