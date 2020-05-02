@@ -22,7 +22,7 @@ public class EnemyGroupManager
         enemies = new List<EnemyToSpawn>();
 
         mapGenerator = GameObject.FindGameObjectWithTag("Map").GetComponent<MapGenerator>();
-        MapConfiguration config = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>();
+        MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
         rng = config.GetRNG();
 
         // Sort based on spawn zone size

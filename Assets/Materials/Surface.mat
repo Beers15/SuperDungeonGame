@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FOWTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: de1b95d3444c8b145ba0dc400c9860b8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FluidGradient:
@@ -76,15 +76,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _XTex:
-        m_Texture: {fileID: 2800000, guid: c86dc5bee4723f941a8330e4863dfd2e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 93da770401479e04facc8491d9ab2bb2, type: 3}
         m_Scale: {x: 0.25, y: 0.25}
         m_Offset: {x: 0, y: 0}
     - _YTex:
-        m_Texture: {fileID: 2800000, guid: b40c6f45738791c4a9febb0c740f5c0a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9c0d7ca2fdaeb6a4d9b03bbde2204d11, type: 3}
         m_Scale: {x: 0.25, y: 0.25}
         m_Offset: {x: 0, y: 0}
     - _ZTex:
-        m_Texture: {fileID: 2800000, guid: e4dcd35cc6d9528439d65808e3705af9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 02e0b3c87234bb04683879ec5da90531, type: 3}
         m_Scale: {x: 0.25, y: 0.25}
         m_Offset: {x: 0, y: 0}
     m_Floats:

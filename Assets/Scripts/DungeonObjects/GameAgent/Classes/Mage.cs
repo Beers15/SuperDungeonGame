@@ -4,7 +4,7 @@ public class Mage : CharacterClass
 {
     public Mage() {
         baseStats = new GameAgentStats(23, 70, 7, 6, true);
-        rng = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>().GetRNG();
+        rng = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>().GetRNG();
     }
 
     public override int GetAttackStatIncreaseFromLevelUp(int level = -1) {

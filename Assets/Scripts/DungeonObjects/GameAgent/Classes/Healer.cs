@@ -4,7 +4,7 @@ public class Healer : CharacterClass
 {
     public Healer() {
         baseStats = new GameAgentStats(16, 65, 7, 10, true);
-        rng = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>().GetRNG();
+        rng = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>().GetRNG();
     }
 
     public override int GetAttackStatIncreaseFromLevelUp(int level = -1) {

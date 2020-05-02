@@ -49,8 +49,11 @@ public class FogOfWar : MonoBehaviour
 	
 	void clearActiveVisibility()
 	{
-		for (int i = 0; i < fog.Length; i++)
-			fog[i] = fog[i] == VISIBLE ? SEMI : fog[i];
+		if(fog != null)
+		{
+			for (int i = 0; i < fog.Length; i++)
+						fog[i] = fog[i] == VISIBLE ? SEMI : fog[i];
+		}
 	}
 	
 	void Update()
@@ -58,7 +61,10 @@ public class FogOfWar : MonoBehaviour
 		clearActiveVisibility();
 		
 		foreach (Player player in Network.getPlayers()) {
-			UpdateVisibility(player.grid_pos);
+				if(player != null)
+				{
+					UpdateVisibility(player.grid_pos);
+				}
 		}
 		
 		if (Input.GetKeyDown("c")) {

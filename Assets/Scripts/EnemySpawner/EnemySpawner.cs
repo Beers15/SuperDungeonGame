@@ -39,7 +39,7 @@ public class EnemySpawner : MonoBehaviour {
     // Initializes map data
     public void Init(MapManager mapManager)
     {
-        MapConfiguration config = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>();
+        MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
         mapGenerator = GameObject.FindGameObjectWithTag("Map").GetComponent<MapGenerator>();
         width = config.width;
         height = config.height;

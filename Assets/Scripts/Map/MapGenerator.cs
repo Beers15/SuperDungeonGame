@@ -32,6 +32,7 @@ public class MapGenerator : MonoBehaviour
 	// debug stuff
 	private List<Connection> debug_connections;
 	private MapManager map_manager;
+	private MapConfiguration config;
 
 	//seed generation
 	//static int MasterSeed = 1111111;
@@ -42,10 +43,10 @@ public class MapGenerator : MonoBehaviour
 	// 	var random = new System.Random();
 	// 	return random.Next();
 	// }
-	
+
 	void set_variables()
 	{
-		MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
+		config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
 		Debug.Log("Map generator initialized");
 
 		//Debug.Log(config.fogViewRange);
@@ -92,7 +93,7 @@ public class MapGenerator : MonoBehaviour
 		bridge_mesh_gen.generateBridgeMesh(map);
 		
 		BoxCollider box = GetComponent<BoxCollider>();
-		box.center = GetComponent<MapConfiguration>().GetCenter();
+		box.center = config.GetCenter();
 		box.size = new Vector3(width, 0.5f, height);
 		
 		Debug.Log("Mesh generation complete!");
@@ -148,8 +149,9 @@ public class MapGenerator : MonoBehaviour
 	
 	void pad_edges()
 	{	
-		this.width = GetComponent<MapConfiguration>().width;
-		this.height = GetComponent<MapConfiguration>().height;
+
+		this.width = config.width; // these should not be needed becuase they are set above
+		this.height = config.height;
 		
 		int[,] new_map = new int[width, height];
 		

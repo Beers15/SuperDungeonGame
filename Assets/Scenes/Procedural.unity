@@ -2651,7 +2651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b70147eb923d2c41aad22704e43d0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugFog: 1
+  debugFog: 0
   classes:
   - Warrior
   - Healer
@@ -3800,7 +3800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1281cb76421430648b4367a29ff2e0bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPrefab: {fileID: 3944264686662586777, guid: b2c9801dc5e38b84fa19b23bc71ec1a2,
+  mapPrefab: {fileID: 8418387445554853595, guid: d956a6fa94102954fbb3d04d904f29d6,
     type: 3}
   fireProjectile: {fileID: 4479903999552307122, guid: 03e4c37920de4e64f9d78163211e82d2,
     type: 3}

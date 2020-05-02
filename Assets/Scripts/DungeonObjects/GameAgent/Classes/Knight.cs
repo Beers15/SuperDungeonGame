@@ -4,7 +4,7 @@ public class Knight : CharacterClass {
 
     public Knight() {
         baseStats = new GameAgentStats(20, 100, 2, 7, true);
-        rng = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>().GetRNG();
+        rng = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>().GetRNG();
     }
 
     public override int GetAttackStatIncreaseFromLevelUp(int level = -1) {
