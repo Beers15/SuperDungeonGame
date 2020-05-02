@@ -2321,7 +2321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &972810461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3483,7 +3483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1281cb76421430648b4367a29ff2e0bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPrefab: {fileID: 5042065804331010235, guid: 7bfe5a9cc06b5e646aaa4151d275add6,
+  mapPrefab: {fileID: 8418387445554853595, guid: d956a6fa94102954fbb3d04d904f29d6,
     type: 3}
   fireProjectile: {fileID: 4479903999552307122, guid: 03e4c37920de4e64f9d78163211e82d2,
     type: 3}
