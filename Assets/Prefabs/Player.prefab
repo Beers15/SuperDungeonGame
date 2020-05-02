@@ -3882,6 +3882,8 @@ MonoBehaviour:
   weapon: 1
   animator: {fileID: 0}
   animating: 0
+  TurnIndicatorPrefab: {fileID: 9176033643825015674, guid: c2edad020c898b64d94def85a9d90e55,
+    type: 3}
   godMode: 0
   name: 
   _attack: 0
