@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{8b4ba7e1-5a54-4b81-993a-a1c68e162f61}">
+		<property name="name">
+			<value>Charactar Grunt</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b6de307e-db20-4644-84e1-8b1b9b4c1264}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{850f2185-3a28-4c2b-b235-0101b66340ce}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{850f2185-3a28-4c2b-b235-0101b66340ce}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>6</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Human Grunt</value>
+			<value>Skeleton Grunt</value>
+			<value>Goblin Grunt</value>
+			<value>Orc Grunt</value>
+			<value>Mage Grunt</value>
+			<value>Ice Golum Grunt</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
