@@ -33,7 +33,8 @@ public class InventoryManager : MonoBehaviour
     {
         //uses item ID to know which item func to call
         //passes item and game agent (for use in equipment)
-        instance.itemFuncs[item.ID](item, agent);
+        if(item != null && agent != null)
+            instance.itemFuncs[item.ID](item, agent);
     }
 
     private static void ApplyHealthPotion(Item item, GameAgent agent)
