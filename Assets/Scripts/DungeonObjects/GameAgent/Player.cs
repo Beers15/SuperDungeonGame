@@ -107,7 +107,8 @@ public class Player : GameAgent
 	{
 		TurnIndicatorBar turnIndicatorBar = GameObject.Find("TurnIndicatorBar").GetComponent<TurnIndicatorBar>();
 		turnIndicatorBar.RemoveTurnIndicator(turnIndicator);
-		// GameObject.Destroy(turnIndicator.gameObject);
+        if(turnIndicator.gameObject != null)
+		    GameObject.Destroy(turnIndicator.gameObject);
 	}
 	
 	public void re_init(Pos position)
