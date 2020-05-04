@@ -75,7 +75,7 @@ public class GameAgentStats
     }
 
     public GameAgentStats(int characterRace, int characterClass, int desiredLevel, int characterWeapon = CharacterClassOptions.RandomClassWeapon) {
-        rng = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>().GetRNG();
+        rng = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>().GetRNG();
 
         this.characterRace = characterRace;
         characterClassOption = characterClass;

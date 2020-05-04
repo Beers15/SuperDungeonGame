@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{c532bc2c-f107-47f1-8a75-75b707bedcf2}">
+		<property name="name">
+			<value>Character Death</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b6de307e-db20-4644-84e1-8b1b9b4c1264}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{68035283-39fb-4659-85d3-57796710e6f3}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{68035283-39fb-4659-85d3-57796710e6f3}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>6</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Human Death</value>
+			<value>Skelton Death</value>
+			<value>Goblin Death</value>
+			<value>Orc Death</value>
+			<value>Mage Death</value>
+			<value>Ice Golum Death</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

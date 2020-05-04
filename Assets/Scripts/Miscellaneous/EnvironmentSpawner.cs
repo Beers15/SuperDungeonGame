@@ -77,7 +77,7 @@ public class EnvironmentSpawner : MonoBehaviour
 
     public void Init(MapManager mapManager)
     {
-        MapConfiguration config = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>();
+        MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
         this.width = config.width;
         this.height = config.height;
         this.cell_size = config.cell_size;

@@ -37,7 +37,7 @@ public class EnemyGroupDescription
         this.maxNumberOfEnemiesInGroup = maxNumberOfEnemiesInGroup;
         this.levelVariance = levelVariance;
 
-        MapConfiguration config = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>();
+        MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
         rng = config.GetRNG();
 
         CalculatePowerLevel();

@@ -50,9 +50,9 @@ MonoBehaviour:
   gradient:
     serializedVersion: 2
     key0: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0.40784314}
-    key1: {r: 0.8, g: 0.09411765, b: 0, a: 1}
-    key2: {r: 0.9137255, g: 0.35686275, b: 0, a: 0}
-    key3: {r: 0.9137255, g: 0.5411765, b: 0, a: 0}
+    key1: {r: 0, g: 0.23744659, b: 0.8, a: 1}
+    key2: {r: 0, g: 0.5898793, b: 0.9137255, a: 0}
+    key3: {r: 0, g: 0.76310414, b: 0.9137255, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
@@ -260,23 +260,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c6c642476f7374c8499c08b631c89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bridgeBase: {fileID: 4300000, guid: f003a3df819c6724d9c1ea9720883bb9, type: 3}
+  bridgeBase: {fileID: 4300000, guid: 4058ca01a5fb64f43b437a220ffe168e, type: 3}
   bridgeLegs: {fileID: 4300000, guid: 55d84bddf7aaab44fa5b77486df56e0e, type: 3}
   platformBase: {fileID: 4300000, guid: 4058ca01a5fb64f43b437a220ffe168e, type: 3}
   platformLegs: {fileID: 4300000, guid: 1c5e705abbd39114f85415f4f9a5957e, type: 3}
   gradient:
     serializedVersion: 2
-    key0: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0.40784314}
-    key1: {r: 0.8, g: 0.09411765, b: 0, a: 1}
-    key2: {r: 0.9137255, g: 0.35686275, b: 0, a: 0}
+    key0: {r: 0.14150941, g: 0.12055344, b: 0.09011213, a: 0.40784314}
+    key1: {r: 0.14150941, g: 0.12055344, b: 0.09011213, a: 1}
+    key2: {r: 0.9137255, g: 0.5411765, b: 0, a: 0}
     key3: {r: 0.9137255, g: 0.5411765, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 40828
-    ctime2: 62062
+    ctime1: 65535
+    ctime2: 65535
     ctime3: 65535
     ctime4: 0
     ctime5: 0
@@ -291,7 +291,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 4
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
 --- !u!33 &3944264687251142842
 MeshFilter:

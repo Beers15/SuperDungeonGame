@@ -33,7 +33,7 @@ public class CharacterClassDefiner : MonoBehaviour
         character = GetComponent<GameAgent>();
         animator = GetComponent<Animator>();
 
-        MapConfiguration config = GameObject.FindGameObjectWithTag("Map").GetComponent<MapConfiguration>();
+        MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
         rng = config.GetRNG();
 
         // Hide all weapon objects.
