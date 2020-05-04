@@ -15,6 +15,7 @@ public class EquipItem : Item {
     public EquipType type;
     public int atkbonus;
     public int defbonus;
+    public string owner;
     //public CharacterClassOptions weaponType;
 
     public string completeName;
@@ -50,9 +51,9 @@ public class EquipItem : Item {
        return  IDLowerBound;
     }
         
-    public void generateEquipmentValues(int level) {
+    public void generateEquipmentValues(int level, string owner) {
         lvlOfSlainMob = level;
-        Debug.Log("This gear's slain mob was lvl " + lvlOfSlainMob);
+        this.owner = owner;
 
         int tierValue;
         
@@ -129,7 +130,7 @@ public class EquipItem : Item {
     }
 
     public void displayMessage() {
-        UI_TextAlert.DisplayColorText("Recieved " + completeName, tier);
+        UI_TextAlert.DisplayColorText(owner + " recieved " + completeName, tier);
     }
 
     public void initWords() {
