@@ -15,6 +15,7 @@ public class EquipItem : Item {
     public EquipType type;
     public int atkbonus;
     public int defbonus;
+    public string owner;
     //public CharacterClassOptions weaponType;
 
     public string completeName;
@@ -50,13 +51,13 @@ public class EquipItem : Item {
        return  IDLowerBound;
     }
         
-    public void generateEquipmentValues(int level) {
+    public void generateEquipmentValues(int level, string owner) {
         lvlOfSlainMob = level;
-        Debug.Log("This gear's slain mob was lvl " + lvlOfSlainMob);
+        this.owner = owner;
 
         int tierValue;
         
-        int tierRoll = UnityEngine.Random.Range(1, 100);
+        int tierRoll = Settings.globalRNG.Next(1, 100);
 
         if(tierRoll > 93) {
             tierValue = 5; //legendary
@@ -83,8 +84,8 @@ public class EquipItem : Item {
     }
 
     private void generateStats(int tierValue) {
-        int atkValue = tierValue * UnityEngine.Random.Range(tierValue, 10);
-        int defValue = tierValue * UnityEngine.Random.Range(tierValue, 10);
+        int atkValue = tierValue * Settings.globalRNG.Next(tierValue, 10);
+        int defValue = tierValue * Settings.globalRNG.Next(tierValue, 10);
 
         switch(type) {
             case EquipType.HELMET:
@@ -118,8 +119,8 @@ public class EquipItem : Item {
 
     private void generateName() {
     
-        string adj = equipmentAdjectives.ToArray()[UnityEngine.Random.Range(0, equipmentAdjectives.Count - 1)];
-        string noun = equipmentNouns.ToArray()[UnityEngine.Random.Range(0, equipmentNouns.Count - 1)];
+        string adj = equipmentAdjectives.ToArray()[Settings.globalRNG.Next(0, equipmentAdjectives.Count)];
+        string noun = equipmentNouns.ToArray()[Settings.globalRNG.Next(0, equipmentNouns.Count)];
         if(type == EquipType.WEAPON)
             completeName = adj + " " + CharacterClassOptions.getWeaponType((this as EquipWeapon).weaponClass) + " of " + noun;
         else {
@@ -129,7 +130,7 @@ public class EquipItem : Item {
     }
 
     public void displayMessage() {
-        UI_TextAlert.DisplayColorText("Recieved " + completeName, tier);
+        UI_TextAlert.DisplayColorText(owner + " recieved " + completeName, tier);
     }
 
     public void initWords() {
