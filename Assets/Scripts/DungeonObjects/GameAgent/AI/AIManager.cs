@@ -31,9 +31,15 @@ public class AIManager
 				yield return null;
 			}
 		}
-		
+
 		foreach (GameAgent agent in HumanPool)
+		{
 			agent.take_turn();
+			while (!agent.turn_over())
+			{
+				yield return null;
+			}
+		}
 	}
 	
 	public static bool turnOver(int team)
