@@ -91,7 +91,8 @@ public class Player : GameAgent
 		AI = null; // players don't have AI
 		TurnManager.instance.addToRoster(this); //add player to player list
 		InitTurnIndicator();
-    }
+		playerWaitingThisTurn = true;
+	}
 
 	private void InitTurnIndicator()
 	{
@@ -101,6 +102,7 @@ public class Player : GameAgent
 		turnIndicator.SetClass(stats.characterClassOption);
 		turnIndicator.SetName(nickname);
 		turnIndicatorBarObj.GetComponent<TurnIndicatorBar>().AddTurnIndicator(turnIndicator);
+		turnIndicator.SetActiveTurn(false);
 	}
 
 	private void DestroyTurnIndicator()
