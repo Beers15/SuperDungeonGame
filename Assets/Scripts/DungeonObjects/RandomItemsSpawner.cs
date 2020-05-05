@@ -53,13 +53,13 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 
 		//set # of items recived, or set amount of gold based on slain enemy's lvl
         if(itemIndex != 3)
-		    randomItemAmount = Settings.globalRNG.Next(1, 3);
+		    randomItemAmount = Settings.globalRNG.Next(1, 4);
         else {
-            int goldRoll = Settings.globalRNG.Next(1, 30);
+            int goldRoll = Settings.globalRNG.Next(1, 31);
             if(goldRoll < 20) 
-                randomItemAmount =  Settings.globalRNG.Next(1, 500);
+                randomItemAmount =  Settings.globalRNG.Next(1, 501);
             else
-                randomItemAmount =  Settings.globalRNG.Next(250, 500 * (slainEnemyLvl / 2));
+                randomItemAmount =  Settings.globalRNG.Next(250, 501 * (slainEnemyLvl / 2));
         }
 
 		Item toAdd;

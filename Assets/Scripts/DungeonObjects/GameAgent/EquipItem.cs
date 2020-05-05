@@ -119,8 +119,8 @@ public class EquipItem : Item {
 
     private void generateName() {
     
-        string adj = equipmentAdjectives.ToArray()[Settings.globalRNG.Next(0, equipmentAdjectives.Count - 1)];
-        string noun = equipmentNouns.ToArray()[Settings.globalRNG.Next(0, equipmentNouns.Count - 1)];
+        string adj = equipmentAdjectives.ToArray()[Settings.globalRNG.Next(0, equipmentAdjectives.Count)];
+        string noun = equipmentNouns.ToArray()[Settings.globalRNG.Next(0, equipmentNouns.Count)];
         if(type == EquipType.WEAPON)
             completeName = adj + " " + CharacterClassOptions.getWeaponType((this as EquipWeapon).weaponClass) + " of " + noun;
         else {

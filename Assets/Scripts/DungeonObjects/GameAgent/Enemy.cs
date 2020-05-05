@@ -194,11 +194,11 @@ public class Enemy : GameAgent
 				if(mobDifficultyModifier <= 0.1f)
 					lootRoll = lootThreshold + 1.0f;
 				else
-					lootRoll = UnityEngine.Random.Range(1.0f, 100.0f * (mobDifficultyModifier));
+					lootRoll = Settings.globalRNG.Next(1.0f, 100.0f * (mobDifficultyModifier));
 					Debug.Log("Loot roll is " + lootRoll + " (>" + lootThreshold + " equals item drop) ");
 
 				if(lootRoll > lootThreshold) {
-					randomItem = UnityEngine.Random.Range(0, lootDrops.Length - 1);
+					randomItem = Settings.globalRNG.Next(0, lootDrops.Length);
 
 					var spawnedDrop = map_manager.instantiate_environment(lootDrops[randomItem], new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
 					if(randomItem == 0) {

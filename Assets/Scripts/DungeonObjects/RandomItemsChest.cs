@@ -37,7 +37,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
         source.PlayOneShot(chestOpeningSFX);
 
 		int randomItemIndex = Settings.globalRNG.Next(0, itemOptions.Length);
-		int randomItemAmount = Settings.globalRNG.Next(1, 7);
+		int randomItemAmount = Settings.globalRNG.Next(1, 8);
 		string itemChoice = itemOptions[randomItemIndex];
 
 		Item toAdd;
