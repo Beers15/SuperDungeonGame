@@ -256,8 +256,6 @@ public class NavigationHandler
 	
 	Vertex pop_min_dist_vert_in_range(List<Vertex> graph, int maxDistance)
 	{
-		if(graph.Count != 0)
-		{
 		Vertex min = graph[0];
 				for (int i = 1; i < graph.Count; i++) {
 					if (graph[i].dist < min.dist && graph[i].dist < maxDistance)
@@ -266,14 +264,7 @@ public class NavigationHandler
 				if (min.dist == Vertex.MAX_DIST)
 					min = null;
 				graph.Remove(min);
-			return min;
-		}
-		else
-		{
-			return new Vertex(0,0);
-		}
-		
-		
+			return min;	
 	}
 	
 	// finds an entire batch of paths, but with a specified max distance to search
@@ -299,20 +290,27 @@ public class NavigationHandler
 			}
 			
 			source.dist = 0;
-			Vertex min_vert = pop_min_dist_vert_in_range(tmp_graph, maxDistance);
-			
-			// uses dijkstra method to find minimum distance from origin to target
-			while (tmp_graph.Count > 0 && min_vert != null) {
-				foreach (Vertex neighbor in min_vert.visible) {
-					int alt_dist = min_vert.dist + Pos.abs_dist(min_vert.pos, neighbor.pos);
-					if (alt_dist < neighbor.dist) {
-						neighbor.dist = alt_dist;
-						neighbor.prev = min_vert;
+			if(tmp_graph.Count != 0)
+			{
+				Vertex min_vert = pop_min_dist_vert_in_range(tmp_graph, maxDistance);
+
+				// uses dijkstra method to find minimum distance from origin to target
+				while (tmp_graph.Count > 0 && min_vert != null)
+				{
+					foreach (Vertex neighbor in min_vert.visible)
+					{
+						int alt_dist = min_vert.dist + Pos.abs_dist(min_vert.pos, neighbor.pos);
+						if (alt_dist < neighbor.dist)
+						{
+							neighbor.dist = alt_dist;
+							neighbor.prev = min_vert;
+						}
 					}
+					min_vert = pop_min_dist_vert_in_range(tmp_graph, maxDistance);
 				}
-				min_vert = pop_min_dist_vert_in_range(tmp_graph, maxDistance);
 			}
-			
+
+		
 			// construct paths leading back to source
 			List<List<Pos>> paths = new List<List<Pos>>();
 			foreach (Vertex target in targetVerts)
