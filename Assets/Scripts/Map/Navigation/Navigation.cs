@@ -256,15 +256,24 @@ public class NavigationHandler
 	
 	Vertex pop_min_dist_vert_in_range(List<Vertex> graph, int maxDistance)
 	{
+		if(graph.Count != 0)
+		{
 		Vertex min = graph[0];
-		for (int i = 1; i < graph.Count; i++) {
-			if (graph[i].dist < min.dist && graph[i].dist < maxDistance)
-				min = graph[i];
+				for (int i = 1; i < graph.Count; i++) {
+					if (graph[i].dist < min.dist && graph[i].dist < maxDistance)
+						min = graph[i];
+				}
+				if (min.dist == Vertex.MAX_DIST)
+					min = null;
+				graph.Remove(min);
+			return min;
 		}
-		if (min.dist == Vertex.MAX_DIST)
-			min = null;
-		graph.Remove(min);
-		return min;
+		else
+		{
+			return new Vertex(0,0);
+		}
+		
+		
 	}
 	
 	// finds an entire batch of paths, but with a specified max distance to search
