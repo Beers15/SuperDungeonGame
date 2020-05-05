@@ -20,7 +20,7 @@ public class UI_TextAlert : MonoBehaviour
 		alert.enabled = display;
 	}
 	
-	public static void DisplayText(string message, float waitTime = 3.0f )
+	public static void DisplayText(string message, float waitTime = 5.0f )
 	{   
 		instance.alert.GetComponent<Text>().color = Color.white; 
 		instance.alert.text = message;
@@ -28,7 +28,7 @@ public class UI_TextAlert : MonoBehaviour
 		instance.StartCoroutine(instance.waitForDisplayEnd(waitTime));
 	}
 	
-	public static void DisplayColorText(string message, int tier, float waitTime = 4.0f)
+	public static void DisplayColorText(string message, int tier, float waitTime = 5.0f)
 	{
 		switch(tier) {
 			case 1:
