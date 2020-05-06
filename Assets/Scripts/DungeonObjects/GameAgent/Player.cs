@@ -84,6 +84,8 @@ public class Player : GameAgent
         //add starting items and consumables here with inventory/potionStore.addItem if desired
         inventory.AddItem(new HealthPot(5));
         inventory.AddItem(new ManaPot(5));
+        inventory.AddItem(new Tome(1));
+        inventory.AddItem(new Gem(1));
         //-----
 
         // AI init
