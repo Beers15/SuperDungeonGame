@@ -15,6 +15,7 @@ public static class Settings
 		set {
 			_MasterSeed = value;
 			seedRNG = new System.Random(_MasterSeed);
+			globalRNG = new System.Random(_MasterSeed);
 		}
 	}
 

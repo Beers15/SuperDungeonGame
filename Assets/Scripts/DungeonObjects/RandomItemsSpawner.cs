@@ -14,7 +14,7 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 	public void init_environment(Pos grid_pos, int health=1) {
 		this.grid_pos = grid_pos;
 
-        switch(0){//(itemIndex) {
+        switch(itemIndex) {
             case 0:
                 itemObject = GameObject.Find("SM_Prop_Chest_01"); break;
             case 1:
@@ -53,13 +53,13 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 
 		//set # of items recived, or set amount of gold based on slain enemy's lvl
         if(itemIndex != 3)
-		    randomItemAmount = UnityEngine.Random.Range(1, 3);
+		    randomItemAmount = Settings.globalRNG.Next(1, 4);
         else {
-            int goldRoll = UnityEngine.Random.Range(1, 30);
-            if(goldRoll < 15) 
-                randomItemAmount =  UnityEngine.Random.Range(1, 500 * slainEnemyLvl);
+            int goldRoll = Settings.globalRNG.Next(1, 31);
+            if(goldRoll < 20) 
+                randomItemAmount =  Settings.globalRNG.Next(1, 501);
             else
-                randomItemAmount =  UnityEngine.Random.Range(500, 1000 * slainEnemyLvl);
+                randomItemAmount =  Settings.globalRNG.Next(250, (500 * slainEnemyLvl) / 2 + 1);
         }
 
 		Item toAdd;
@@ -80,9 +80,9 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 		
 		//pluarlize text alert
 		if(randomItemAmount > 1)
-			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.name + "s");
+			UI_TextAlert.DisplayText(interactor.nickname + " received " + toAdd.Amount + " " + toAdd.name + "s");
 		else
-			UI_TextAlert.DisplayText("Received " + toAdd.name);
+			UI_TextAlert.DisplayText(interactor.nickname + " received " + toAdd.name);
 
 		//add to consumable/potions storage if consumable, otherwise add to normal inventory
 		// if(isConsumable) {

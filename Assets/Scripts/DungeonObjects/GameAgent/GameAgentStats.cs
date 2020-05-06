@@ -168,7 +168,7 @@ public class GameAgentStats
 
     public int GetHealAmount() {
         if (characterClassOption == CharacterClassOptions.Healer) {
-            return Mathf.RoundToInt(UnityEngine.Random.Range(0.5f, 0.75f) * (attack + attackStatBoost));
+            return Mathf.RoundToInt(rng.Next(50, 76) * 0.01f * (attack + attackStatBoost));
         }
         return 0;
     }
@@ -181,11 +181,11 @@ public class GameAgentStats
     }
 
     public int GetFireStormDamage() {
-        return Mathf.RoundToInt(UnityEngine.Random.Range(0.55f, 0.7f) * (attack + attackStatBoost));
+        return Mathf.RoundToInt(rng.Next(55, 71) * 0.01f * (attack + attackStatBoost));
     }
 
     public int GetBerserkDamage() {
-        return Mathf.RoundToInt(UnityEngine.Random.Range(0.45f, 0.75f) * (attack + attackStatBoost));
+        return Mathf.RoundToInt(rng.Next(45, 76) * 0.01f * (attack + attackStatBoost));
     }
 
     private void CheckLevelProgression() {

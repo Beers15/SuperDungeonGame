@@ -31,13 +31,13 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		chestObject.SetActive(false);
 	}
 
-	string[] itemOptions = { "health", "mana", "gold", "helmet", "armor", "gloves", "boot", "weapon" };
+	string[] itemOptions = { "health", "mana", "gold", "helmet", "armor", "gloves", "boot", "weapon", "tome", "gem" };
 	public void interact(GameAgent interactor)
 	{
         source.PlayOneShot(chestOpeningSFX);
 
-		int randomItemIndex = UnityEngine.Random.Range(0, itemOptions.Length);
-		int randomItemAmount = UnityEngine.Random.Range(1, 7);
+		int randomItemIndex = Settings.globalRNG.Next(0, itemOptions.Length);
+		int randomItemAmount = Settings.globalRNG.Next(1, 8);
 		string itemChoice = itemOptions[randomItemIndex];
 
 		Item toAdd;
@@ -46,34 +46,38 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 
 		switch (itemChoice) {
 			case "health":
-				toAdd = new HealthPot(randomItemAmount); break;//isConsumable = true; break;
+				toAdd = new HealthPot(randomItemAmount); break;
 			case "mana":
-				toAdd = new ManaPot(randomItemAmount); break;//isConsumable = true; break;
+				toAdd = new ManaPot(randomItemAmount); break;
 			case "gold":
 				toAdd = new Gold(randomItemAmount);	break;
+			case "tome": 
+				toAdd = new Tome(1); randomItemAmount = 1; break;
+			case "gem": 
+				toAdd = new Gem(1);  randomItemAmount = 1; break;
 			case "helmet":
 				toAdd = new Helmet(); 
-				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl, interactor.nickname);
 				notEquipItem = false;
 				break;
 			case "armor":
 				toAdd = new Armor(); 
-				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl, interactor.nickname);
 				notEquipItem = false;
 				break;
 			case "gloves":
 				toAdd = new Glove(); 
-				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl, interactor.nickname);
 				notEquipItem = false;
 				break;
 			case "boot":
 				toAdd = new Boot(); 
-				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl, interactor.nickname);
 				notEquipItem = false;
 				break;
 			case "weapon":
 				toAdd = new EquipWeapon(classOfAttacker); 
-				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl);
+				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl, interactor.nickname);
 				notEquipItem = false;
 				break;
 			default:
@@ -83,15 +87,16 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		
 		//pluarlize text alert
 		if(randomItemAmount >= 2 && notEquipItem)
-			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.name + "s");
-
+			UI_TextAlert.DisplayText(interactor.nickname + " received " + toAdd.Amount + " " + toAdd.name + "s");
+		else if(notEquipItem)
+			UI_TextAlert.DisplayText(interactor.nickname + " received a magic " + toAdd.name);
 		//add to consumable/potions storage if consumable, otherwise add to normal inventory
 		// if(isConsumable) {
 		// 	interactor.potions.AddConsumable((ConsumableItem)toAdd);
 		// 	interactor.potions.display();
 		// } else {
 		interactor.inventory.AddItem(toAdd);
-		interactor.inventory.display();
+		//interactor.inventory.display();
 		//}
 
 		GameManager.kill(this, 0.5f);

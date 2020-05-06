@@ -82,7 +82,7 @@ public class CharacterAnimator : MonoBehaviour
     #region Character Action
     public IEnumerator PlayAttackAnimation()
     {
-        animationNumber = UnityEngine.Random.Range(1, maxAttackAnimations + 1);
+        animationNumber = Settings.globalRNG.Next(1, maxAttackAnimations + 1);
 
         if (animator.GetInteger("Weapon") == CharacterClassOptions.Staff)
 		{
@@ -160,7 +160,7 @@ public class CharacterAnimator : MonoBehaviour
     #region Character Reaction
     public IEnumerator PlayHitAnimation()
     {
-        animationNumber = UnityEngine.Random.Range(1, maxHitAnimations + 1);
+        animationNumber = Settings.globalRNG.Next(1, maxHitAnimations + 1);
         animator.SetTrigger("GetHit" + (animationNumber).ToString() + "Trigger");
         SpawnParticleSystemAtCharacter(blood);
         SpawnParticleSystemAtCharacter(hit);
@@ -171,7 +171,7 @@ public class CharacterAnimator : MonoBehaviour
     {
         animator.SetBool("Blocking", true);
         animator.SetTrigger("BlockTrigger");
-        animationNumber = UnityEngine.Random.Range(1, maxBlockedAnimations + 1);
+        animationNumber = Settings.globalRNG.Next(1, maxBlockedAnimations + 1);
         animator.SetTrigger("BlockGetHit" + (animationNumber).ToString() + "Trigger");
         SpawnParticleSystemAtCharacter(sparks);
         SpawnParticleSystemAtCharacter(dust);

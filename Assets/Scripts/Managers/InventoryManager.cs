@@ -18,6 +18,8 @@ public class InventoryManager : MonoBehaviour
     IDictionary<string, ItemFunc> itemFuncs = new Dictionary<string, ItemFunc>() {
 		[HealthPot._ID] = ApplyHealthPotion,
 		[ManaPot._ID] = ApplyManaPotion,
+        [Tome._ID] = ApplyTome,
+        [Gem._ID] = ApplyGem,
 	};
 
     public static InventoryManager instance = null;
@@ -54,7 +56,45 @@ public class InventoryManager : MonoBehaviour
 		if (agent.stats.currentMagicPoints > agent.stats.maxMagicPoints)
 			agent.stats.currentMagicPoints = agent.stats.maxMagicPoints;
     }
-	
+
+    private static void ApplyTome(Item item, GameAgent agent)
+    {   
+        int statBoostAmount = Settings.globalRNG.Next(1, 5);
+        int statBoostChoice = Settings.globalRNG.Next(0, 2);
+        if(statBoostChoice == 0) {
+            Debug.Log("Player stats before Tome (atk, def): " + agent.stats.attack + " " + agent.stats.defense);
+            agent.stats.attack += statBoostAmount;
+            UI_TextAlert.DisplayColorText("An ancient tome provides " + agent.nickname + " with forbidden knowledge (Atk + "+ statBoostAmount + ")", 6);
+            Debug.Log("Player stats after Tome (atk, def): " + agent.stats.attack + " " + agent.stats.defense);
+        }
+        else {
+            Debug.Log("Player stats before Tome (atk, def): " + agent.stats.attack + " " + agent.stats.defense);
+            agent.stats.defense += statBoostAmount;
+            UI_TextAlert.DisplayColorText("An ancient tome provides " + agent.nickname + " with forbidden knowledge (Def + "+ statBoostAmount + ")", 6);
+            Debug.Log("Player stats after Tome (atk, def): " + agent.stats.attack + " " + agent.stats.defense);
+        }
+		agent.animator.PlayHealedAnimation();
+    }
+
+    private static void ApplyGem(Item item, GameAgent agent)
+    {   
+        int statBoostAmount = Settings.globalRNG.Next(1, 20);
+        int statBoostChoice = Settings.globalRNG.Next(0, 2);
+        if(statBoostChoice == 0) {
+            Debug.Log("Player attack stats before Tome (HP, MP): " + agent.stats.maxHealth + " " + agent.stats.maxMagicPoints);
+            agent.stats.maxHealth += statBoostAmount;
+            UI_TextAlert.DisplayColorText("An imbued gem gives " + agent.nickname + " a surge of power (Max Health + "+ statBoostAmount + ")", 6);
+            Debug.Log("Player attack stats after Tome (HP, MP): " + agent.stats.maxHealth + " " + agent.stats.maxMagicPoints);
+        }
+        else {
+            Debug.Log("Player stats before Tome (HP, MP): " + agent.stats.maxHealth + " " + agent.stats.maxMagicPoints);
+            agent.stats.maxMagicPoints += statBoostAmount;
+            UI_TextAlert.DisplayColorText("An imbued gem fills " + agent.nickname + " with energy (Max mana + "+ statBoostAmount + ")", 6);
+            Debug.Log("Player stats after Tome (HP, MP): " + agent.stats.maxHealth + " " + agent.stats.maxMagicPoints);
+        }
+		agent.animator.PlayHealedAnimation();
+    }
+		
 	private static void EquipEquipment(EquipItem item, GameAgent agent)
 	{
 		Debug.Log("Equipping item!");
@@ -65,6 +105,8 @@ public class InventoryManager : MonoBehaviour
         {
             case EquipType.HELMET:
                 oldItem = agent.inventory.helmet;
+                agent.stats.attack -= oldItem.atkbonus;
+                agent.stats.attack -= oldItem.defbonus;
                 agent.inventory.helmet = equip;
                 agent.stats.attack = equip.atkbonus;
                 agent.stats.defense = equip.defbonus;
@@ -72,28 +114,39 @@ public class InventoryManager : MonoBehaviour
                 break;
             case EquipType.BOOT:
                 oldItem = agent.inventory.boots;
+                agent.stats.attack -= oldItem.atkbonus;
+                agent.stats.attack -= oldItem.defbonus;
                 agent.inventory.helmet = equip;
-                agent.stats.attack = equip.atkbonus;
-                agent.stats.defense = equip.defbonus;
+                agent.stats.attack += equip.atkbonus;
+                agent.stats.defense += equip.defbonus;
                 agent.inventory.AddItem(oldItem);
                 break;
             case EquipType.ARMOR:
                 oldItem = agent.inventory.armor;
+                agent.stats.attack -= oldItem.atkbonus;
+                agent.stats.attack -= oldItem.defbonus;
                 agent.inventory.helmet = equip;
-                agent.stats.attack = equip.atkbonus;
-                agent.stats.defense = equip.defbonus;
+                agent.stats.attack += equip.atkbonus;
+                agent.stats.defense += equip.defbonus;
                 agent.inventory.AddItem(oldItem);
                 break;
             case EquipType.GLOVE:
                 oldItem = agent.inventory.gloves;
+                agent.stats.attack -= oldItem.atkbonus;
+                agent.stats.attack -= oldItem.defbonus;
                 agent.inventory.helmet = equip;
-                agent.stats.attack = equip.atkbonus;
-                agent.stats.defense = equip.defbonus;
+                agent.stats.attack += equip.atkbonus;
+                agent.stats.defense += equip.defbonus;
                 agent.inventory.AddItem(oldItem);
                 break;
             case EquipType.WEAPON:
                 oldItem = agent.inventory.weapon;
-                agent.inventory.helmet = equip;
+                agent.stats.attack -= oldItem.atkbonus;
+                agent.stats.attack -= oldItem.defbonus;
+                agent.inventory.weapon = equip;
+                agent.stats.attack += equip.atkbonus;
+                agent.stats.defense += equip.defbonus;
+                agent.inventory.AddItem(oldItem);
                 break;
         }
     }

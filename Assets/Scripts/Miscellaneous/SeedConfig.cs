@@ -17,9 +17,9 @@ public class SeedConfig : MonoBehaviour
     public static void setSeed()
     {	
         if(instance.useRandomSeed)
-			{
-				var random = new System.Random();
-				Settings.MasterSeed = random.Next();
-			}
+		{
+			var random = new System.Random();
+			Settings.MasterSeed = random.Next();
+		}
     }
 }

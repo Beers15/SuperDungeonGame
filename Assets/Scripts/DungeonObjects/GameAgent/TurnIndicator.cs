@@ -25,6 +25,7 @@ public class TurnIndicator : MonoBehaviour
 		}
 
 		nameText = transform.Find("Nickname").gameObject.GetComponent<Text>();
+		originalColor = new Color(1.0f, 1.0f, 1.0f);
 	}
 
 	public void SetClass(int charClass)
@@ -38,7 +39,6 @@ public class TurnIndicator : MonoBehaviour
 			portraits[2].SetActive(false);
 			portraits[3].SetActive(false);
 			image = portraits[0].GetComponent<Image>();
-			originalColor = image.color;
 			Debug.Log("Warrior Portrait activate!");
 		}
 		else if (charClass == CharacterClassOptions.Mage)
@@ -48,7 +48,6 @@ public class TurnIndicator : MonoBehaviour
 			portraits[2].SetActive(false);
 			portraits[3].SetActive(false);
 			image = portraits[1].GetComponent<Image>();
-			originalColor = image.color;
 			Debug.Log("Mage Portrait activate!");
 		}
 		else if (charClass == CharacterClassOptions.Hunter)
@@ -58,7 +57,6 @@ public class TurnIndicator : MonoBehaviour
 			portraits[2].SetActive(true);
 			portraits[3].SetActive(false);
 			image = portraits[2].GetComponent<Image>();
-			originalColor = image.color;
 			Debug.Log("Hunter Portrait activate!");
 		}
 		else if (charClass == CharacterClassOptions.Healer)
@@ -68,7 +66,6 @@ public class TurnIndicator : MonoBehaviour
 			portraits[2].SetActive(false);
 			portraits[3].SetActive(true);
 			image = portraits[3].GetComponent<Image>();
-			originalColor = image.color;
 			Debug.Log("Healer Portrait activate!");
 		}
 		else
