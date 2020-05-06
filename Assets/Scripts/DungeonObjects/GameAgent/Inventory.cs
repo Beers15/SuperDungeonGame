@@ -151,7 +151,7 @@ public class Inventory {
         if ((--items[slot].Amount) <= 0)
         {
             items[slot] = new Item(20, "", "-1", 0); //remove item if amount is zero
-            RearrangeSlots();
+            RearrangeSlots();        
         }
     }
 
@@ -161,8 +161,9 @@ public class Inventory {
             if (items[i].ID == "-1")
             {
                 for (int j = i + 1; j < numItemSlots; j++)
-                {
-                    items[j - 1] = items[j];
+                {   
+                        items[j - 1] = items[j];
+                        items[j] = new Item(20, "", "-1", 0);
                 }
             }
         }

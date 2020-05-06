@@ -198,7 +198,11 @@ public class Enemy : GameAgent
 					Debug.Log("Loot roll is " + lootRoll + " (>" + lootThreshold + " equals item drop) ");
 
 				if(lootRoll > lootThreshold) {
-					randomItem = Settings.globalRNG.Next(0, lootDrops.Length - 1);
+					//chest more common than not since they spawn a majority of the item types
+					if(Settings.globalRNG.Next(0, 8) % 2 == 0)
+						randomItem = 0;
+					else 
+						randomItem = Settings.globalRNG.Next(0, lootDrops.Length - 1);
 
 					var spawnedDrop = map_manager.instantiate_environment(lootDrops[randomItem], new Pos(this.grid_pos.x, this.grid_pos.y), true, true);
 					if(randomItem == 0) {
