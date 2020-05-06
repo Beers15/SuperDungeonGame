@@ -6,9 +6,11 @@ public class UI_InventoryManager : MonoBehaviour {
 	List<UI_InventorySlot> inventorySlots;
 	List<UI_InventorySlot> equipSlots;
 	UI_GoldDisplay goldDisplay;
+	public UI_ToolTipDisplay tooltipDisplay;
 	GameObject display;
+	public GameObject tooltipScreen;
 	Player playerMain;
-	int selectedSlotIndex = -1;
+	public int selectedSlotIndex = -1;
 	
     // Start is called before the first frame update
     void Awake() {
@@ -58,6 +60,9 @@ public class UI_InventoryManager : MonoBehaviour {
 	
 	public void TriggerSlot(int index) {
 		selectedSlotIndex = index;
+		Debug.Log("shit has been triggered, index: " + index);
+		tooltipScreen.SetActive(true);
+
 	}
 	
 	public void DropItem() {
@@ -72,5 +77,11 @@ public class UI_InventoryManager : MonoBehaviour {
 	
 	public void Back() {
 		display.SetActive(false);
+		tooltipScreen.SetActive(false);
+	}
+
+	public int getSlot()
+	{
+		return this.selectedSlotIndex;
 	}
 }
