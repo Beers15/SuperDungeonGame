@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_InventorySlot : MonoBehaviour {	
-	Image itemImage;
+	public Image itemImage;
 	Text itemCount;
-    Item slotItem;
+    public Item slotItem;
+	public string itemName;
 	UI_InventoryManager manager;
 	
 	public Sprite healthPot, manaPot, helmet, armor, gloves, boots, bow, sword, staff, nothing;
@@ -29,6 +30,7 @@ public class UI_InventorySlot : MonoBehaviour {
 		slotItem = item;
 		itemCount.text = item.Amount.ToString();
 		itemImage.color = new Color(1, 1, 1, 1);
+		itemName = item.name;
 		Debug.Log("IN INVENTORY SLOT THE SPRITE NAME IS " +item.name);
 		switch (item.name) {
 			case "Health Potion":
@@ -55,5 +57,15 @@ public class UI_InventorySlot : MonoBehaviour {
 		//no amount displayed for empty item slots
 		if(string.Compare(item.ID, "-1") == 0)
 			itemCount.text = " ";
+	}
+
+	public Sprite getImage()
+	{
+		return this.itemImage.sprite;
+	}
+
+	public Item getItem()
+	{
+		return this.slotItem;
 	}
 }
