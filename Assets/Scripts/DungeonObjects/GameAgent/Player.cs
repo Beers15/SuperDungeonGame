@@ -93,7 +93,8 @@ public class Player : GameAgent
 		AI = null; // players don't have AI
 		TurnManager.instance.addToRoster(this); //add player to player list
 		InitTurnIndicator();
-    }
+		playerWaitingThisTurn = true;
+	}
 
 	private void InitTurnIndicator()
 	{
@@ -103,13 +104,17 @@ public class Player : GameAgent
 		turnIndicator.SetClass(stats.characterClassOption);
 		turnIndicator.SetName(nickname);
 		turnIndicatorBarObj.GetComponent<TurnIndicatorBar>().AddTurnIndicator(turnIndicator);
+		turnIndicator.SetActiveTurn(false);
 	}
 
 	private void DestroyTurnIndicator()
 	{
 		TurnIndicatorBar turnIndicatorBar = GameObject.Find("TurnIndicatorBar").GetComponent<TurnIndicatorBar>();
 		turnIndicatorBar.RemoveTurnIndicator(turnIndicator);
-		GameObject.Destroy(turnIndicator.gameObject);
+		if (turnIndicator != null)
+		{
+			turnIndicator.gameObject.SetActive(false);
+		}
 	}
 	
 	public void re_init(Pos position)

@@ -59,7 +59,7 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
             if(goldRoll < 20) 
                 randomItemAmount =  Settings.globalRNG.Next(1, 501);
             else
-                randomItemAmount =  Settings.globalRNG.Next(250, 501 * (slainEnemyLvl / 2));
+                randomItemAmount =  Settings.globalRNG.Next(250, (500 * slainEnemyLvl) / 2 + 1);
         }
 
 		Item toAdd;
