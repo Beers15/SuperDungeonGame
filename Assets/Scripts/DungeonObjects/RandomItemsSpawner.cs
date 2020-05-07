@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MapUtils;
+using UnityEngine.Networking;
 
 public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Renderable, Damageable {
     public AudioClip itemSFX;
@@ -14,7 +15,7 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 	public void init_environment(Pos grid_pos, int health=1) {
 		this.grid_pos = grid_pos;
 
-        switch(itemIndex) {
+        switch(0){//(itemIndex) {
             case 0:
                 itemObject = GameObject.Find("SM_Prop_Chest_01"); break;
             case 1:
@@ -37,8 +38,7 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 	}
 	
     public void EnableRendering() {
-		if (itemObject != null)
-			itemObject.SetActive(true);
+		itemObject.SetActive(true);
 	}
 
 	public void DisableRendering() {
@@ -53,13 +53,13 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 
 		//set # of items recived, or set amount of gold based on slain enemy's lvl
         if(itemIndex != 3)
-		    randomItemAmount = Settings.globalRNG.Next(1, 4);
+		    randomItemAmount = UnityEngine.Random.Range(1, 3);
         else {
-            int goldRoll = Settings.globalRNG.Next(1, 31);
-            if(goldRoll < 20) 
-                randomItemAmount =  Settings.globalRNG.Next(1, 501);
+            int goldRoll = UnityEngine.Random.Range(1, 30);
+            if(goldRoll < 15) 
+                randomItemAmount =  UnityEngine.Random.Range(1, 500 * slainEnemyLvl);
             else
-                randomItemAmount =  Settings.globalRNG.Next(250, (500 * slainEnemyLvl) / 2 + 1);
+                randomItemAmount =  UnityEngine.Random.Range(500, 1000 * slainEnemyLvl);
         }
 
 		Item toAdd;
@@ -80,9 +80,9 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 		
 		//pluarlize text alert
 		if(randomItemAmount > 1)
-			UI_TextAlert.DisplayText(interactor.nickname + " received " + toAdd.Amount + " " + toAdd.name + "s");
+			UI_TextAlert.DisplayText("Received " + toAdd.Amount + " " + toAdd.name + "s");
 		else
-			UI_TextAlert.DisplayText(interactor.nickname + " received " + toAdd.name);
+			UI_TextAlert.DisplayText("Received " + toAdd.name);
 
 		//add to consumable/potions storage if consumable, otherwise add to normal inventory
 		// if(isConsumable) {
@@ -91,10 +91,34 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 		// } else {
 		interactor.inventory.AddItem(toAdd);
 		interactor.inventory.display();
-		//}
 
-		GameManager.kill(this, 0.5f);
+        //}
+
+        //Add item to database for highscores:
+        if(toAdd.ID == "99") //Gold only
+            StartCoroutine(UploadGoldPost(toAdd, interactor));
+
+        GameManager.kill(this, 0.5f);
 	}
+
+    IEnumerator UploadGoldPost(Item toAdd, GameAgent interactor)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("username", interactor.nickname);
+        form.AddField("amount", toAdd.Amount);
+        Debug.Log("[GOLD BACKEND - Highscores] Form upload attempt for player: " + interactor.nickname + " " + toAdd.Amount.ToString());
+        UnityWebRequest www = UnityWebRequest.Post("http://18.144.85.192:5000/api_1", form);
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log("[GOLD BACKEND - Highscores] ERROR:" + www.error);
+        }
+        else
+        {
+            Debug.Log("[GOLD BACKEND - Highscores] Form upload complete for player: " + interactor.name);
+        }
+    }
 
     public int getLevel() {
         return slainEnemyLvl;
