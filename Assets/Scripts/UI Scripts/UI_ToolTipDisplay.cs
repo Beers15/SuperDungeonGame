@@ -15,7 +15,7 @@ public class UI_ToolTipDisplay : MonoBehaviour
 	public List<UI_InventorySlot> inventorySlots;
 	int selectSlot;
 
-    public Sprite healthPot, manaPot, helmet, armor, gloves, boots, bow, sword, staff, nothing;
+    public Sprite healthPot, manaPot, helmet, armor, gloves, boots, bow, sword, staff, tome, gem, nothing;
 
 
     private void Awake()
@@ -27,7 +27,7 @@ public class UI_ToolTipDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        item = transform.parent.Find("Item").gameObject;
+        
     }
 
     // Update is called once per frame
@@ -43,7 +43,7 @@ public class UI_ToolTipDisplay : MonoBehaviour
             temp.a = 0f;
             itemImage.color = temp;
         }
-        text.text = inventorySlots[selectSlot].itemName; 
+        text.text = inventorySlots[selectSlot].slotItem.name; 
 
     }
 
@@ -70,6 +70,10 @@ public class UI_ToolTipDisplay : MonoBehaviour
                 itemImage.sprite = sword; break;
             case "Staff":
                 itemImage.sprite = staff; break;
+            case "Tome":
+                itemImage.sprite = tome; break;
+            case "Gem":
+                itemImage.sprite = gem; break;
             default:
                 itemImage.sprite = nothing; break;
         }
