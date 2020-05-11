@@ -50,38 +50,61 @@ public class EnvironmentSpawner : MonoBehaviour
     public float objectDensity = 0.3f;
     public float rubbleDensity = 0.5f;
 	
-	[Header("Base Environment Prefab")]
-	public GameObject basePrefab;
+	/*[Header("Base Environment Prefab")]
+	public GameObject basePrefab;*/
 
     [Header("Portrait Prefabs")]
-    public GameObject[] folliageStructures;
-    public GameObject[] folliageObjects;
-    public GameObject[] folliageRubble;
-    public GameObject[] orcStructures;
-    public GameObject[] orcObjects;
-    public GameObject[] orcRubble;
-    public GameObject[] undeadStructures;
-    public GameObject[] undeadObjects;
-    public GameObject[] undeadRubble;
+    private GameObject[] folliageStructures;
+    private GameObject[] folliageObjects;
+    private GameObject[] folliageRubble;
+    private GameObject[] orcStructures;
+    private GameObject[] orcObjects;
+    private GameObject[] orcRubble;
+    private GameObject[] undeadStructures;
+    private GameObject[] undeadObjects;
+    private GameObject[] undeadRubble;
 
     [Header("Environment Prefabs")]
-    public GameObject[] traversableFolliageObject;
-    public GameObject[] nonTraversableFolliageObject;
-    public GameObject[] traversableObjectObject;
-    public GameObject[] nonTraversableObjectObject;
-    public GameObject[] traversableStructureObject;
-    public GameObject[] nonTraversableStructureObject;
-    public GameObject[] particleObject;
+    private GameObject[] traversableFolliageObject;
+    private GameObject[] nonTraversableFolliageObject;
+    private GameObject[] traversableObjectObject;
+    private GameObject[] nonTraversableObjectObject;
+    private GameObject[] traversableStructureObject;
+    private GameObject[] nonTraversableStructureObject;
+    private GameObject[] particleObject;
     List<GameObject> allEnvironmentObject = new List<GameObject>();
     #endregion
 
     public void Init(MapManager mapManager)
     {
+        // set map configurations
         MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
         this.width = config.width;
         this.height = config.height;
         this.cell_size = config.cell_size;
         this.mapManager = mapManager;
+        // set enviorment objects based on LevelConfig Object
+        LevelConfig levelConfig = GameObject.FindGameObjectWithTag("Map").GetComponent<LevelConfig>();
+
+        folliageStructures = levelConfig.folliageStructures;
+        folliageObjects = levelConfig.folliageObjects;
+        folliageRubble = levelConfig.folliageRubble;
+        orcStructures = levelConfig.orcStructures;
+        orcObjects = levelConfig.orcObjects;
+        orcRubble = levelConfig.orcRubble;
+        undeadStructures = levelConfig.undeadStructures;
+        undeadObjects = levelConfig.undeadObjects;
+        undeadRubble = levelConfig.undeadRubble;
+
+        traversableFolliageObject = levelConfig.traversableFolliageObject;
+        nonTraversableFolliageObject = levelConfig.nonTraversableFolliageObject;
+        traversableObjectObject = levelConfig.traversableObjectObject;
+        nonTraversableObjectObject = levelConfig.nonTraversableObjectObject;
+        traversableStructureObject = levelConfig.traversableStructureObject;
+        nonTraversableStructureObject = levelConfig.nonTraversableStructureObject;
+        particleObject = levelConfig.particleObject;
+
+
         rng = new System.Random(Settings.MasterSeed);
         //spawnPortals();
 		paintedList.Clear();
