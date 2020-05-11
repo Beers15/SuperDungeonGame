@@ -43,7 +43,7 @@ public class UI_ToolTipDisplay : MonoBehaviour
             temp.a = 0f;
             itemImage.color = temp;
         }
-        text.text = inventorySlots[selectSlot].itemName; 
+        text.text = inventorySlots[selectSlot].slotItem.ID;
 
     }
 
