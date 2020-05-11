@@ -14,6 +14,7 @@ public class UI_ToolTipDisplay : MonoBehaviour
     UI_InventoryManager manager;
 	public List<UI_InventorySlot> inventorySlots;
 	int selectSlot;
+    bool active;
 
     public Sprite healthPot, manaPot, helmet, armor, gloves, boots, bow, sword, staff, tome, gem, nothing;
 
@@ -23,6 +24,7 @@ public class UI_ToolTipDisplay : MonoBehaviour
         displayBackground = transform.Find("DisplayBackground").gameObject;
         manager = transform.parent.Find("InventoryMenu").GetComponent<UI_InventoryManager>();
         displayBackground.SetActive(false);
+        active = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -43,8 +45,7 @@ public class UI_ToolTipDisplay : MonoBehaviour
             temp.a = 0f;
             itemImage.color = temp;
         }
-        text.text = inventorySlots[selectSlot].slotItem.name; 
-
+        text.text = inventorySlots[selectSlot].slotItem.name;
     }
 
     public void setImage(int selectSlot)
@@ -77,6 +78,11 @@ public class UI_ToolTipDisplay : MonoBehaviour
             default:
                 itemImage.sprite = nothing; break;
         }
+    }
+
+    public void closeDisplay()
+    {
+        displayBackground.SetActive(false);
     }
 
 	
