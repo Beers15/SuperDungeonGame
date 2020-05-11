@@ -20,7 +20,7 @@ public class UI_TextAlert : MonoBehaviour
 		alert.enabled = display;
 	}
 	
-	public static void DisplayText(string message, float waitTime = 3.0f )
+	public static void DisplayText(string message, float waitTime = 5.0f )
 	{   
 		instance.alert.GetComponent<Text>().color = Color.white; 
 		instance.alert.text = message;
@@ -28,9 +28,9 @@ public class UI_TextAlert : MonoBehaviour
 		instance.StartCoroutine(instance.waitForDisplayEnd(waitTime));
 	}
 	
-	public static void DisplayColorText(string message, int tier, float waitTime = 4.0f)
+	public static void DisplayColorText(string message, int colorChoice, float waitTime = 5.0f)
 	{
-		switch(tier) {
+		switch(colorChoice) {
 			case 1:
 				instance.alert.GetComponent<Text>().color = Color.white; break;
 			case 2:
@@ -41,6 +41,8 @@ public class UI_TextAlert : MonoBehaviour
 				instance.alert.GetComponent<Text>().color = Color.magenta; break;
 			case 5: 
 				instance.alert.GetComponent<Text>().color = Color.red; break;
+			case 6: 
+				instance.alert.GetComponent<Text>().color = Color.cyan; break;
 			default:
 				instance.alert.GetComponent<Text>().color = Color.grey; break;
 			break;

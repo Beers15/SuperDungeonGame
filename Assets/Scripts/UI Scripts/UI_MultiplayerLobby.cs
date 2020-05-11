@@ -87,6 +87,7 @@ public class UI_MultiplayerLobby : MonoBehaviour
 			Debug.Log(Settings.MasterSeed);
 			// modify the startcommand to accept a int value
 
+			Network.submitCommand(new SetSeedCommand(Settings.MasterSeed));
 			Network.submitCommand(new StartCommand());
 		}
 	}

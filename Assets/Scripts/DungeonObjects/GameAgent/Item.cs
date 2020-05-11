@@ -40,6 +40,20 @@ public class ManaPot : ConsumableItem
 	public ManaPot(int amount) : base(1, 64, "Mana Potion", _ID, amount) {}
 }
 
+public class Tome : ConsumableItem
+{
+	public static string _ID = "3";
+	//public HealthPot(int effectiveness, int maxAmount, string Name, int ID, int Amount) : base(effectiveness, maxAmount, Name, ID, Amount) {}
+	public Tome(int amount) : base(1, 10, "Tome", _ID, amount) {}
+}
+
+public class Gem : ConsumableItem
+{
+	public static string _ID = "4";
+	//public HealthPot(int effectiveness, int maxAmount, string Name, int ID, int Amount) : base(effectiveness, maxAmount, Name, ID, Amount) {}
+	public Gem(int amount) : base(1, 10, "Gem", _ID, amount) {}
+}
+
 public class Gold : ConsumableItem {
     public static string _ID = "99";
 	public Gold(int amount) : base(1, 64, "Gold Coin", _ID, amount) {}
