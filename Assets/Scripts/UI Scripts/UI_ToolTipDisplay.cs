@@ -16,6 +16,10 @@ public class UI_ToolTipDisplay : MonoBehaviour
 	int selectSlot;
     bool active;
 
+    public GameObject attackDisplay, defenseDisplay;
+    public TextMeshProUGUI attackDisplayValue;
+    public TextMeshProUGUI defenseDisplayValue;
+
     public Sprite healthPot, manaPot, helmet, armor, gloves, boots, bow, sword, staff, tome, gem, nothing;
 
 
@@ -46,7 +50,18 @@ public class UI_ToolTipDisplay : MonoBehaviour
             itemImage.color = temp;
         }
         text.text = inventorySlots[selectSlot].slotItem.name;
-        EquipItem equipment = inventorySlots[selectSlot].slotItem as EquipItem;
+        if (inventorySlots[selectSlot].slotItem is EquipItem)
+        {
+            attackDisplay.SetActive(true);
+            defenseDisplay.SetActive(true);
+            EquipItem equipment = inventorySlots[selectSlot].slotItem as EquipItem;
+            attackDisplayValue.SetText(equipment.atkbonus.ToString());
+            defenseDisplayValue.SetText(equipment.defbonus.ToString());
+        } else
+        {
+            attackDisplay.SetActive(false);
+            defenseDisplay.SetActive(false);
+        }
     }
 
     public void setImage(int selectSlot)

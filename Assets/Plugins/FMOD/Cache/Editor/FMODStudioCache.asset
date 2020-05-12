@@ -17,7 +17,6 @@ MonoBehaviour:
   Max: 4
   Default: 0
   Exists: 1
-
 --- !u!114 &-9014661919416070808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,12 +100,12 @@ MonoBehaviour:
   Path: event:/Character Hit
   guid: 2a5b7fc982425240b17a1db59c7575f7
   Banks:
-  - {fileID: 9164658138877131808}
+  - {fileID: -8055015991761252}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 5278178453261611489}
+  - {fileID: 2438505635673150489}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -142,12 +141,12 @@ MonoBehaviour:
   Path: event:/Attack
   guid: 990fb56b5dad5c498c0f256c0e40c7d9
   Banks:
-  - {fileID: 9164658138877131808}
+  - {fileID: -8055015991761252}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -9014661919416070808}
+  - {fileID: -3424770594841208431}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -287,6 +286,23 @@ MonoBehaviour:
   Max: 4
   Default: 0
   Exists: 0
+--- !u!114 &-3424770594841208431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 'parameter:/Attack/Weapon or Attack '
+  m_EditorClassIdentifier: 
+  Name: 'Weapon or Attack '
+  Min: 0
+  Max: 10
+  Default: 0
+  Exists: 1
 --- !u!114 &-3384405630978140277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637244586147452521
+  lastModified: 637241971336927216
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -377,6 +393,40 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-2061997248569113659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Charactar Grunt/Charactar Grunt
+  m_EditorClassIdentifier: 
+  Name: Charactar Grunt
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 1
+--- !u!114 &-1896450544727002544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Character Death/Character Death
+  m_EditorClassIdentifier: 
+  Name: Character Death
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 1
 --- !u!114 &-1814061574048830475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,12 +442,12 @@ MonoBehaviour:
   Path: event:/Music
   guid: 7b53258554df0c459165e5831fa50539
   Banks:
-  - {fileID: 9164658138877131808}
+  - {fileID: -8055015991761252}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -724986814867800764}
+  - {fileID: 3331757432065891936}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
@@ -470,6 +520,24 @@ MonoBehaviour:
   Max: 4
   Default: 0
   Exists: 1
+--- !u!114 &-8055015991761252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637241971329149890
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,7 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -3188558731491260654}
-  - {fileID: 9164658138877131808}
+  - {fileID: -8055015991761252}
   EditorEvents:
   - {fileID: 6092691547321740348}
   - {fileID: 3318443659664696889}
@@ -496,10 +564,10 @@ MonoBehaviour:
   - {fileID: 7705282299102542744}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 9164658138877131808}
+  - {fileID: -8055015991761252}
   StringsBanks:
   - {fileID: -3188558731491260654}
-  stringsBankWriteTime: 637244586147452521
+  stringsBankWriteTime: 637241971336927216
   cacheVersion: 3
 --- !u!114 &327475573189318878
 MonoBehaviour:
@@ -584,12 +652,12 @@ MonoBehaviour:
   Path: event:/Character Death
   guid: 50294fc987029a4a8b0c71340389b3b1
   Banks:
-  - {fileID: 9164658138877131808}
+  - {fileID: -8055015991761252}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 7328779009133815192}
+  - {fileID: -1896450544727002544}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -625,6 +693,23 @@ MonoBehaviour:
   Name: Character Death
   Min: 0
   Max: 6
+  Default: 0
+  Exists: 1
+--- !u!114 &2438505635673150489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Character Hit/Character-Armor Type
+  m_EditorClassIdentifier: 
+  Name: Character-Armor Type
+  Min: 0
+  Max: 4
   Default: 0
   Exists: 1
 --- !u!114 &2838298658936912956
@@ -684,6 +769,23 @@ MonoBehaviour:
   Max: 4
   Default: 0
   Exists: 1
+--- !u!114 &3305516719420065584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Pick-up & Items/Pick-Up & Items
+  m_EditorClassIdentifier: 
+  Name: Pick-Up & Items
+  Min: 0
+  Max: 5
+  Default: 0
+  Exists: 1
 --- !u!114 &3318443659664696889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,15 +801,49 @@ MonoBehaviour:
   Path: event:/Pick-up & Items
   guid: 23047cd5a3fdd74f85113d3ff35fcdd9
   Banks:
-  - {fileID: 9164658138877131808}
+  - {fileID: -8055015991761252}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -8214424998900051077}
+  - {fileID: 3305516719420065584}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3331757432065891936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Biome
+  m_EditorClassIdentifier: 
+  Name: Biome
+  Min: 0
+  Max: 4
+  Default: 0
+  Exists: 1
+--- !u!114 &3555087714650210017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/UI/UI Sound
+  m_EditorClassIdentifier: 
+  Name: UI Sound
+  Min: 0
+  Max: 4
+  Default: 0
+  Exists: 1
 --- !u!114 &3564463256409888231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,6 +930,23 @@ MonoBehaviour:
   Max: 4
   Default: 0
   Exists: 0
+--- !u!114 &4321992567985138740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ambience/Biome
+  m_EditorClassIdentifier: 
+  Name: Biome
+  Min: 0
+  Max: 4
+  Default: 0
+  Exists: 1
 --- !u!114 &4408174238796721609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,12 +962,12 @@ MonoBehaviour:
   Path: event:/Ambience
   guid: 81143162b8d3d64d9460b21f24be0290
   Banks:
-  - {fileID: 9164658138877131808}
+  - {fileID: -8055015991761252}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -5199917131279823801}
+  - {fileID: 4321992567985138740}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
@@ -923,12 +1076,12 @@ MonoBehaviour:
   Path: event:/UI
   guid: 074ee5f30000514f87cace1619055981
   Banks:
-  - {fileID: 9164658138877131808}
+  - {fileID: -8055015991761252}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -6224234317378692752}
+  - {fileID: 3555087714650210017}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
@@ -1050,12 +1203,12 @@ MonoBehaviour:
   Path: event:/Charactar Grunt
   guid: f6a54a64b8c2564596fcbc4fd3e4426f
   Banks:
-  - {fileID: 9164658138877131808}
+  - {fileID: -8055015991761252}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 5653327228513933582}
+  - {fileID: -2061997248569113659}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
