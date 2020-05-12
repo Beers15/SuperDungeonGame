@@ -144,8 +144,7 @@ public class UI_ToolTipDisplay : MonoBehaviour
                     }
                     break;
             }
-        }
-        else
+        }else
         {
             switch (inventorySlots[selectSlot].itemName)
             {
