@@ -60,7 +60,6 @@ public class UI_InventoryManager : MonoBehaviour {
 	
 	public void TriggerSlot(int index) {
 		selectedSlotIndex = index;
-		Debug.Log("shit has been triggered, index: " + index);
 		tooltipScreen.SetActive(true);
 
 	}

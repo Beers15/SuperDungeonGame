@@ -8,7 +8,7 @@ public class UI_EquipmentSlot : MonoBehaviour
 	public Image itemImage;
 	public Item slotItem;
 	public string itemName;
-	UI_EquipmentDisplay manager;
+	public UI_InventoryManager manager;
 
 	public Sprite bow, sword, staff, helmet, armor, gloves, boots;
 
@@ -18,9 +18,25 @@ public class UI_EquipmentSlot : MonoBehaviour
 	{
 	}
 
-	public void TriggerSlot()
+	public void HelmetTriggerSlot()
 	{
-		manager.TriggerSlot(this.index);
+		manager.TriggerSlot(18);
+	}
+	public void ArmorTriggerSlot()
+	{
+		manager.TriggerSlot(19);
+	}
+	public void HandTriggerSlot()
+	{
+		manager.TriggerSlot(20);
+	}
+	public void FootTriggerSlot()
+	{
+		manager.TriggerSlot(21);
+	}
+	public void WeaponTriggerSlot()
+	{
+		manager.TriggerSlot(22);
 	}
 
 	public void SetItem(Item item)
