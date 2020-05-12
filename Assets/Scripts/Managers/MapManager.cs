@@ -163,10 +163,9 @@ public class MapManager : MonoBehaviour
 		return candidate;
 	}
 	
-	public GameObject instantiate_environment_randomly(GameObject environmentObject, bool traversable = true)
+	public GameObject instantiate_environment_randomly(GameObject environmentObject, bool traversable = true, bool item = false)
 	{
-		
-		return instantiate_environment(environmentObject, random_traversable_pos(), traversable);
+		return instantiate_environment(environmentObject, random_traversable_pos(), traversable, item);
 	}
 	
 
@@ -198,8 +197,11 @@ public class MapManager : MonoBehaviour
 			map[pos.x, pos.y].occupied = false;
 			map[pos.x, pos.y].environment = env;
 
-			if(item)
+			if (item)
+			{
+				map[pos.x, pos.y].occupied = true;
 				map[pos.x, pos.y].resident = env;
+			}
 		}
 		
 		return environmentObject;
@@ -626,7 +628,7 @@ public class MapManager : MonoBehaviour
 	{
 		int chestsToSpawn = rng.Next((int) Math.Ceiling(Math.Sqrt(width * height) / 10f));
 		for (int i = 0; i < chestsToSpawn; i++) {
-			instantiate_environment_randomly(chestPrefab, false);
+			instantiate_environment_randomly(chestPrefab, true, true);
 		}
 	}
 	

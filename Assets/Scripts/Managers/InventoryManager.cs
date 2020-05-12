@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -33,9 +34,16 @@ public class InventoryManager : MonoBehaviour
 
     public static void UseItem(Item item, GameAgent agent)
     {
-        //uses item ID to know which item func to call
-        //passes item and game agent (for use in equipment)
-        instance.itemFuncs[item.ID](item, agent);
+		//uses item ID to know which item func to call
+		//passes item and game agent (for use in equipment)
+		if (item is EquipItem)
+		{
+			EquipEquipment(item as EquipItem, agent);
+		}
+		else
+		{
+			instance.itemFuncs[item.ID](item, agent);
+		}
     }
 
     private static void ApplyHealthPotion(Item item, GameAgent agent)
@@ -98,57 +106,52 @@ public class InventoryManager : MonoBehaviour
 	private static void EquipEquipment(EquipItem item, GameAgent agent)
 	{
 		Debug.Log("Equipping item!");
-        EquipItem equip = item;
-        EquipItem oldItem;
+		Debug.Log("Attack before: " + agent.stats.attack);
+		Debug.Log("Defense before: " + agent.stats.defense);
+		EquipItem equip = item;
+        EquipItem oldItem = null;
 
         switch (equip.type)
         {
             case EquipType.HELMET:
                 oldItem = agent.inventory.helmet;
-                agent.stats.attack -= oldItem.atkbonus;
-                agent.stats.attack -= oldItem.defbonus;
                 agent.inventory.helmet = equip;
-                agent.stats.attack = equip.atkbonus;
-                agent.stats.defense = equip.defbonus;
-                agent.inventory.AddItem(oldItem);
+                agent.stats.attack += equip.atkbonus;
+                agent.stats.defense += equip.defbonus;
                 break;
             case EquipType.BOOT:
                 oldItem = agent.inventory.boots;
-                agent.stats.attack -= oldItem.atkbonus;
-                agent.stats.attack -= oldItem.defbonus;
-                agent.inventory.helmet = equip;
+                agent.inventory.boots = equip;
                 agent.stats.attack += equip.atkbonus;
                 agent.stats.defense += equip.defbonus;
-                agent.inventory.AddItem(oldItem);
                 break;
             case EquipType.ARMOR:
                 oldItem = agent.inventory.armor;
-                agent.stats.attack -= oldItem.atkbonus;
-                agent.stats.attack -= oldItem.defbonus;
-                agent.inventory.helmet = equip;
+                agent.inventory.armor = equip;
                 agent.stats.attack += equip.atkbonus;
                 agent.stats.defense += equip.defbonus;
-                agent.inventory.AddItem(oldItem);
                 break;
             case EquipType.GLOVE:
                 oldItem = agent.inventory.gloves;
-                agent.stats.attack -= oldItem.atkbonus;
-                agent.stats.attack -= oldItem.defbonus;
-                agent.inventory.helmet = equip;
+                agent.inventory.gloves = equip;
                 agent.stats.attack += equip.atkbonus;
                 agent.stats.defense += equip.defbonus;
-                agent.inventory.AddItem(oldItem);
                 break;
             case EquipType.WEAPON:
                 oldItem = agent.inventory.weapon;
-                agent.stats.attack -= oldItem.atkbonus;
-                agent.stats.attack -= oldItem.defbonus;
                 agent.inventory.weapon = equip;
                 agent.stats.attack += equip.atkbonus;
                 agent.stats.defense += equip.defbonus;
-                agent.inventory.AddItem(oldItem);
                 break;
-        }
-    }
+		}
+		if (oldItem != null)
+		{
+			agent.stats.attack -= oldItem.atkbonus;
+			agent.stats.defense -= oldItem.defbonus;
+			agent.inventory.AddItem(oldItem);
+		}
+		Debug.Log("Attack after: " + agent.stats.attack);
+		Debug.Log("Defense after: " + agent.stats.defense);
+	}
 
 }

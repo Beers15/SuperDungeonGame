@@ -70,11 +70,11 @@ public class Inventory {
             //insert into inventory at an empty slot if not found
             for(int i = 0; i < numItemSlots; i++) {
                 if(string.Equals(items[i].ID, "-1")) {
-                    items[i].name = item.name;
+					items[i] = item;
 
                     //check to see if item that is being added is equipment
-                    int id = int.Parse(item.ID);
-                    Debug.Log("ID: " +id);
+                    long id = long.Parse(item.ID);
+                    Debug.Log("ID: " + id);
                     if(id >= gearIdLowerBound && id <= gearIdUpperBound) {
                         item.ID = getUniqueID();
                         
@@ -82,11 +82,8 @@ public class Inventory {
                         //based on rarity variable (add rarity variable)
 
                         Debug.Log("Equipment ID generated: " + item.ID);
-                        items[i].ID = item.ID;
                     }
-                    else 
-                        items[i].ID = item.ID;
-
+					/*
                     int maxInsert = items[i].maxAmount - items[i].Amount;
 
                     if(item.Amount - maxInsert > 0) {
@@ -95,6 +92,7 @@ public class Inventory {
                     } else {
                         items[i].Amount += item.Amount;
                     }
+					*/
                     emptySlotExists = true;
                     slotNum = i;
                     break;
@@ -148,11 +146,15 @@ public class Inventory {
         {
             return; //out of bounds
         }
-        if ((--items[slot].Amount) <= 0)
-        {
-            items[slot] = new Item(20, "", "-1", 0); //remove item if amount is zero
-            RearrangeSlots();        
-        }
+		if (items[slot].Amount <= 1)
+		{
+			items[slot] = new Item(20, "", "-1", 0); //remove item if amount is zero
+			RearrangeSlots();
+		}
+		else
+		{
+			items[slot].Amount--;
+		}
     }
 
     private void RearrangeSlots() {

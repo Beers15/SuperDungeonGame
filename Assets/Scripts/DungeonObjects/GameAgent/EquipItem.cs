@@ -25,9 +25,9 @@ public class EquipItem : Item {
     public string[] nouns;
 
     //All gear IDs are within this range by default until they are assigned stats and given unique IDs (Change as needed)
-    private static int IDUpperBound = 20;
-    private static int IDLowerBound = 24;
-    private int lvlOfSlainMob = 1;  //used to calculate EquipItem's tier 
+    private static int IDLowerBound = 20;
+	private static int IDUpperBound = 24;
+	private int lvlOfSlainMob = 1;  //used to calculate EquipItem's tier 
     private int tier;
     public int weaponClass;
 

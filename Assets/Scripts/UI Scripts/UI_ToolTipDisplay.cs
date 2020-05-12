@@ -36,8 +36,8 @@ public class UI_ToolTipDisplay : MonoBehaviour
     void Update()
     {
 		selectSlot = manager.getSlot();
-        Debug.Log("the slot was " + selectSlot);
-        Debug.Log("the item in the slot was " + inventorySlots[selectSlot]);
+    //    Debug.Log("the slot was " + selectSlot);
+    //    Debug.Log("the item in the slot was " + inventorySlots[selectSlot]);
         this.setImage(selectSlot);
         if (itemImage == null)
         {
@@ -47,12 +47,11 @@ public class UI_ToolTipDisplay : MonoBehaviour
         }
         text.text = inventorySlots[selectSlot].slotItem.name;
         EquipItem equipment = inventorySlots[selectSlot].slotItem as EquipItem;
-        Debug.Log("Some shit: " + equipment.completeName);
     }
 
     public void setImage(int selectSlot)
     {
-        Debug.Log("the item in the slot was " + inventorySlots[selectSlot].itemName);
+    //    Debug.Log("the item in the slot was " + inventorySlots[selectSlot].itemName);
         switch (inventorySlots[selectSlot].itemName)
         {
             case "Health Potion":

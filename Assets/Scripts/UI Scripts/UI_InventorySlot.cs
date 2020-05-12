@@ -32,7 +32,7 @@ public class UI_InventorySlot : MonoBehaviour {
 		itemImage.color = new Color(1, 1, 1, 1);
 
 		itemName = item.name;
-		Debug.Log("IN INVENTORY SLOT THE SPRITE NAME IS " +item.name);
+	//	Debug.Log("IN INVENTORY SLOT THE SPRITE NAME IS " +item.name);
 		switch (item.name) {
 			case "Health Potion":
 				itemImage.sprite = healthPot; break;
