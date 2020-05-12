@@ -19,6 +19,7 @@ public class UI_ToolTipDisplay : MonoBehaviour
     public GameObject attackDisplay, defenseDisplay;
     public TextMeshProUGUI attackDisplayValue;
     public TextMeshProUGUI defenseDisplayValue;
+    Player playerMain;
 
     public Sprite healthPot, manaPot, helmet, armor, gloves, boots, bow, sword, staff, tome, gem, nothing;
 
@@ -39,7 +40,12 @@ public class UI_ToolTipDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		selectSlot = manager.getSlot();
+        if (playerMain == null)
+        {
+            playerMain = Network.getPlayer(NetworkManager.clientID);
+            return;
+        }
+        selectSlot = manager.getSlot();
     //    Debug.Log("the slot was " + selectSlot);
     //    Debug.Log("the item in the slot was " + inventorySlots[selectSlot]);
         this.setImage(selectSlot);
@@ -49,50 +55,124 @@ public class UI_ToolTipDisplay : MonoBehaviour
             temp.a = 0f;
             itemImage.color = temp;
         }
-        text.text = inventorySlots[selectSlot].slotItem.name;
-        if (inventorySlots[selectSlot].slotItem is EquipItem)
+        if (selectSlot > 17)
         {
-            attackDisplay.SetActive(true);
-            defenseDisplay.SetActive(true);
-            EquipItem equipment = inventorySlots[selectSlot].slotItem as EquipItem;
-            attackDisplayValue.SetText(equipment.atkbonus.ToString());
-            defenseDisplayValue.SetText(equipment.defbonus.ToString());
-        } else
+            switch (selectSlot)
+            {
+                case 18:
+                    text.text = playerMain.inventory.helmet.completeName;
+                    attackDisplay.SetActive(true);
+                    defenseDisplay.SetActive(true);
+                    attackDisplayValue.SetText(playerMain.inventory.helmet.atkbonus.ToString());
+                    defenseDisplayValue.SetText(playerMain.inventory.helmet.defbonus.ToString());
+                    break;
+                case 19:
+                    text.text = playerMain.inventory.armor.completeName;
+                    attackDisplay.SetActive(true);
+                    defenseDisplay.SetActive(true);
+                    attackDisplayValue.SetText(playerMain.inventory.armor.atkbonus.ToString());
+                    defenseDisplayValue.SetText(playerMain.inventory.armor.defbonus.ToString());
+                    break;
+                case 20:
+                    text.text = playerMain.inventory.gloves.completeName;
+                    attackDisplay.SetActive(true);
+                    defenseDisplay.SetActive(true);
+                    attackDisplayValue.SetText(playerMain.inventory.gloves.atkbonus.ToString());
+                    defenseDisplayValue.SetText(playerMain.inventory.gloves.defbonus.ToString());
+                    break;
+                case 21:
+                    text.text = playerMain.inventory.boots.completeName;
+                    attackDisplay.SetActive(true);
+                    defenseDisplay.SetActive(true);
+                    attackDisplayValue.SetText(playerMain.inventory.boots.atkbonus.ToString());
+                    defenseDisplayValue.SetText(playerMain.inventory.boots.defbonus.ToString());
+                    break;
+                case 22:
+                    text.text = playerMain.inventory.weapon.completeName;
+                    attackDisplay.SetActive(true);
+                    defenseDisplay.SetActive(true);
+                    attackDisplayValue.SetText(playerMain.inventory.weapon.atkbonus.ToString());
+                    defenseDisplayValue.SetText(playerMain.inventory.weapon.defbonus.ToString());
+                    break;
+
+            }
+        }
+        else
         {
-            attackDisplay.SetActive(false);
-            defenseDisplay.SetActive(false);
+            text.text = inventorySlots[selectSlot].slotItem.name;
+            if (inventorySlots[selectSlot].slotItem is EquipItem)
+            {
+                attackDisplay.SetActive(true);
+                defenseDisplay.SetActive(true);
+                EquipItem equipment = inventorySlots[selectSlot].slotItem as EquipItem;
+                attackDisplayValue.SetText(equipment.atkbonus.ToString());
+                defenseDisplayValue.SetText(equipment.defbonus.ToString());
+                text.text = equipment.completeName;
+            }
+            else
+            {
+                text.text = inventorySlots[selectSlot].slotItem.name;
+                attackDisplay.SetActive(false);
+                defenseDisplay.SetActive(false);
+            }
         }
     }
 
     public void setImage(int selectSlot)
     {
-    //    Debug.Log("the item in the slot was " + inventorySlots[selectSlot].itemName);
-        switch (inventorySlots[selectSlot].itemName)
+        if (selectSlot > 17)
         {
-            case "Health Potion":
-                itemImage.sprite = healthPot; break;
-            case "Mana Potion":
-                itemImage.sprite = manaPot; break;
-            case "Helmet":
-                itemImage.sprite = helmet; break;
-            case "Armor":
-                itemImage.sprite = armor; break;
-            case "Gloves":
-                itemImage.sprite = gloves; break;
-            case "Boots":
-                itemImage.sprite = boots; break;
-            case "Bow":
-                itemImage.sprite = bow; break;
-            case "Sword":
-                itemImage.sprite = sword; break;
-            case "Staff":
-                itemImage.sprite = staff; break;
-            case "Tome":
-                itemImage.sprite = tome; break;
-            case "Gem":
-                itemImage.sprite = gem; break;
-            default:
-                itemImage.sprite = nothing; break;
+            switch (selectSlot)
+            {
+                case 18:
+                    itemImage.sprite = helmet; break;
+                case 19:
+                    itemImage.sprite = armor; break;
+                case 20:
+                    itemImage.sprite = gloves; break;
+                case 21:
+                    itemImage.sprite = boots; break;
+                case 22:
+                    switch (playerMain.inventory.weapon.name)
+                    {
+                        case "Sword":
+                            itemImage.sprite = sword; break;
+                        case "Staff":
+                            itemImage.sprite = staff; break;
+                        case "Bow":
+                            itemImage.sprite = bow; break;
+                    }
+                    break;
+            }
+        }else
+        {
+            switch (inventorySlots[selectSlot].itemName)
+            {
+                case "Health Potion":
+                    itemImage.sprite = healthPot; break;
+                case "Mana Potion":
+                    itemImage.sprite = manaPot; break;
+                case "Helmet":
+                    itemImage.sprite = helmet; break;
+                case "Armor":
+                    itemImage.sprite = armor; break;
+                case "Gloves":
+                    itemImage.sprite = gloves; break;
+                case "Boots":
+                    itemImage.sprite = boots; break;
+                case "Bow":
+                    itemImage.sprite = bow; break;
+                case "Sword":
+                    itemImage.sprite = sword; break;
+                case "Staff":
+                    itemImage.sprite = staff; break;
+                case "Tome":
+                    itemImage.sprite = tome; break;
+                case "Gem":
+                    itemImage.sprite = gem; break;
+                default:
+                    itemImage.sprite = nothing; break;
+            }
         }
     }
 
