@@ -3763,7 +3763,7 @@ MonoBehaviour:
     type: 3}
   lightningProjectile: {fileID: 7123571416476213774, guid: 01fbfc0ee180c4de6ac29c03e9cbac75,
     type: 3}
-  debug: 1
+  debug: 0
   config: {fileID: 1591538340}
 --- !u!114 &1591538343
 MonoBehaviour:
