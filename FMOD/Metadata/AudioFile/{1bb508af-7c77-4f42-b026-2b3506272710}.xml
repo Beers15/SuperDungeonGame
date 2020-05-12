@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{1bb508af-7c77-4f42-b026-2b3506272710}">
+		<property name="assetPath">
+			<value>The Second Cave Son.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>425.14285714285717</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{34634d05-7946-4598-8439-fef0f87594a0}</destination>
+		</relationship>
+	</object>
+</objects>

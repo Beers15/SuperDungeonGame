@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{baa958da-e739-42ad-84dc-52ae86d3b998}">
+		<property name="assetPath">
+			<value>SDG_SFX_ForrestAmbience.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>168.01959183673469</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{34634d05-7946-4598-8439-fef0f87594a0}</destination>
+		</relationship>
+	</object>
+</objects>

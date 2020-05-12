@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{ac2320c5-2cd7-4386-b490-a7108f3f8190}">
+		<property name="assetPath">
+			<value>SDG_SFX_DaggerStab2.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.94040816326530607</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{34634d05-7946-4598-8439-fef0f87594a0}</destination>
+		</relationship>
+	</object>
+</objects>

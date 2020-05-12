@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{b778706d-ec82-4d37-b21f-a3516ba0d46e}">
+		<property name="assetPath">
+			<value>SDG_SFX_FireSpell2.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.1232653061224489</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{34634d05-7946-4598-8439-fef0f87594a0}</destination>
+		</relationship>
+	</object>
+</objects>

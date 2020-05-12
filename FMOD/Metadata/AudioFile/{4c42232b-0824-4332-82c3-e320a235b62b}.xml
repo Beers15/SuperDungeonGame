@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{4c42232b-0824-4332-82c3-e320a235b62b}">
+		<property name="assetPath">
+			<value>RL_SFX_ReadyUp (Mixed).wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.137482993197279</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{34634d05-7946-4598-8439-fef0f87594a0}</destination>
+		</relationship>
+	</object>
+</objects>
