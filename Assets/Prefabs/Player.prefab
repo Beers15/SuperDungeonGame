@@ -3893,19 +3893,19 @@ MonoBehaviour:
   _speed: 0
   level: 0
   viewableState: 
-  sword: event:/Attack
-  bowShot: 
-  daggerStab: 
-  lightingAttack: 
-  staffSwing: 
-  clubSwing: 
-  fireBurst: 
-  fireStrom: 
-  armorHit: 
-  fleshHit: 
-  deathNoise: 
-  grunt: 
-  footStep: 
+  sword: event:/Attacks/SwordSwing_Attack
+  bowShot: event:/Attacks/BowShot_Attack
+  daggerStab: event:/Attacks/DaggerStab_Attack
+  lightingAttack: event:/Attacks/Lighting_Attack
+  staffSwing: event:/Attacks/StaffSwing_Attack
+  clubSwing: event:/Attacks/DaggerStab_Attack
+  fireBurst: event:/Attacks/FireBurst_Attack
+  fireStrom: event:/Attacks/FireStorm_Attack
+  armorHit: event:/Character Hit/CharactarHit_Armor
+  fleshHit: event:/Character Hit/CharactarHit_Flesh
+  deathNoise: event:/Deaths/Human_Death
+  grunt: event:/Grunts/Human_Grunt
+  footStep: event:/Footsteps
 --- !u!114 &1111223434817933391
 MonoBehaviour:
   m_ObjectHideFlags: 0
