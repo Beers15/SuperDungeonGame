@@ -68,15 +68,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _XTex:
-        m_Texture: {fileID: 2800000, guid: f39a1777975e0bf468b4a1d196b2e536, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8d4e4a8fa0743f447a9ca492942a0d0a, type: 3}
         m_Scale: {x: 0.25, y: 0.25}
         m_Offset: {x: 0, y: 0}
     - _YTex:
-        m_Texture: {fileID: 2800000, guid: f39a1777975e0bf468b4a1d196b2e536, type: 3}
-        m_Scale: {x: 0.25, y: 0.25}
+        m_Texture: {fileID: 2800000, guid: 8d4e4a8fa0743f447a9ca492942a0d0a, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _ZTex:
-        m_Texture: {fileID: 2800000, guid: f39a1777975e0bf468b4a1d196b2e536, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3b453c155e7d8a84ab2bb5ff707a5817, type: 3}
         m_Scale: {x: 0.25, y: 0.25}
         m_Offset: {x: 0, y: 0}
     m_Floats:

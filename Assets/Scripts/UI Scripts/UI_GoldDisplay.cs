@@ -11,7 +11,7 @@ public class UI_GoldDisplay : MonoBehaviour {
 	
 
 	void Awake() {
-		manager = transform.parent.parent.GetComponent<UI_InventoryManager>();
+		manager = GameObject.Find("InventoryMenu").GetComponent<UI_InventoryManager>();
 		goldCount = transform.Find("GoldText").GetComponent<Text>();  
 	}
 	
