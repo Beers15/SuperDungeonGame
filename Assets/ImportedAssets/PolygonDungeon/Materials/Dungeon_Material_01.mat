@@ -96,4 +96,4 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
-    - _MapWidthHeight: {r: 60, g: 60, b: 0, a: 0}
+    - _MapWidthHeight: {r: 80, g: 80, b: 0, a: 0}

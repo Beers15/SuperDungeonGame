@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{4df4ab5a-0096-4c2f-8c24-0997970a84a6}">
+		<property name="name">
+			<value>Cave Ambience</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b6de307e-db20-4644-84e1-8b1b9b4c1264}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{72977e5b-61b9-4ca4-a02f-47c86d109959}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{72977e5b-61b9-4ca4-a02f-47c86d109959}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
