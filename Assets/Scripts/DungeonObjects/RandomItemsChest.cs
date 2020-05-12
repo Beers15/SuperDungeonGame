@@ -39,7 +39,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		int randomItemIndex = Settings.globalRNG.Next(0, itemOptions.Length);
 		int randomItemAmount = Settings.globalRNG.Next(1, 8);
 		string itemChoice = itemOptions[randomItemIndex];
-		itemChoice = "helmet"; // DEBUG
+		
 		Item toAdd;
 		//bool isConsumable = false; removing potion store for now
 		bool notEquipItem = true;
