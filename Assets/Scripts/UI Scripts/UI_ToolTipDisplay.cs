@@ -97,7 +97,7 @@ public class UI_ToolTipDisplay : MonoBehaviour
 
             }
         }
-        else
+        else if (selectSlot >= 0)
         {
             text.text = inventorySlots[selectSlot].slotItem.name;
             if (inventorySlots[selectSlot].slotItem is EquipItem)
@@ -144,7 +144,8 @@ public class UI_ToolTipDisplay : MonoBehaviour
                     }
                     break;
             }
-        }else
+        }
+		else if (selectSlot >= 0)
         {
             switch (inventorySlots[selectSlot].itemName)
             {
