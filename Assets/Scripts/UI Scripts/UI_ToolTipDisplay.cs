@@ -46,6 +46,8 @@ public class UI_ToolTipDisplay : MonoBehaviour
             itemImage.color = temp;
         }
         text.text = inventorySlots[selectSlot].slotItem.name;
+        EquipItem equipment = inventorySlots[selectSlot].slotItem as EquipItem;
+        Debug.Log("Some shit: " + equipment.completeName);
     }
 
     public void setImage(int selectSlot)
