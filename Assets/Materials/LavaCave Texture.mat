@@ -72,7 +72,7 @@ Material:
         m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _YTex:
-        m_Texture: {fileID: 2800000, guid: 15f9a852352d4dc4da9e9713b283eff0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8d4e4a8fa0743f447a9ca492942a0d0a, type: 3}
         m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _ZTex:
