@@ -15,7 +15,7 @@ public class UI_InventorySlot : MonoBehaviour {
 	public int index = 0;
 	
 	void Awake() {
-		manager = transform.parent.parent.parent.GetComponent<UI_InventoryManager>();
+		manager = GameObject.Find("InventoryMenu").GetComponent<UI_InventoryManager>();
 		itemImage = transform.Find("Item").GetComponent<Image>();
 		itemCount = transform.Find("ItemCount").GetComponent<Text>();
 	}
