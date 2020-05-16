@@ -45,9 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30832096843b1c64db1552e0a6e94d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shortPortalSound: {fileID: 8300000, guid: 33e51098259184c9cbb903349ae25850, type: 3}
-  mediumPortalSound: {fileID: 8300000, guid: bce0e562a5bba47b88f91f6175f85882, type: 3}
-  longPortalSound: {fileID: 8300000, guid: 685426a9e48ab4a119cf9ec2cdf0a2fe, type: 3}
 --- !u!82 &4299985402006020081
 AudioSource:
   m_ObjectHideFlags: 0
@@ -210,6 +207,22 @@ PrefabInstance:
     - target: {fileID: 488368, guid: 0845aa8b2ce753145ab9bacc42062661, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19876754, guid: 0845aa8b2ce753145ab9bacc42062661, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19876754, guid: 0845aa8b2ce753145ab9bacc42062661, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19876754, guid: 0845aa8b2ce753145ab9bacc42062661, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19876754, guid: 0845aa8b2ce753145ab9bacc42062661, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0845aa8b2ce753145ab9bacc42062661, type: 3}
