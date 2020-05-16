@@ -26,7 +26,7 @@ public class UI_InventoryManager : MonoBehaviour {
 			inventorySlots.Add(slot);
 		}
 
-		goldDisplay =  transform.Find("GoldDisplay").gameObject.GetComponent<UI_GoldDisplay>();
+		goldDisplay =  GameObject.Find("GoldDisplay").GetComponent<UI_GoldDisplay>();
 
 		display.SetActive(true);
 		

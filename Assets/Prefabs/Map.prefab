@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 846437577282361654}
   - component: {fileID: 4616697007260526377}
   - component: {fileID: 5563939625085585910}
+  - component: {fileID: 5709030369017800974}
   m_Layer: 0
   m_Name: Map
   m_TagString: Map
@@ -215,6 +216,52 @@ MonoBehaviour:
   bridge_texture_scale: 1
   floor_texture_scale: 1
   object_size_scale: 0
+--- !u!114 &5709030369017800974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3944264686662586777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a8df8c6d60615449cadcc6b1d10a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environmentDensity: 50
+  traversableFolliagDensity: 0.1
+  nonTraversableFolliageDensity: 0.1
+  traversableObjectDensity: 0.1
+  nonTraversableObjectDensity: 0
+  traversableStructureDensity: 0
+  nonTraversableStructureDensity: 0
+  particleDensity: 0
+  maxRadius: 5
+  minRadius: 1
+  minArea: 10
+  smallArea: 30
+  minPortraitMargin: 2
+  maxPortraitMargin: 5
+  structureDensity: 0.1
+  objectDensity: 0.3
+  rubbleDensity: 0.5
+  folliageStructures: []
+  folliageObjects: []
+  folliageRubble: []
+  rubble: []
+  orcStructures: []
+  orcObjects: []
+  orcRubble: []
+  undeadStructures: []
+  undeadObjects: []
+  undeadRubble: []
+  traversableFolliageObject: []
+  nonTraversableFolliageObject: []
+  traversableObjectObject: []
+  nonTraversableObjectObject: []
+  traversableStructureObject: []
+  nonTraversableStructureObject: []
+  particleObject: []
 --- !u!1 &3944264687251142841
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ TagManager:
   - HPValue
   - MPValue
   - Selector
+  - LevelConfig
   layers:
   - Default
   - TransparentFX

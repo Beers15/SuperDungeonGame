@@ -11,6 +11,9 @@
 /[Uu]ser[Ss]ettings/
 /Assets/FMODStudioCache.asset
 /Assets/FMODStudioCache.asset.meta
+/Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset.meta
+/Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset
+/Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset.meta
 fmod.log
 fmod_editor.log
 

@@ -3,28 +3,29 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
 
 using MapUtils;
 using static MapUtils.EnumUtils;
 
 public class Player : GameAgent
-{	
-	private MapManager map_manager; // reference to MapManager instance with map data
+{
+    private MapManager map_manager; // reference to MapManager instance with map data
     private MapConfiguration config;
-	private TileSelector tile_selector; // reference to map tile selector
+    private TileSelector tile_selector; // reference to map tile selector
     private List<Pos> selectableTiles;
-	private TurnIndicator turnIndicator;
+    private TurnIndicator turnIndicator;
 
-	public GameObject TurnIndicatorPrefab;
+    public GameObject TurnIndicatorPrefab;
 
-	public bool godMode = false;
+    public bool godMode = false;
 
     // player turn options
     private bool playerMovedThisTurn = false;
     private bool playerActedThisTurn = false;
     private bool playerUsedPotionThisTurn = false;
     private bool playerWaitingThisTurn = false;
-	private bool playerExtracted = false;
+    private bool playerExtracted = false;
 
     [Header("Player Stats")]
     public string name;
@@ -41,32 +42,88 @@ public class Player : GameAgent
     // Get rid of this when you get rid of using keys to change player class
     List<Player> playersForTestingPurposes;
 
+
+    //Fmod
+    [FMODUnity.EventRef]
+    public string sword;
+
+    [FMODUnity.EventRef]
+    public string bowShot;
+
+    [FMODUnity.EventRef]
+    public string daggerStab;
+
+    [FMODUnity.EventRef]
+    public string lightingAttack;
+
+    [FMODUnity.EventRef]
+    public string staffSwing;
+
+    [FMODUnity.EventRef]
+    public string clubSwing;
+
+    [FMODUnity.EventRef]
+    public string fireBurst;
+
+    [FMODUnity.EventRef]
+    public string fireStrom;
+
+    [FMODUnity.EventRef]
+    public string armorHit;
+
+    [FMODUnity.EventRef]
+    public string fleshHit;
+
+    [FMODUnity.EventRef]
+    public string deathNoise;
+
+    [FMODUnity.EventRef]
+    public string grunt;
+
+    [FMODUnity.EventRef]
+    public string footStep;
+
+
+    FMOD.Studio.EventInstance soundevent;
+    FMOD.Studio.EventInstance bowShotEvent;
+    FMOD.Studio.EventInstance daggerStabEvent;
+    FMOD.Studio.EventInstance lightingAttackEvent;
+    FMOD.Studio.EventInstance staffSwingEvent;
+    FMOD.Studio.EventInstance clubSwingEvent;
+    FMOD.Studio.EventInstance fireBurstEvent;
+    FMOD.Studio.EventInstance fireStromEvent;
+    FMOD.Studio.EventInstance armorHitEvent;
+    FMOD.Studio.EventInstance fleshHitEvent;
+    FMOD.Studio.EventInstance deathNoiseEvent;
+    FMOD.Studio.EventInstance gruntEvent;
+    FMOD.Studio.EventInstance footStepEvent;
+
     //sound effects
-    private AudioSource source;
-    public AudioClip[] swordSwing;
-    public AudioClip[] axeSwing;
-    public AudioClip[] bowShot;
-    public AudioClip[] fireSpell;
-    public AudioClip lightningSpell;
-    public AudioClip[] footsteps;
-	public AudioClip[] deathRattle;
-	public AudioClip[] hitNoise;
-	public AudioClip[] armorHitNoise;
-	
-	private int max_move_budget;
-	
+    //private AudioSource source;
+    // public AudioClip[] swordSwing;
+    // public AudioClip[] axeSwing;
+    // public AudioClip[] bowShot;
+    //  public AudioClip[] fireSpell;
+    //  public AudioClip lightningSpell;
+    //  public AudioClip[] footsteps;
+    //public AudioClip[] deathRattle;
+    //public AudioClip[] hitNoise;
+    //public AudioClip[] armorHitNoise;
+
+    private int max_move_budget;
+
     // Gets references to necessary game components
     public override void init_agent(Pos position, GameAgentStats stats, string name = null)
     {
-		map_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapManager>();
+        map_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapManager>();
         grid_pos = position;
 
         this.stats = stats;
         UpdateViewableEditorPlayerStats();
-		max_move_budget = 15;
-		move_budget = max_move_budget;
-		speed = 10;
-		this.nickname = name;
+        max_move_budget = 15;
+        move_budget = max_move_budget;
+        speed = 10;
+        this.nickname = name;
 
         animator = GetComponent<CharacterAnimator>();
         classDefiner = GetComponent<CharacterClassDefiner>();
@@ -76,191 +133,227 @@ public class Player : GameAgent
         selectableTiles = new List<Pos>();
 
         currentState = GameAgentState.Alive;
-		animating = false;
+        animating = false;
 
-        source = GetComponent<AudioSource>();
-        
+        //source = GetComponent<AudioSource>();
+
+        soundevent = FMODUnity.RuntimeManager.CreateInstance(sword);
+        bowShotEvent = FMODUnity.RuntimeManager.CreateInstance(bowShot);
+        daggerStabEvent = FMODUnity.RuntimeManager.CreateInstance(daggerStab);
+        lightingAttackEvent = FMODUnity.RuntimeManager.CreateInstance(lightingAttack);
+        staffSwingEvent = FMODUnity.RuntimeManager.CreateInstance(staffSwing);
+        clubSwingEvent = FMODUnity.RuntimeManager.CreateInstance(clubSwing);
+        fireBurstEvent = FMODUnity.RuntimeManager.CreateInstance(fireBurst);
+        fireStromEvent = FMODUnity.RuntimeManager.CreateInstance(fireStrom);
+        armorHitEvent = FMODUnity.RuntimeManager.CreateInstance(armorHit);
+        fleshHitEvent = FMODUnity.RuntimeManager.CreateInstance(fleshHit);
+        deathNoiseEvent = FMODUnity.RuntimeManager.CreateInstance(deathNoise);
+        gruntEvent = FMODUnity.RuntimeManager.CreateInstance(grunt);
+        footStepEvent = FMODUnity.RuntimeManager.CreateInstance(footStep);
+
         //-----
         //add starting items and consumables here with inventory/potionStore.addItem if desired
         inventory.AddItem(new HealthPot(5));
         inventory.AddItem(new ManaPot(5));
-        inventory.AddItem(new Tome(1));
-        inventory.AddItem(new Gem(1));
         //-----
 
         // AI init
         team = 0;
-		AI = null; // players don't have AI
-		TurnManager.instance.addToRoster(this); //add player to player list
-		InitTurnIndicator();
-		playerWaitingThisTurn = true;
-	}
+        AI = null; // players don't have AI
+        TurnManager.instance.addToRoster(this); //add player to player list
+        InitTurnIndicator();
+    }
 
-	private void InitTurnIndicator()
-	{
-		GameObject turnIndicatorBarObj = GameObject.Find("TurnIndicatorBar");
-		GameObject turnIndicatorObj = GameObject.Instantiate(TurnIndicatorPrefab, turnIndicatorBarObj.transform);
-		turnIndicator = turnIndicatorObj.GetComponent<TurnIndicator>();
-		turnIndicator.SetClass(stats.characterClassOption);
-		turnIndicator.SetName(nickname);
-		turnIndicatorBarObj.GetComponent<TurnIndicatorBar>().AddTurnIndicator(turnIndicator);
-		turnIndicator.SetActiveTurn(false);
-	}
+    private void InitTurnIndicator()
+    {
+        GameObject turnIndicatorBarObj = GameObject.Find("TurnIndicatorBar");
+        GameObject turnIndicatorObj = GameObject.Instantiate(TurnIndicatorPrefab, turnIndicatorBarObj.transform);
+        turnIndicator = turnIndicatorObj.GetComponent<TurnIndicator>();
+        turnIndicator.SetClass(stats.characterClassOption);
+        turnIndicator.SetName(nickname);
+        turnIndicatorBarObj.GetComponent<TurnIndicatorBar>().AddTurnIndicator(turnIndicator);
+    }
 
-	private void DestroyTurnIndicator()
-	{
-		TurnIndicatorBar turnIndicatorBar = GameObject.Find("TurnIndicatorBar").GetComponent<TurnIndicatorBar>();
-		turnIndicatorBar.RemoveTurnIndicator(turnIndicator);
-		if (turnIndicator != null)
-		{
-			turnIndicator.gameObject.SetActive(false);
-		}
-	}
-	
-	public void re_init(Pos position)
-	{
-		grid_pos = position;
-		playerExtracted = false;
-		playerMovedThisTurn = false;
-		playerActedThisTurn = false;
-		playerUsedPotionThisTurn = false;
-		playerWaitingThisTurn = false;
-		TurnManager.instance.addToRoster(this); //add player to player list
-		InitTurnIndicator();
-		EnableRendering();
-	}
-	
-	private bool moving = false;
+    private void DestroyTurnIndicator()
+    {
+        TurnIndicatorBar turnIndicatorBar = GameObject.Find("TurnIndicatorBar").GetComponent<TurnIndicatorBar>();
+        turnIndicatorBar.RemoveTurnIndicator(turnIndicator);
+        GameObject.Destroy(turnIndicator.gameObject);
+    }
+
+    public void re_init(Pos position)
+    {
+        grid_pos = position;
+        playerExtracted = false;
+        playerMovedThisTurn = false;
+        playerActedThisTurn = false;
+        playerUsedPotionThisTurn = false;
+        playerWaitingThisTurn = false;
+        TurnManager.instance.addToRoster(this); //add player to player list
+        InitTurnIndicator();
+        EnableRendering();
+    }
+
+    private bool moving = false;
     public override IEnumerator smooth_movement(Path path)
-	{
-		if (path.getPositions() == null) yield break;
-		while (moving) yield return null; // wait for any previous movement to finish
-		moving = true;
-		move_budget -= path.distance();
+    {
+        if (path.getPositions() == null) yield break;
+        while (moving) yield return null; // wait for any previous movement to finish
+        moving = true;
+        move_budget -= path.distance();
 
         StartCoroutine(animator.StartMovementAnimation());
         //source.PlayOneShot(footsteps);
-			Vector3 origin, target;
-			foreach(Pos step in path.getPositions()) {
-				grid_pos = step;
+        Vector3 origin, target;
+        foreach (Pos step in path.getPositions())
+        {
+            grid_pos = step;
 
-				origin = transform.position;
-				target = map_manager.grid_to_world(step);
-				float dist = Vector3.Distance(origin, target);
-				float time = 0f;
+            origin = transform.position;
+            target = map_manager.grid_to_world(step);
+            float dist = Vector3.Distance(origin, target);
+            float time = 0f;
 
-				transform.LookAt(target);
+            transform.LookAt(target);
 
-					while(time < 1f && dist > 0f) {
-						time += (Time.deltaTime * speed) / dist;
-						transform.position = Vector3.Lerp(origin, target, time);
-						yield return null;
-					}
-			}
-			transform.position = map_manager.grid_to_world(path.endPos());
+            while (time < 1f && dist > 0f)
+            {
+                time += (Time.deltaTime * speed) / dist;
+                transform.position = Vector3.Lerp(origin, target, time);
+                yield return null;
+            }
+        }
+        transform.position = map_manager.grid_to_world(path.endPos());
 
         StartCoroutine(animator.StopMovementAnimation());
         moving = false;
-		grid_pos = path.endPos();
-		
-        playerMovedThisTurn = true;
-	}
+        grid_pos = path.endPos();
 
-	public override void attack(Damageable target)
-	{
+        playerMovedThisTurn = true;
+    }
+
+    public override void attack(Damageable target)
+    {
         if (stats.currentMagicPoints >= currentAttack.MPcost)
         {
             animating = true;
             StartCoroutine(currentAttack.Execute(this, target));
             StartCoroutine(waitForAttackEnd());
-		}
-	}
-	
-	private IEnumerator waitForAttackEnd()
-	{
-		while (currentAttack.attacking) yield return null;
-		playerActedThisTurn = true;
-		turnIndicator.SetActiveTurn(false);
-	}
-	
-	public void Hit(){ animating = false; }
-	public void Shoot(){ animating = false; }
-	
-	public override void playAttackAnimation()
-	{
-		StartCoroutine(animator.PlayAttackAnimation());
-	}
-	
-	public override void playHitAnimation()
-	{
-		StartCoroutine(animator.PlayHitAnimation());
-	}
-	
-	public override void playAttackNoise(string type)
-	{
-		switch (type) {
-			case "Melee":
-			switch (weapon) {
-				case 1:
-					source.PlayOneShot(randomSFX(swordSwing));
-					break;
-				case 2:
-					source.PlayOneShot(randomSFX(bowShot));
-					break;
-				case 3:
-					source.PlayOneShot(randomSFX(fireSpell));
-					break;
-				default:
-					source.PlayOneShot(randomSFX(axeSwing));
-					break;
-			}
-			break;
-            case "Lightning":
-                source.PlayOneShot(lightningSpell);
+        }
+    }
+
+    private IEnumerator waitForAttackEnd()
+    {
+        while (currentAttack.attacking) yield return null;
+        playerActedThisTurn = true;
+        turnIndicator.SetActiveTurn(false);
+    }
+
+    public void Hit() { animating = false; }
+    public void Shoot() { animating = false; }
+
+    public override void playAttackAnimation()
+    {
+        StartCoroutine(animator.PlayAttackAnimation());
+    }
+
+    public override void playHitAnimation()
+    {
+        StartCoroutine(animator.PlayHitAnimation());
+    }
+
+    public override void playAttackNoise(string type)
+    {
+        switch (type)
+        {
+            case "Melee":
+                switch (weapon)
+                {
+                    case 1:
+                        //source.PlayOneShot(randomSFX(swordSwing));
+                        //soundevent = FMODUnity.RuntimeManager.CreateInstance(sword);
+                        //soundevent.start();
+                        //FMODUnity.RuntimeManager.PlayOneShot("event:/Attack");
+                        soundevent.start();
+                        break;
+                    case 2:
+                        //source.PlayOneShot(randomSFX(bowShot));
+
+                        bowShotEvent.start();
+                        break;
+                    case 3:
+                        //source.PlayOneShot(randomSFX(fireSpell));
+
+                        fireBurstEvent.start();
+
+                        break;
+                    default:
+                        //source.PlayOneShot(randomSFX(axeSwing));
+
+                        daggerStabEvent.start();
+                        break;
+                }
                 break;
-            
-		}
-	}
-	// TODO: once we have more hit noises, switch based on type of projectile/weapon we are hit by
-	public override void playHitNoise(string type)
-	{
-		switch (type) {
-			default:
-			source.PlayOneShot(randomSFX(hitNoise));
-			source.PlayOneShot(randomSFX(armorHitNoise));
-			break;
-		}
-	}
-	
-	public override bool animationFinished()
-	{
-		return (currentAttack == null || !currentAttack.attacking) && !moving;
-	}
-	
-	public override void take_damage(int amount, int classOfAttacker, GameAgent attacker)
-	{
-        if (stats.currentState == GameAgentState.Alive) {
+            case "Lightning":
+                //source.PlayOneShot(lightningSpell);
+
+                lightingAttackEvent.start();
+                break;
+
+        }
+    }
+    // TODO: once we have more hit noises, switch based on type of projectile/weapon we are hit by
+    public override void playHitNoise(string type)
+    {
+        switch (type)
+        {
+            default:
+                //source.PlayOneShot(randomSFX(hitNoise));
+                //source.PlayOneShot(randomSFX(armorHitNoise));
+
+                gruntEvent.start();
+                armorHitEvent.start();
+
+                break;
+        }
+    }
+
+    public override bool animationFinished()
+    {
+        return (currentAttack == null || !currentAttack.attacking) && !moving;
+    }
+
+    public override void take_damage(int amount, int classOfAttacker, GameAgent attacker)
+    {
+        if (stats.currentState == GameAgentState.Alive)
+        {
             if (!godMode) stats.TakeDamage((int)(amount * 0.05));
             //if (!godMode) stats.TakeDamage(amount);
 
-            if (stats.currentState == GameAgentState.Unconscious) {
+            if (stats.currentState == GameAgentState.Unconscious)
+            {
                 StartCoroutine(animator.PlayKilledAimation());
-				GameManager.kill(this);
-			}
+                GameManager.kill(this);
+
+                deathNoiseEvent.start();
+                //add sound
+            }
         }
 
         UpdateViewableEditorPlayerStats();
     }
-	
-	/*private IEnumerator slide_to_position()
+
+    /*private IEnumerator slide_to_position()
 	{
 		Vector3 originalPos = transform.position;
 		yield return new WaitForSeconds(1f);
 		transform.position = pos;
 	}*/
 
-    public override void GetHealed(int amount) {
-        if (stats.currentState == GameAgentState.Alive) {
+    public override void GetHealed(int amount)
+    {
+        if (stats.currentState == GameAgentState.Alive)
+        {
             if (!godMode) stats.GetHealed(amount);
 
             StartCoroutine(animator.PlayUseItemAnimation());
@@ -270,20 +363,22 @@ public class Player : GameAgent
     }
 
     public override void take_turn()
-	{
-        if (stats.currentState == GameAgentState.Alive) {
+    {
+        if (stats.currentState == GameAgentState.Alive)
+        {
             playerMovedThisTurn = false;
             playerActedThisTurn = false;
             playerUsedPotionThisTurn = false;
             playerWaitingThisTurn = false;
-			move_budget = max_move_budget;
-			turnIndicator.SetActiveTurn(true);
+            move_budget = max_move_budget;
+            turnIndicator.SetActiveTurn(true);
         }
 
         UpdateViewableEditorPlayerStats();
     }
 
-    private void UpdateViewableEditorPlayerStats() {
+    private void UpdateViewableEditorPlayerStats()
+    {
         _attack = stats.attack;
         maxHealth = stats.maxHealth;
         currentHealth = stats.currentHealth;
@@ -291,7 +386,8 @@ public class Player : GameAgent
         _speed = stats.speed;
         level = stats.level;
 
-        switch (stats.currentState) {
+        switch (stats.currentState)
+        {
             case GameAgentState.Alive:
                 viewableState = "Alive";
                 break;
@@ -304,69 +400,77 @@ public class Player : GameAgent
         }
     }
 
-	/*** UNUSED ANIMATION RECEIVERS ***/
-	public void FootR(){
-        source.PlayOneShot(randomSFX(footsteps));
+    /*** UNUSED ANIMATION RECEIVERS ***/
+    public void FootR()
+    {
+        //source.PlayOneShot(randomSFX(footsteps));
+        footStepEvent.start();
     }
-	public void FootL(){
-        source.PlayOneShot(randomSFX(footsteps));
+    public void FootL()
+    {
+        //source.PlayOneShot(randomSFX(footsteps));
+        footStepEvent.start();
     }
-	public void WeaponSwitch(){}
-	/*** END ANIMATION RECEIVERS ***/
-	
-	public string[] getActionNames()
-	{
-		List<string> actionNames = new List<string>();
-		foreach (Attack act in stats.playerCharacterClass.GetAvailableActs())
-			actionNames.Add(act.toString()); // GetString() defined in MapUtils.EnumUtils
-		return actionNames.ToArray();
-	}
-	
-	public override void wait() { playerWaitingThisTurn = true; turnIndicator.SetActiveTurn(false); }
-	public override void potion() { playerUsedPotionThisTurn = true; turnIndicator.SetActiveTurn(false); }
-	public override void move() { playerMovedThisTurn = true; }
-	public override void act() { playerActedThisTurn = true; turnIndicator.SetActiveTurn(false); }
-	public override bool turn_over() {
-		return playerWaitingThisTurn || playerActedThisTurn || playerUsedPotionThisTurn || playerExtracted;
+    public void WeaponSwitch() { }
+    /*** END ANIMATION RECEIVERS ***/
+
+    public string[] getActionNames()
+    {
+        List<string> actionNames = new List<string>();
+        foreach (Attack act in stats.playerCharacterClass.GetAvailableActs())
+            actionNames.Add(act.toString()); // GetString() defined in MapUtils.EnumUtils
+        return actionNames.ToArray();
     }
-	public void extract() {
-		playerExtracted = true;
-		DisableRendering();
-		TurnManager.instance.removeFromRoster(this);
-		DestroyTurnIndicator();
-	}
-	
-	public bool can_take_action() { return !playerExtracted && animationFinished() && !turn_over() && Network.allPlayersReady(); }
-	
-	public void SetCharacterClass(string classname) {
-		
+
+    public override void wait() { playerWaitingThisTurn = true; turnIndicator.SetActiveTurn(false); }
+    public override void potion() { playerUsedPotionThisTurn = true; turnIndicator.SetActiveTurn(false); }
+    public override void move() { playerMovedThisTurn = true; }
+    public override void act() { playerActedThisTurn = true; turnIndicator.SetActiveTurn(false); }
+    public override bool turn_over()
+    {
+        return playerWaitingThisTurn || playerActedThisTurn || playerUsedPotionThisTurn || playerExtracted;
+    }
+    public void extract()
+    {
+        playerExtracted = true;
+        DisableRendering();
+        TurnManager.instance.removeFromRoster(this);
+        DestroyTurnIndicator();
+    }
+
+    public bool can_take_action() { return !playerExtracted && animationFinished() && !turn_over() && Network.allPlayersReady(); }
+
+    public void SetCharacterClass(string classname)
+    {
+
         int classID;
-        switch (classname) {
-			case "Warrior":
-				classID = CharacterClassOptions.Knight;
-				weapon = CharacterClassOptions.Sword;
+        switch (classname)
+        {
+            case "Warrior":
+                classID = CharacterClassOptions.Knight;
+                weapon = CharacterClassOptions.Sword;
                 Debug.Log("WARRIOR CLASS WEP VALUE IS " + weapon);
-				break;
-			case "Mage":
-				classID = CharacterClassOptions.Mage;
-				weapon = CharacterClassOptions.Staff;
+                break;
+            case "Mage":
+                classID = CharacterClassOptions.Mage;
+                weapon = CharacterClassOptions.Staff;
                 Debug.Log("MAGE CLASS WEP VALUE IS " + weapon);
-				break;
-			case "Hunter":
-				classID = CharacterClassOptions.Hunter;
-				weapon = CharacterClassOptions.Bow;
+                break;
+            case "Hunter":
+                classID = CharacterClassOptions.Hunter;
+                weapon = CharacterClassOptions.Bow;
                 Debug.Log("HUNTER CLASS WEP VALUE IS " + weapon);
-				break;
-			case "Healer":
-				classID = CharacterClassOptions.Healer;
-				weapon = CharacterClassOptions.Staff;
+                break;
+            case "Healer":
+                classID = CharacterClassOptions.Healer;
+                weapon = CharacterClassOptions.Staff;
                 Debug.Log("HEALER CLASS WEP VALUE IS " + weapon);
-				break;
-			default:
-				classID = CharacterClassOptions.Knight;
-				weapon = CharacterClassOptions.Sword;
-				break;
-		}
+                break;
+            default:
+                classID = CharacterClassOptions.Knight;
+                weapon = CharacterClassOptions.Sword;
+                break;
+        }
 
         stats = new GameAgentStats(CharacterRaceOptions.Human, classID, 1, weapon);
         _attack = stats.attack;
@@ -376,20 +480,20 @@ public class Player : GameAgent
         _speed = stats.speed;
 
         classDefiner.init(stats.characterRace, stats.characterClassOption, stats.playerCharacterClass.weapon);
-		turnIndicator.SetClass(stats.characterClassOption);
-	}
-	
-	private static int nextSFX = 0;
-	private AudioClip randomSFX(AudioClip[] library)
-	{
-		return library[nextSFX++%library.Length];
-	}
-	
-	// VVVVVVVVVVVVVVVVV CODE JAIL VVVVVVVVVVVVVVVVVV //
-	// 			INTRUDERS WILL BE EXECUTED			  //
-	
-	
-	/*public void RespondToKeyboardInput(char key)
+        turnIndicator.SetClass(stats.characterClassOption);
+    }
+
+    private static int nextSFX = 0;
+    private AudioClip randomSFX(AudioClip[] library)
+    {
+        return library[nextSFX++ % library.Length];
+    }
+
+    // VVVVVVVVVVVVVVVVV CODE JAIL VVVVVVVVVVVVVVVVVV //
+    // 			INTRUDERS WILL BE EXECUTED			  //
+
+
+    /*public void RespondToKeyboardInput(char key)
 	{
 		switch (key) {
 		    case '1': StartCoroutine(animator.PlayRotateAnimation()); break;
@@ -402,18 +506,18 @@ public class Player : GameAgent
             case 's': TestCharacterClass(CharacterClassOptions.Hunter); break;
             case 'd': TestCharacterClass(CharacterClassOptions.Mage); break;
             case 'f': TestCharacterClass(CharacterClassOptions.Healer); break;*/
-        /*}
-    }*/
-	
-	// disabling this for now while I test changes
-	/*public string getActionMode(int action)
+    /*}
+}*/
+
+    // disabling this for now while I test changes
+    /*public string getActionMode(int action)
 	{
 		GameAgentAction[] actions = stats.playerCharacterClass.GetAvailableActs();
 		return actions[action].GetMode(); // mode can be ACT or AOE
 	}*/
-	
-	// a lot of the WaitForXXX functions seemed redundant... we can add this functionality back later if necessary
-	/*IEnumerator WaitForAttackEnd(Pos attackPos)
+
+    // a lot of the WaitForXXX functions seemed redundant... we can add this functionality back later if necessary
+    /*IEnumerator WaitForAttackEnd(Pos attackPos)
 	{
 		isAttacking = true;
         // Have player look at the target it's attacking
@@ -491,7 +595,7 @@ public class Player : GameAgent
         playerActedThisTurn = true;
     }*/
 
-	// if right mouse button is pressed, move player model to hover position
+    // if right mouse button is pressed, move player model to hover position
     /*public void RespondToMouseClick()
     {
 		if (!moving && !isAttacking && hoveringActionTileSelector) {
@@ -538,7 +642,7 @@ public class Player : GameAgent
             }
 		}
 	}*/
-	
+
     /*public override void move() {
 		if (playerMovedThisTurn || turn_over())
             return;
@@ -725,5 +829,5 @@ public class Player : GameAgent
         return sortedPlayersIndex;
     }*/
 
-   
+
 }
