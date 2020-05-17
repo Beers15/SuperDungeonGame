@@ -175,6 +175,7 @@ public class Player : GameAgent
         turnIndicator = turnIndicatorObj.GetComponent<TurnIndicator>();
         turnIndicator.SetClass(stats.characterClassOption);
         turnIndicator.SetName(nickname);
+		turnIndicator.SetActiveTurn(false);
         turnIndicatorBarObj.GetComponent<TurnIndicatorBar>().AddTurnIndicator(turnIndicator);
     }
 

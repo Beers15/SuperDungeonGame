@@ -50,7 +50,7 @@ public class TurnManager : MonoBehaviour
 					yield return null;
 				}
 				Debug.Log("turn over! " + teamsLeft());
-				if (teamsLeft() == 1 && teamRoster[0].Count == 0) {
+				if (teamRoster[0].Count == 0) {
 					if (EndPortal.AllPlayersExtracted()) {
 						GameManager.NextLevel();
 						yield break;
