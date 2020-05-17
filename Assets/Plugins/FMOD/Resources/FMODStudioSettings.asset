@@ -15,7 +15,7 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: FMOD\FMOD - OFfical.fspro
+  sourceProjectPath: FMOD/FMOD - OFfical.fspro
   sourceBankPath: FMOD\Build
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
   EncryptionKey: 
   ImportType: 0
   TargetAssetPath: FMODBanks
-  LoggingLevel: 2
+  LoggingLevel: 0
   SpeakerModeSettings:
   - Platform: 2
     Value: 3

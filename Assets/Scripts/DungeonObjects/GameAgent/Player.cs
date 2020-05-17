@@ -120,7 +120,7 @@ public class Player : GameAgent
 
         this.stats = stats;
         UpdateViewableEditorPlayerStats();
-        max_move_budget = 15;
+        max_move_budget = 10;
         move_budget = max_move_budget;
         speed = 10;
         this.nickname = name;
@@ -155,6 +155,10 @@ public class Player : GameAgent
         //add starting items and consumables here with inventory/potionStore.addItem if desired
         inventory.AddItem(new HealthPot(5));
         inventory.AddItem(new ManaPot(5));
+        inventory.AddItem(new Gem(1));
+        inventory.AddItem(new Tome(1));
+        inventory.AddItem(new Food(1));
+        inventory.AddItem(new Scroll(1));
         //-----
 
         // AI init

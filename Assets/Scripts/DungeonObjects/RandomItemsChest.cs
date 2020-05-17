@@ -31,7 +31,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		chestObject.SetActive(false);
 	}
 
-	string[] itemOptions = { "health", "mana", "gold", "helmet", "armor", "gloves", "boot", "weapon", "tome", "gem" };
+	string[] itemOptions = { "health", "mana", "gold", "helmet", "armor", "gloves", "boot", "weapon", "tome", "gem", "well-cooked meal", "scroll" };
 	public void interact(GameAgent interactor)
 	{
         source.PlayOneShot(chestOpeningSFX);
@@ -55,6 +55,10 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 				toAdd = new Tome(1); randomItemAmount = 1; break;
 			case "gem": 
 				toAdd = new Gem(1);  randomItemAmount = 1; break;
+			case "well-cooked meal": 
+				toAdd = new Food(1);  randomItemAmount = 1; break;
+			case "scroll": 
+				toAdd = new Scroll(1);  randomItemAmount = 1; break;
 			case "helmet":
 				toAdd = new Helmet(); 
 				(toAdd as EquipItem).generateEquipmentValues(slainEnemyLvl, interactor.nickname);
@@ -89,7 +93,7 @@ public class RandomItemsChest : DungeonObject, Interactable, Environment, Render
 		if(randomItemAmount >= 2 && notEquipItem)
 			UI_TextAlert.DisplayText(interactor.nickname + " received " + toAdd.Amount + " " + toAdd.name + "s");
 		else if(notEquipItem)
-			UI_TextAlert.DisplayText(interactor.nickname + " received a magic " + toAdd.name);
+			UI_TextAlert.DisplayText(interactor.nickname + " received a " + toAdd.name);
 		//add to consumable/potions storage if consumable, otherwise add to normal inventory
 		// if(isConsumable) {
 		// 	interactor.potions.AddConsumable((ConsumableItem)toAdd);

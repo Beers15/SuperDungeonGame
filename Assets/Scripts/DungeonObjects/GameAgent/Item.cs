@@ -54,6 +54,20 @@ public class Gem : ConsumableItem
 	public Gem(int amount) : base(1, 10, "Gem", _ID, amount) {}
 }
 
+public class Food : ConsumableItem
+{
+	public static string _ID = "5";
+	//public HealthPot(int effectiveness, int maxAmount, string Name, int ID, int Amount) : base(effectiveness, maxAmount, Name, ID, Amount) {}
+	public Food(int amount) : base(1, 10, "Food", _ID, amount) {}
+}
+
+public class Scroll : ConsumableItem
+{
+	public static string _ID = "6";
+	//public HealthPot(int effectiveness, int maxAmount, string Name, int ID, int Amount) : base(effectiveness, maxAmount, Name, ID, Amount) {}
+	public Scroll(int amount) : base(1, 10, "Scroll", _ID, amount) {}
+}
+
 public class Gold : ConsumableItem {
     public static string _ID = "99";
 	public Gold(int amount) : base(1, 64, "Gold Coin", _ID, amount) {}

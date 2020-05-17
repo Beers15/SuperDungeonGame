@@ -10,7 +10,7 @@ public class UI_InventorySlot : MonoBehaviour {
 	public string itemName;
 	UI_InventoryManager manager;
 	
-	public Sprite healthPot, manaPot, helmet, armor, gloves, boots, bow, sword, staff, gem, tome, nothing;
+	public Sprite healthPot, manaPot, helmet, armor, gloves, boots, bow, sword, staff, gem, tome, food, scroll, nothing;
 	
 	public int index = 0;
 	
@@ -56,6 +56,10 @@ public class UI_InventorySlot : MonoBehaviour {
 				itemImage.sprite = gem; break;
 			case "Tome":
 				itemImage.sprite = tome; break;
+			case "Food":
+				itemImage.sprite = food; break;
+			case "Scroll":
+				itemImage.sprite = scroll; break;
 			default:
 				itemImage.sprite = nothing; break;
 		}

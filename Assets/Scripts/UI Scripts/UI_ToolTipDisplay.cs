@@ -21,7 +21,7 @@ public class UI_ToolTipDisplay : MonoBehaviour
     public TextMeshProUGUI defenseDisplayValue;
     Player playerMain;
 
-    public Sprite healthPot, manaPot, helmet, armor, gloves, boots, bow, sword, staff, tome, gem, nothing;
+    public Sprite healthPot, manaPot, helmet, armor, gloves, boots, bow, sword, staff, tome, gem, food, scroll, nothing;
 
 
     private void Awake()
@@ -171,6 +171,10 @@ public class UI_ToolTipDisplay : MonoBehaviour
                     itemImage.sprite = tome; break;
                 case "Gem":
                     itemImage.sprite = gem; break;
+                case "Food":
+                    itemImage.sprite = food; break;
+                case "Scroll":
+                    itemImage.sprite = scroll; break;
                 default:
                     itemImage.sprite = nothing; break;
             }

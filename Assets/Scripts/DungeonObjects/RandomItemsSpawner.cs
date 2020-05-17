@@ -15,7 +15,7 @@ public class RandomItemsSpawner : DungeonObject, Interactable, Environment, Rend
 	public void init_environment(Pos grid_pos, int health=1) {
 		this.grid_pos = grid_pos;
 
-        switch(0){//(itemIndex) {
+        switch(itemIndex){//(itemIndex) {
             case 0:
                 itemObject = GameObject.Find("SM_Prop_Chest_01"); break;
             case 1:

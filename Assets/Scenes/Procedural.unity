@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4345,6 +4345,8 @@ MonoBehaviour:
   staff: {fileID: 21300000, guid: 47c141ae7e8a9e643b880d302c9fb66b, type: 3}
   tome: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
   gem: {fileID: 21300000, guid: e7d29a79bc7fae248887c8a08a160303, type: 3}
+  food: {fileID: 21300000, guid: 4a39cb4b272639541b7bd5ac0649acf7, type: 3}
+  scroll: {fileID: 21300000, guid: db427fab3e94daf4caa704d9314a77a1, type: 3}
   nothing: {fileID: 21300000, guid: cf1462bc694c3c249831ad8ac5293aa2, type: 3}
 --- !u!222 &850662679
 CanvasRenderer:
@@ -5952,63 +5954,6 @@ MonoBehaviour:
   structureDensity: 0.05
   objectDensity: 0.1
   rubbleDensity: 0.3
-  basePrefab: {fileID: 8087698396020384166, guid: e63f7f16186fd57448e4e4c7b92f1363,
-    type: 3}
-  folliageStructures:
-  - {fileID: 5309839873291892276, guid: d1246235279ec7f4e8d264dfd0e385ff, type: 3}
-  folliageObjects:
-  - {fileID: 7739757255420070819, guid: 44a81fd58fe5b4f419d3923f34396b55, type: 3}
-  - {fileID: 2910491381736730130, guid: 3cb224c30a64f784cbbf309906d1c377, type: 3}
-  - {fileID: 4668345937415399177, guid: 0b404004fd0382a4eb4548606ed47868, type: 3}
-  - {fileID: 4755899731273503617, guid: e12118c13c85b7844951c8c5445d319c, type: 3}
-  folliageRubble:
-  - {fileID: 7575857774382736801, guid: a7fbeda7c8fea864297301fe641fdfad, type: 3}
-  - {fileID: 3286199504315909831, guid: 434c5318db0051746aa46b0f5f3928f3, type: 3}
-  orcStructures:
-  - {fileID: 2250717334145093624, guid: ea3b141d90695c94f8597c1ef36745a0, type: 3}
-  - {fileID: 4477351777556222558, guid: ee01ff31a9b7d6b49986f3e1dcea1f7b, type: 3}
-  orcObjects:
-  - {fileID: 4403252591181458362, guid: 4fd90a1bd63d87342aa2ecddbc10b7dd, type: 3}
-  - {fileID: 2910491381736730130, guid: 3cb224c30a64f784cbbf309906d1c377, type: 3}
-  - {fileID: 7739757255420070819, guid: 44a81fd58fe5b4f419d3923f34396b55, type: 3}
-  orcRubble:
-  - {fileID: 2871075504616166886, guid: 1b2e16e4c4746204d82f7d8170a21316, type: 3}
-  - {fileID: 6828092740068816102, guid: d00bf3bf2510c9640b7ae125544f76a4, type: 3}
-  - {fileID: 7575857774382736801, guid: a7fbeda7c8fea864297301fe641fdfad, type: 3}
-  - {fileID: 3286199504315909831, guid: 434c5318db0051746aa46b0f5f3928f3, type: 3}
-  - {fileID: 3252336698144799736, guid: 5ed48dc00812ac942a8f813712278642, type: 3}
-  - {fileID: 2543653311597655776, guid: d4db42475c42b0f4d8a057d3462e5217, type: 3}
-  - {fileID: 2855412379276019589, guid: 6317ce2c546f3054181a220e55aec717, type: 3}
-  - {fileID: 1977199516858913251, guid: 6c581396a57558d4e943ad876aefff66, type: 3}
-  - {fileID: 3866557326235942733, guid: eedc3324b869a2c4a85772bb0427d41c, type: 3}
-  undeadStructures:
-  - {fileID: 5309839873291892276, guid: d1246235279ec7f4e8d264dfd0e385ff, type: 3}
-  undeadObjects:
-  - {fileID: 3945498889534665522, guid: a78fa8e318a0e864696b3c44fd531823, type: 3}
-  - {fileID: 1425893195213650686, guid: bf55c22950af88a4eaceb9159c1d3fac, type: 3}
-  - {fileID: 1691867916173815190, guid: 9c973b623b72bda46b95899e6b240ec0, type: 3}
-  - {fileID: 8273780847944824863, guid: 6066f751389c5444e8321f744a1b4994, type: 3}
-  undeadRubble:
-  - {fileID: 2871075504616166886, guid: 1b2e16e4c4746204d82f7d8170a21316, type: 3}
-  - {fileID: 6828092740068816102, guid: d00bf3bf2510c9640b7ae125544f76a4, type: 3}
-  - {fileID: 7575857774382736801, guid: a7fbeda7c8fea864297301fe641fdfad, type: 3}
-  - {fileID: 3286199504315909831, guid: 434c5318db0051746aa46b0f5f3928f3, type: 3}
-  - {fileID: 8024212719110717760, guid: d99c27f1372583542a40487366f3b78f, type: 3}
-  - {fileID: 7887306236373845741, guid: de3556857e961e5499fc948c382792bc, type: 3}
-  - {fileID: 5576920169442503060, guid: 0b6576a458445e44099102ee41c84d62, type: 3}
-  traversableFolliageObject:
-  - {fileID: 178538, guid: d6267d2e6296e7946afb915ef648ed67, type: 3}
-  - {fileID: 198516, guid: a03e2dd3dba33b9418311d00a91cf378, type: 3}
-  nonTraversableFolliageObject:
-  - {fileID: 164760, guid: 8ed44b12ca34ce34e9754ece5b325562, type: 3}
-  - {fileID: 122796, guid: 146879b9a407b4947a38bacaa6fc4dd8, type: 3}
-  traversableObjectObject:
-  - {fileID: 168602, guid: 3e0f6b0ee51e6eb42a731a26210989b9, type: 3}
-  - {fileID: 113888, guid: 6b8ef567fab8aae4fb47c66e41111903, type: 3}
-  nonTraversableObjectObject: []
-  traversableStructureObject: []
-  nonTraversableStructureObject: []
-  particleObject: []
 --- !u!4 &1591538337
 Transform:
   m_ObjectHideFlags: 0
@@ -6741,7 +6686,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -44.677795, y: -218.42969}
+  m_AnchoredPosition: {x: -44.677734, y: -218.42969}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1867890175
@@ -8006,6 +7951,12 @@ PrefabInstance:
       propertyPath: tome
       value: 
       objectReference: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368,
+        type: 3}
+    - target: {fileID: 73993413705802035, guid: a49284f0f3f9d964c99aba1ade3dc8ba,
+        type: 3}
+      propertyPath: food
+      value: 
+      objectReference: {fileID: 21300000, guid: 4a39cb4b272639541b7bd5ac0649acf7,
         type: 3}
     - target: {fileID: 1489494806619306703, guid: a49284f0f3f9d964c99aba1ade3dc8ba,
         type: 3}

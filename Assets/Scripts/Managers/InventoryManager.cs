@@ -21,6 +21,8 @@ public class InventoryManager : MonoBehaviour
 		[ManaPot._ID] = ApplyManaPotion,
         [Tome._ID] = ApplyTome,
         [Gem._ID] = ApplyGem,
+        [Food._ID] = ApplyFood,
+        [Scroll._ID] = ApplyScroll
 	};
 
     public static InventoryManager instance = null;
@@ -100,6 +102,22 @@ public class InventoryManager : MonoBehaviour
             UI_TextAlert.DisplayColorText("An imbued gem fills " + agent.nickname + " with energy (Max mana + "+ statBoostAmount + ")", 6);
             Debug.Log("Player stats after Tome (HP, MP): " + agent.stats.maxHealth + " " + agent.stats.maxMagicPoints);
         }
+		agent.animator.PlayHealedAnimation();
+    }
+
+    private static void ApplyFood(Item item, GameAgent agent)
+    {
+        agent.stats.attack += 1;
+        agent.stats.defense += 1;
+        agent.stats.maxHealth += 5;
+        UI_TextAlert.DisplayColorText(agent.nickname + " eats a delicious, well cooked meal and feels invigorated (All stats slightly increased)", 6);
+		agent.animator.PlayHealedAnimation();
+    }
+
+    private static void ApplyScroll(Item item, GameAgent agent)
+    {
+        agent.stats.level += 1;
+        UI_TextAlert.DisplayColorText(agent.nickname + " reads a magic scroll, and is overcome with memories of battle (Level + 1)", 6);
 		agent.animator.PlayHealedAnimation();
     }
 		

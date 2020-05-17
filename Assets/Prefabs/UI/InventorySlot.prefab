@@ -179,6 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b8f88e808642f4b89f33bd101f6229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemImage: {fileID: 0}
+  itemName: 
   healthPot: {fileID: 21300000, guid: e52ea25af699fd445b7046374f81a5b9, type: 3}
   manaPot: {fileID: 21300000, guid: 6592b916f86b19e428db6f6847c7b6dd, type: 3}
   helmet: {fileID: 21300000, guid: fd6e4fc32c78509458fc45ea4a478ba8, type: 3}
@@ -190,6 +192,8 @@ MonoBehaviour:
   staff: {fileID: 21300000, guid: 47c141ae7e8a9e643b880d302c9fb66b, type: 3}
   gem: {fileID: 21300000, guid: e7d29a79bc7fae248887c8a08a160303, type: 3}
   tome: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
+  food: {fileID: 21300000, guid: 4a39cb4b272639541b7bd5ac0649acf7, type: 3}
+  scroll: {fileID: 21300000, guid: db427fab3e94daf4caa704d9314a77a1, type: 3}
   nothing: {fileID: 21300000, guid: cf1462bc694c3c249831ad8ac5293aa2, type: 3}
   index: 0
 --- !u!1 &2074940769197358697
