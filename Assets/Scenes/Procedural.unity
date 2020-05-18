@@ -152,11 +152,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1289607738}
   - {fileID: 1838496977}
   - {fileID: 2031992668}
   - {fileID: 546068468}
   - {fileID: 656519721}
-  - {fileID: 1289607738}
   - {fileID: 751920924}
   - {fileID: 850662677}
   - {fileID: 1584715257}
@@ -1742,7 +1742,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 25}
+  m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &400788506
 MonoBehaviour:
@@ -1770,7 +1770,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &400788507
 MonoBehaviour:
@@ -3018,7 +3018,7 @@ RectTransform:
   - {fileID: 1834559282}
   - {fileID: 1884324321}
   m_Father: {fileID: 42102059}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3364,7 +3364,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 42102059}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -3506,9 +3506,9 @@ RectTransform:
   m_Father: {fileID: 1834559282}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -35}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -160, y: -30}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &771130425
@@ -3529,7 +3529,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 25
+  m_Spacing: 20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -4320,7 +4320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &972810461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4339,7 +4339,7 @@ MonoBehaviour:
   - Healer
   - Hunter
   - Mage
-  characterClass: 2
+  characterClass: 0
   loadingScreen: {fileID: 1289607737}
   networkPrefab: {fileID: 6081443213912929002, guid: 3bc2fd1e22f72e34285ef303be890706,
     type: 3}
@@ -5019,7 +5019,7 @@ RectTransform:
   - {fileID: 500786947}
   - {fileID: 297400237}
   m_Father: {fileID: 42102059}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5780,7 +5780,7 @@ MonoBehaviour:
   upperRadius: 6
   minimumNumberOfTilesInSpawnZone: 4
   maximumNumberOfTilesInSpawnZone: 10
-  maxNumberOfSpawnZones: 1
+  maxNumberOfSpawnZones: 4
 --- !u!114 &1591538339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5806,8 +5806,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fogViewRange: 16
-  _width: 30
-  _height: 30
+  _width: 50
+  _height: 50
   _padding: 15
   fill_percent: 51
   smoothness: 8
@@ -6047,7 +6047,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 25}
+  m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1611002181
 MonoBehaviour:
@@ -6474,7 +6474,7 @@ RectTransform:
   m_LocalScale: {x: 0.48788, y: 0.48788, z: 0.48788}
   m_Children: []
   m_Father: {fileID: 42102059}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7000,7 +7000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 133120399, guid: bcfeb66b5a365914483f3a675c49a0df, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 133120399, guid: bcfeb66b5a365914483f3a675c49a0df, type: 3}
       propertyPath: m_AnchoredPosition.x
