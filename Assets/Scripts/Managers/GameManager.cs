@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
     void Update()
 	{
 		if (Input.GetKeyDown("escape")) {
-			Quit();
+		//	Quit();
 		}
 		
 		foreach (char key in Input.inputString) {
