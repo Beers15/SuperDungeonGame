@@ -29,15 +29,69 @@ public class Enemy : GameAgent
     public GameAgentState viewableState;
 
     //sound effects
-    private AudioSource source;
-    public AudioClip[] swordSwing;
-    public AudioClip[] axeSwing;
-    public AudioClip[] bowShot;
-    public AudioClip[] fireSpell;
-    public AudioClip[] footsteps;
-	public AudioClip[] deathRattle;
-	public AudioClip[] hitNoise;
-	
+    //private AudioSource source;
+    //public AudioClip[] swordSwing;
+    //public AudioClip[] axeSwing;
+    //public AudioClip[] bowShot;
+    //public AudioClip[] fireSpell;
+    //public AudioClip[] footsteps;
+	//public AudioClip[] deathRattle;
+	//public AudioClip[] hitNoise;
+
+	[FMODUnity.EventRef]
+	public string sword;
+
+	[FMODUnity.EventRef]
+	public string bowShot;
+
+	[FMODUnity.EventRef]
+	public string daggerStab;
+
+	[FMODUnity.EventRef]
+	public string lightingAttack;
+
+	[FMODUnity.EventRef]
+	public string staffSwing;
+
+	[FMODUnity.EventRef]
+	public string clubSwing;
+
+	[FMODUnity.EventRef]
+	public string fireBurst;
+
+	[FMODUnity.EventRef]
+	public string fireStrom;
+
+	[FMODUnity.EventRef]
+	public string armorHit;
+
+	[FMODUnity.EventRef]
+	public string fleshHit;
+
+	[FMODUnity.EventRef]
+	public string deathNoise;
+
+	[FMODUnity.EventRef]
+	public string grunt;
+
+	[FMODUnity.EventRef]
+	public string footStep;
+
+
+	FMOD.Studio.EventInstance soundevent;
+	FMOD.Studio.EventInstance bowShotEvent;
+	FMOD.Studio.EventInstance daggerStabEvent;
+	FMOD.Studio.EventInstance lightingAttackEvent;
+	FMOD.Studio.EventInstance staffSwingEvent;
+	FMOD.Studio.EventInstance clubSwingEvent;
+	FMOD.Studio.EventInstance fireBurstEvent;
+	FMOD.Studio.EventInstance fireStromEvent;
+	FMOD.Studio.EventInstance armorHitEvent;
+	FMOD.Studio.EventInstance fleshHitEvent;
+	FMOD.Studio.EventInstance deathNoiseEvent;
+	FMOD.Studio.EventInstance gruntEvent;
+	FMOD.Studio.EventInstance footStepEvent;
+
 	void Update() {
 		if (FogOfWar.IsVisible(map_manager.world_to_grid(transform.position))) {
 			EnableRendering();
@@ -75,10 +129,24 @@ public class Enemy : GameAgent
         animator.init();
         classDefiner.init(stats.characterRace, stats.characterClassOption, stats.playerCharacterClass.weapon);
 
-        source = GetComponent<AudioSource>();
+		//source = GetComponent<AudioSource>();
 
-        // AI init
-        team = 1;
+		soundevent = FMODUnity.RuntimeManager.CreateInstance(sword);
+		bowShotEvent = FMODUnity.RuntimeManager.CreateInstance(bowShot);
+		daggerStabEvent = FMODUnity.RuntimeManager.CreateInstance(daggerStab);
+		lightingAttackEvent = FMODUnity.RuntimeManager.CreateInstance(lightingAttack);
+		staffSwingEvent = FMODUnity.RuntimeManager.CreateInstance(staffSwing);
+		clubSwingEvent = FMODUnity.RuntimeManager.CreateInstance(clubSwing);
+		fireBurstEvent = FMODUnity.RuntimeManager.CreateInstance(fireBurst);
+		fireStromEvent = FMODUnity.RuntimeManager.CreateInstance(fireStrom);
+		armorHitEvent = FMODUnity.RuntimeManager.CreateInstance(armorHit);
+		fleshHitEvent = FMODUnity.RuntimeManager.CreateInstance(fleshHit);
+		deathNoiseEvent = FMODUnity.RuntimeManager.CreateInstance(deathNoise);
+		gruntEvent = FMODUnity.RuntimeManager.CreateInstance(grunt);
+		footStepEvent = FMODUnity.RuntimeManager.CreateInstance(footStep);
+
+		// AI init
+		team = 1;
 		AI = new AIComponent(this); // AI component that decides the actions for this enemy to take
 		TurnManager.instance.addToRoster(this);
 		SetCurrentAction(0);
@@ -143,17 +211,22 @@ public class Enemy : GameAgent
 			case "Melee":
 			switch (weapon) {
 				case 1:
-					source.PlayOneShot(randomSFX(swordSwing));
-					break;
+						//source.PlayOneShot(randomSFX(swordSwing));
+						soundevent.start();
+
+						break;
 				case 2:
-					source.PlayOneShot(randomSFX(bowShot));
-					break;
+						//source.PlayOneShot(randomSFX(bowShot));
+						bowShotEvent.start();
+						break;
 				case 3:
-					source.PlayOneShot(randomSFX(fireSpell));
-					break;
+						//source.PlayOneShot(randomSFX(fireSpell));
+						fireBurstEvent.start();
+						break;
 				default:
-					source.PlayOneShot(randomSFX(axeSwing));
-					break;
+						//source.PlayOneShot(randomSFX(axeSwing));
+						daggerStabEvent.start();
+						break;
 			}
 			break;
 		}
@@ -163,8 +236,10 @@ public class Enemy : GameAgent
 	public override void playHitNoise(string type) {
 		switch (type) {
 			default:
-			source.PlayOneShot(randomSFX(hitNoise));
-			break;
+				//source.PlayOneShot(randomSFX(hitNoise));
+				gruntEvent.start();
+				armorHitEvent.start();
+				break;
 		}
 	}
 	
@@ -185,8 +260,9 @@ public class Enemy : GameAgent
             stats.currentState = GameAgentState.Dead;
 
 			GameManager.kill(this);
+			deathNoiseEvent.start();
 
-			if(team == 1) {
+			if (team == 1) {
 				var lootRoll = 0.0f;
 				var lootThreshold = 1.0f;
 				var mobDifficultyModifier = 1.0f / (10.0f - Convert.ToSingle(level));
@@ -258,11 +334,13 @@ public class Enemy : GameAgent
     }
 
     public void FootR() {
-        source.PlayOneShot(randomSFX(footsteps));
-    }
+		//source.PlayOneShot(randomSFX(footsteps));
+		footStepEvent.start();
+	}
     public void FootL() {
-        source.PlayOneShot(randomSFX(footsteps));
-    }
+		//source.PlayOneShot(randomSFX(footsteps));
+		footStepEvent.start();
+	}
     public void WeaponSwitch() { }
 	
 	private static int nextSFX = 0;
