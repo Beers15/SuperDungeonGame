@@ -118,14 +118,15 @@ public class EquipItem : Item {
     }
 
     private void generateName() {
-    
+        string rawstring;
         string adj = equipmentAdjectives.ToArray()[Settings.globalRNG.Next(0, equipmentAdjectives.Count)];
         string noun = equipmentNouns.ToArray()[Settings.globalRNG.Next(0, equipmentNouns.Count)];
         if(type == EquipType.WEAPON)
-            completeName = adj + " " + CharacterClassOptions.getWeaponType((this as EquipWeapon).weaponClass) + " of " + noun;
+            rawstring = adj + " " + CharacterClassOptions.getWeaponType((this as EquipWeapon).weaponClass) + " of " + noun;
         else {
-           completeName = adj + " " + name + " of " + noun; 
+           rawstring = adj + " " + name + " of " + noun; 
         }
+        completeName = rawstring.Replace("\r", "").Replace("\n", "");
         Debug.Log("Name of equipment is : " + completeName);
     }
 

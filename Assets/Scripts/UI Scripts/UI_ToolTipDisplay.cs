@@ -107,7 +107,8 @@ public class UI_ToolTipDisplay : MonoBehaviour
                 EquipItem equipment = inventorySlots[selectSlot].slotItem as EquipItem;
                 attackDisplayValue.SetText(equipment.atkbonus.ToString());
                 defenseDisplayValue.SetText(equipment.defbonus.ToString());
-                text.text = equipment.completeName;
+                string foo = equipment.completeName.ToString();
+                text.text = foo;
             }
             else
             {
