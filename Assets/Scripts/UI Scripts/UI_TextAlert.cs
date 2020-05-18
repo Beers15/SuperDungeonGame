@@ -40,7 +40,7 @@ public class UI_TextAlert : MonoBehaviour
 			case 4:
 				instance.alert.GetComponent<Text>().color = Color.magenta; break;
 			case 5: 
-				instance.alert.GetComponent<Text>().color = Color.red; break;
+				instance.alert.GetComponent<Text>().color = Color.yellow; break;
 			case 6: 
 				instance.alert.GetComponent<Text>().color = Color.cyan; break;
 			default:
