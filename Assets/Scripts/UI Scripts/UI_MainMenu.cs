@@ -34,8 +34,8 @@ public class UI_MainMenu : MonoBehaviour
 	
 	public void Settings()
 	{
-		gameObject.SetActive(false);
-		Panel_Settings.SetActive(true);
+	//	gameObject.SetActive(false);
+	//	Panel_Settings.SetActive(true);
 	}
 	
 	public void Quit()
