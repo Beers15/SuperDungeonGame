@@ -17,6 +17,7 @@ MonoBehaviour:
   currentState: 0
   team: 0
   move_budget: 0
+  weapon: 0
   animator: {fileID: 0}
   animating: 1
   interactTilesMaterial: {fileID: 0}
@@ -32,47 +33,22 @@ MonoBehaviour:
   range: 0
   _speed: 0
   moveTime: 0.1
-  lootDrop: {fileID: 5539044942602581205, guid: 23aeddc0f049ccd4ab4d593683d33a8e,
-    type: 3}
   moveBudget: 0
   level: 0
   viewableState: 0
-  swordSwing:
-  - {fileID: 8300000, guid: 9bebec336d8345d4d99302d483703e6d, type: 3}
-  - {fileID: 8300000, guid: 75847b5b43dbd3b4ca412f7624f4ec34, type: 3}
-  - {fileID: 8300000, guid: 3bab56702b93d4852a25c37f5a0bd7c1, type: 3}
-  - {fileID: 8300000, guid: 986cc9e647a584c27aec507c799dc7bd, type: 3}
-  axeSwing:
-  - {fileID: 8300000, guid: a925cb22a2ad99b47a46ab3e965da9dd, type: 3}
-  - {fileID: 8300000, guid: ff200a9cadf844294b0b02e101310f7a, type: 3}
-  bowShot:
-  - {fileID: 8300000, guid: b1a580e874ea4ce4a80ce4fa6a28c35c, type: 3}
-  - {fileID: 8300000, guid: b631697ca7b4943fc9a41ef1be36e586, type: 3}
-  - {fileID: 8300000, guid: c5da04257cfb640cd9e3b59a8ecc820d, type: 3}
-  - {fileID: 8300000, guid: dc01f12e8c8694cfc810287cb7c15d63, type: 3}
-  fireSpell:
-  - {fileID: 8300000, guid: 3a5ec5dba446ce24dbe134245612cf7d, type: 3}
-  - {fileID: 8300000, guid: aaea69c0b9a824393b2cd06426857db4, type: 3}
-  - {fileID: 8300000, guid: 46a5834046ae548458d7edc1b9ac970b, type: 3}
-  footsteps:
-  - {fileID: 8300000, guid: c18bb08675dad4bf1ae3c0a4f4c17f13, type: 3}
-  - {fileID: 8300000, guid: 3012d7d0871d94b5f895ad83355c4f5a, type: 3}
-  - {fileID: 8300000, guid: 325470f725bb549879dd93466185beb1, type: 3}
-  - {fileID: 8300000, guid: b18fbb219539e490fb31e399b8af774c, type: 3}
-  - {fileID: 8300000, guid: c57c0577345c64578aa0e3d188f4e0bf, type: 3}
-  - {fileID: 8300000, guid: 9f7bf89094bab462689fb5141d530b39, type: 3}
-  - {fileID: 8300000, guid: 87e711f4bead642bc9aee3741b08acbd, type: 3}
-  deathRattle:
-  - {fileID: 8300000, guid: 7bb263bd7101d1e4883c27c27cbd5332, type: 3}
-  hitNoise:
-  - {fileID: 8300000, guid: 87b70462dfd231a42b00e4d7bbf0cce6, type: 3}
-  - {fileID: 8300000, guid: c667612fe54e4194691085890dd309d7, type: 3}
-  - {fileID: 8300000, guid: 650271be1be284e4d9083b9da5770731, type: 3}
-  - {fileID: 8300000, guid: 65494bbec1d674b3fbb455ecb2b83319, type: 3}
-  - {fileID: 8300000, guid: 1f6720ae40ac647dbb5cc6a42f434c13, type: 3}
-  - {fileID: 8300000, guid: 1f7c732988bbe485396579c0cf7f5ede, type: 3}
-  - {fileID: 8300000, guid: e83ca42b737c04a01b0d0e932ae36576, type: 3}
-  - {fileID: 8300000, guid: 510febc82080f4c259d5e731da7702d4, type: 3}
+  sword: event:/Attacks/SwordSwing_Attack
+  bowShot: event:/Attacks/BowShot_Attack
+  daggerStab: event:/Attacks/DaggerStab_Attack
+  lightingAttack: event:/Attacks/Lighting_Attack
+  staffSwing: event:/Attacks/StaffSwing_Attack
+  clubSwing: event:/Attacks/DaggerStab_Attack
+  fireBurst: event:/Attacks/FireBurst_Attack
+  fireStrom: event:/Attacks/FireStorm_Attack
+  armorHit: event:/Character Hit/CharactarHit_Skeleton
+  fleshHit: event:/Character Hit/CharactarHit_Flesh
+  deathNoise: event:/Deaths/Goblin_Death
+  grunt: event:/Grunts/Goblin_Grunt
+  footStep: event:/Footsteps
 --- !u!1001 &1681421951367576731
 PrefabInstance:
   m_ObjectHideFlags: 0
