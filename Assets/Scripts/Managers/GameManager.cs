@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
 		}
 		// spawn enemies
 		if (level%3 != 0) {
-			enemySpawner.Init(map_manager);
+			enemySpawner.Init(map_manager, level);
 		}
 		else {
 			map_manager.SPAWN_ILMI_DEVOURER_OF_WORLDS(ilmiPrefab, level / 3);

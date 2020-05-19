@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour {
     private MapManager mapManager;
     private MapGenerator mapGenerator;
     private System.Random rng;
+	private int level;
     // A list of all accepted Spawn Zones
     private List<SpawnZone> spawnZones;
     List<Region> regions;
@@ -37,7 +38,7 @@ public class EnemySpawner : MonoBehaviour {
     public int maxNumberOfSpawnZones = 20;
 
     // Initializes map data
-    public void Init(MapManager mapManager)
+    public void Init(MapManager mapManager, int level)
     {
         MapConfiguration config = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapConfiguration>();
         mapGenerator = GameObject.FindGameObjectWithTag("Map").GetComponent<MapGenerator>();
@@ -49,6 +50,7 @@ public class EnemySpawner : MonoBehaviour {
         this.mapManager = mapManager;
         mapConfiguration = config;
         rng = config.GetRNG();
+		this.level = level;
 
         spawnZones = new List<SpawnZone>();
 		SpawnEnemies();
@@ -60,7 +62,7 @@ public class EnemySpawner : MonoBehaviour {
         TrimSpawnZones();
 
         EnemyGroupManager enemyGroupManager = new EnemyGroupManager(spawnZones);
-        List<EnemyToSpawn> enemies = enemyGroupManager.GetEnemiesToSpawn();
+        List<EnemyToSpawn> enemies = enemyGroupManager.GetEnemiesToSpawn(level);
 
 		foreach (EnemyToSpawn enemy in enemies) {
 			mapManager.instantiate(enemyPrefab, enemy.gridPosition, enemy.stats);
